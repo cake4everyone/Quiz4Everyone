@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://c3x74j3lbrik6"]
+
+[node name="Main" type="Node2D"]
+
+[node name="Webserver" type="Node2D" parent="."]
+
+[node name="HTTPRequest" type="HTTPRequest" parent="Webserver"]
