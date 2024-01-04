@@ -28,6 +28,7 @@ func _process(delta):
 	if(Input.is_action_just_pressed("ui_accept") and $Password.text != ""):
 		_send_message_to_tcp($Password.text)
 		$Password.text = ""
+	receive()
 	
 func load_config():
 	var file = FileAccess.open("res://config.yaml", FileAccess.READ)
@@ -36,3 +37,11 @@ func load_config():
 
 func _on_button_pressed():
 	tcp.disconnect_from_host()
+	await get_tree().create_timer(1).timeout
+	get_tree().quit()
+	
+func receive():
+	var received_data
+	if(tcp.get_available_bytes() > 0):
+		received_data = tcp.get_data(tcp.get_available_bytes())
+		print("Data received: ", received_data[1].get_string_from_ascii())
