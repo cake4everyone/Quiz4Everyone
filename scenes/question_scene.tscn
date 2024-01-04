@@ -1,0 +1,36 @@
+[gd_scene load_steps=2 format=3 uid="uid://ifh3d72f4c8r"]
+
+[ext_resource type="Script" path="res://question_scene.gd" id="1_24euc"]
+
+[node name="QuestionScene" type="Node2D"]
+script = ExtResource("1_24euc")
+
+[node name="Question" type="Label" parent="."]
+offset_left = 406.0
+offset_top = 27.0
+offset_right = 699.0
+offset_bottom = 160.0
+
+[node name="Answer1" type="Label" parent="."]
+offset_left = 27.0
+offset_top = 148.0
+offset_right = 217.0
+offset_bottom = 208.0
+
+[node name="Answer2" type="Label" parent="."]
+offset_left = 66.0
+offset_top = 258.0
+offset_right = 270.0
+offset_bottom = 335.0
+
+[node name="Answer3" type="Label" parent="."]
+offset_left = 740.0
+offset_top = 184.0
+offset_right = 950.0
+offset_bottom = 244.0
+
+[node name="Answer4" type="Label" parent="."]
+offset_left = 723.0
+offset_top = 314.0
+offset_right = 1060.0
+offset_bottom = 399.0

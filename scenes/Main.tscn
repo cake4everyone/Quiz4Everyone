@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://c3x74j3lbrik6"]
+[gd_scene load_steps=3 format=3 uid="uid://c3x74j3lbrik6"]
 
 [ext_resource type="Script" path="res://Webserver.gd" id="1_ascc3"]
+[ext_resource type="PackedScene" uid="uid://ifh3d72f4c8r" path="res://scenes/question_scene.tscn" id="2_gkubl"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_ascc3")
@@ -11,11 +12,30 @@ offset_top = 318.0
 offset_right = 689.0
 offset_bottom = 349.0
 
-[node name="Button" type="Button" parent="."]
+[node name="Label" type="Label" parent="Password"]
+layout_mode = 0
+offset_left = 57.0
+offset_top = -27.0
+offset_right = 139.0
+offset_bottom = -1.0
+text = "Password?"
+
+[node name="Exit" type="Button" parent="."]
 offset_left = 1006.0
 offset_top = 596.0
 offset_right = 1118.0
 offset_bottom = 626.0
 text = "Exit"
 
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[node name="Start" type="Button" parent="."]
+offset_left = 712.0
+offset_top = 320.0
+offset_right = 824.0
+offset_bottom = 351.0
+text = "Start"
+
+[node name="QuestionScene" parent="." instance=ExtResource("2_gkubl")]
+
+[connection signal="StartQuiz" from="." to="QuestionScene" method="_on_main_start_quiz"]
+[connection signal="pressed" from="Exit" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Start" to="." method="_on_start_pressed"]

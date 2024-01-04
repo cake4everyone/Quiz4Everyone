@@ -3,8 +3,11 @@ var tcp: StreamPeerTCP = StreamPeerTCP.new()
 var host = ""
 var port = 0
 
+signal StartQuiz
 
 func _ready():
+	$QuestionScene.hide()
+	$Start.hide()
 	load_config()
 	var error = tcp.connect_to_host(host, port)
 	if error != OK:
@@ -28,6 +31,7 @@ func _process(delta):
 	if(Input.is_action_just_pressed("ui_accept") and $Password.text != ""):
 		_send_message_to_tcp($Password.text)
 		$Password.text = ""
+		$Start.show()
 	receive()
 	
 func load_config():
@@ -45,3 +49,10 @@ func receive():
 	if(tcp.get_available_bytes() > 0):
 		received_data = tcp.get_data(tcp.get_available_bytes())
 		print("Data received: ", received_data[1].get_string_from_ascii())
+		
+		
+func _on_start_pressed():
+	StartQuiz.emit()
+	$Password.hide()
+	_send_message_to_tcp("GAME: Test")
+	await get_tree().create_timer(1).timeout
