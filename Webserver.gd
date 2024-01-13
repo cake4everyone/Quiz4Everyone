@@ -1,7 +1,6 @@
 extends Node2D
-var tcp: StreamPeerTCP = StreamPeerTCP.new()
+var ws: WebSocketPeer = WebSocketPeer.new()
 var host = ""
-var port = 0
 
 signal StartQuiz
 
@@ -9,50 +8,50 @@ func _ready():
 	$QuestionScene.hide()
 	$Start.hide()
 	load_config()
-	var error = tcp.connect_to_host(host, port)
-	if error != OK:
-		print("Error:", error)
+
+func connect_to_ws():
+	var err = ws.connect_to_url("ws://"+host+"/login")
+	if err != OK:
+		print("Error:", err)
 		return
-		
-	print(tcp.get_connected_host(), tcp.get_connected_port())
+
 	print("Connected Succesfully")
-	
-func _send_message_to_tcp(message : String):
-	var data = message.to_ascii_buffer()
-	print(data)
-	print(tcp.get_status())
-	print(tcp.put_data(data))
+
+func _send_message_to_ws(message : String):
+	print("send data: ", message)
+	print("sent data: ", ws.send_text(message))
 
 func _process(delta):
-	tcp.poll()
-	if(tcp.get_status() != 2):
+	ws.poll()
+	if ws.get_ready_state() == WebSocketPeer.STATE_CONNECTING:
 		return
-		
+
+	if ws.get_ready_state() != WebSocketPeer.STATE_OPEN:
+		print("connection lost")
+		set_process(false)
+		return
+
 	if(Input.is_action_just_pressed("ui_accept") and $Password.text != ""):
-		_send_message_to_tcp($Password.text)
+		_send_message_to_ws($Password.text)
 		$Password.text = ""
 		$Start.show()
 	receive()
-	
+
 func load_config():
 	var file = FileAccess.open("res://config.yaml", FileAccess.READ)
 	host = file.get_line()
-	port = int(file.get_line())
 
 func _on_button_pressed():
-	tcp.disconnect_from_host()
 	await get_tree().create_timer(1).timeout
 	get_tree().quit()
-	
+
 func receive():
-	var received_data
-	if(tcp.get_available_bytes() > 0):
-		received_data = tcp.get_data(tcp.get_available_bytes())
-		print("Data received: ", received_data[1].get_string_from_ascii())
-		
-		
+	while ws.get_available_packet_count():
+		var received_data = ws.get_packet()
+		print("Data received: ", received_data)
+
 func _on_start_pressed():
 	StartQuiz.emit()
 	$Password.hide()
-	_send_message_to_tcp("GAME: Test")
+	_send_message_to_ws("GAME: Test")
 	await get_tree().create_timer(1).timeout
