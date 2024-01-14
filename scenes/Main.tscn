@@ -8,10 +8,10 @@ texture_filter = 1
 script = ExtResource("1_ascc3")
 
 [node name="Password" type="LineEdit" parent="."]
-offset_left = 499.0
-offset_top = 318.0
-offset_right = 689.0
-offset_bottom = 349.0
+offset_left = -96.0
+offset_top = -12.0
+offset_right = 94.0001
+offset_bottom = 19.0
 
 [node name="Label" type="Label" parent="Password"]
 layout_mode = 0
@@ -22,22 +22,25 @@ offset_bottom = -1.0
 text = "Password?"
 
 [node name="Exit" type="Button" parent="."]
-offset_left = 1006.0
-offset_top = 596.0
-offset_right = 1118.0
-offset_bottom = 626.0
+offset_left = 444.0
+offset_top = 280.0
+offset_right = 556.0
+offset_bottom = 311.0
 text = "Exit"
 
 [node name="Start" type="Button" parent="."]
-offset_left = 712.0
-offset_top = 320.0
-offset_right = 824.0
-offset_bottom = 351.0
+offset_left = -56.0
+offset_top = -13.0
+offset_right = 56.0001
+offset_bottom = 18.0
 text = "Start"
 
 [node name="QuestionScene" parent="." instance=ExtResource("2_gkubl")]
+visible = false
 
 [node name="LoginHTTP" type="HTTPRequest" parent="."]
+
+[node name="Camera2D" type="Camera2D" parent="."]
 
 [connection signal="StartQuiz" from="." to="QuestionScene" method="_on_main_start_quiz"]
 [connection signal="pressed" from="Exit" to="." method="_on_button_pressed"]

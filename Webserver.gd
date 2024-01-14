@@ -12,6 +12,8 @@ signal StartQuiz
 func _ready():
 	load_config()
 	$LoginHTTP.request_completed.connect(_on_http_request_completed)
+	$Password.show()
+	$Exit.show()
 	$QuestionScene.hide()
 	$Start.hide()
 	
@@ -83,6 +85,7 @@ func _on_button_pressed():
 func _on_start_pressed():
 	StartQuiz.emit()
 	$Password.hide()
+	$Start.hide()
 	_send_message_to_ws("GAME: Test")
 	await get_tree().create_timer(1).timeout
 
