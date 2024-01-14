@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://ifh3d72f4c8r" path="res://scenes/question_scene.tscn" id="2_gkubl"]
 
 [node name="Main" type="Node2D"]
+texture_filter = 1
 script = ExtResource("1_ascc3")
 
 [node name="Password" type="LineEdit" parent="."]
@@ -35,6 +36,8 @@ offset_bottom = 351.0
 text = "Start"
 
 [node name="QuestionScene" parent="." instance=ExtResource("2_gkubl")]
+
+[node name="LoginHTTP" type="HTTPRequest" parent="."]
 
 [connection signal="StartQuiz" from="." to="QuestionScene" method="_on_main_start_quiz"]
 [connection signal="pressed" from="Exit" to="." method="_on_button_pressed"]
