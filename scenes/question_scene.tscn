@@ -1,23 +1,74 @@
-[gd_scene load_steps=3 format=3 uid="uid://ifh3d72f4c8r"]
+[gd_scene load_steps=5 format=3 uid="uid://ifh3d72f4c8r"]
 
 [ext_resource type="Script" path="res://question_scene.gd" id="1_24euc"]
 [ext_resource type="Texture2D" uid="uid://bo44t6exvhoqr" path="res://sprites/Quiz.png" id="2_q1q60"]
 
+[sub_resource type="LabelSettings" id="LabelSettings_1ytrn"]
+font_size = 34
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_aeqsn"]
+font_size = 34
+font_color = Color(0, 0, 0, 1)
+
 [node name="QuestionScene" type="Node2D"]
 script = ExtResource("1_24euc")
-
-[node name="Question" type="Label" parent="."]
-offset_left = 406.0
-offset_top = 27.0
-offset_right = 699.0
-offset_bottom = 160.0
-
-[node name="Answer1" type="Label" parent="."]
-offset_left = 27.0
-offset_top = 148.0
-offset_right = 217.0
-offset_bottom = 208.0
 
 [node name="Quiz" type="Sprite2D" parent="."]
 scale = Vector2(0.705, 0.705)
 texture = ExtResource("2_q1q60")
+
+[node name="Answer1" type="Label" parent="."]
+offset_left = -493.0
+offset_top = 15.0
+offset_right = -91.0
+offset_bottom = 115.0
+text = "Spongebob squarepants"
+label_settings = SubResource("LabelSettings_1ytrn")
+autowrap_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Answer2" type="Label" parent="."]
+offset_left = 93.0
+offset_top = 15.0
+offset_right = 495.0
+offset_bottom = 115.0
+text = "Patrick"
+label_settings = SubResource("LabelSettings_1ytrn")
+autowrap_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Answer3" type="Label" parent="."]
+offset_left = -489.0
+offset_top = 181.0
+offset_right = -87.0
+offset_bottom = 281.0
+text = "Mr. Krabs"
+label_settings = SubResource("LabelSettings_1ytrn")
+autowrap_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Answer4" type="Label" parent="."]
+offset_left = 90.0
+offset_top = 179.0
+offset_right = 492.0
+offset_bottom = 279.0
+text = "Squidward"
+label_settings = SubResource("LabelSettings_1ytrn")
+autowrap_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Question" type="Label" parent="."]
+offset_left = -335.0
+offset_top = -264.0
+offset_right = 325.0
+offset_bottom = -53.0
+text = "Who lives in a pineapple under the sea?"
+label_settings = SubResource("LabelSettings_aeqsn")
+autowrap_mode = 3
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+metadata/_edit_use_anchors_ = true

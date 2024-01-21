@@ -42,6 +42,13 @@ visible = false
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
+[node name="Label" type="Label" parent="."]
+offset_left = -51.0
+offset_top = 40.0
+offset_right = 56.0
+offset_bottom = 66.0
+text = "Test Question"
+
 [connection signal="StartQuiz" from="." to="QuestionScene" method="_on_main_start_quiz"]
 [connection signal="pressed" from="Exit" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Start" to="." method="_on_start_pressed"]
