@@ -14,6 +14,11 @@ config/name="Quiz4EveryoneApp"
 run/main_scene="res://scenes/Main.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
 
+[display]
+
+window/stretch/mode="viewport"
+window/stretch/aspect="expand"
+
 [input]
 
 ui_accept={

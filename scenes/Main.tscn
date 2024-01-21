@@ -1,54 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://c3x74j3lbrik6"]
+[gd_scene load_steps=4 format=3 uid="uid://c3x74j3lbrik6"]
 
-[ext_resource type="Script" path="res://Webserver.gd" id="1_ascc3"]
+[ext_resource type="Script" path="res://scripts/Main.gd" id="1_whlbn"]
+[ext_resource type="PackedScene" uid="uid://2ysj36v7ruon" path="res://scenes/login.tscn" id="2_eawfu"]
 [ext_resource type="PackedScene" uid="uid://ifh3d72f4c8r" path="res://scenes/question_scene.tscn" id="2_gkubl"]
 
 [node name="Main" type="Node2D"]
 texture_filter = 1
-script = ExtResource("1_ascc3")
-
-[node name="Password" type="LineEdit" parent="."]
-offset_left = -96.0
-offset_top = -12.0
-offset_right = 94.0001
-offset_bottom = 19.0
-
-[node name="Label" type="Label" parent="Password"]
-layout_mode = 0
-offset_left = 57.0
-offset_top = -27.0
-offset_right = 139.0
-offset_bottom = -1.0
-text = "Password?"
-
-[node name="Exit" type="Button" parent="."]
-offset_left = 444.0
-offset_top = 280.0
-offset_right = 556.0
-offset_bottom = 311.0
-text = "Exit"
-
-[node name="Start" type="Button" parent="."]
-offset_left = -56.0
-offset_top = -13.0
-offset_right = 56.0001
-offset_bottom = 18.0
-text = "Start"
+script = ExtResource("1_whlbn")
 
 [node name="QuestionScene" parent="." instance=ExtResource("2_gkubl")]
 visible = false
 
-[node name="LoginHTTP" type="HTTPRequest" parent="."]
-
-[node name="Camera2D" type="Camera2D" parent="."]
-
-[node name="Label" type="Label" parent="."]
-offset_left = -51.0
-offset_top = 40.0
-offset_right = 56.0
-offset_bottom = 66.0
-text = "Test Question"
-
-[connection signal="StartQuiz" from="." to="QuestionScene" method="_on_main_start_quiz"]
-[connection signal="pressed" from="Exit" to="." method="_on_button_pressed"]
-[connection signal="pressed" from="Start" to="." method="_on_start_pressed"]
+[node name="Login" parent="." instance=ExtResource("2_eawfu")]

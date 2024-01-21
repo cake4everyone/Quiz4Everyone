@@ -1,0 +1,73 @@
+[gd_scene load_steps=5 format=3 uid="uid://2ysj36v7ruon"]
+
+[ext_resource type="Script" path="res://scripts/Login.gd" id="1_4rhoe"]
+[ext_resource type="Texture2D" uid="uid://bk0hi4cgvmhnm" path="res://sprites/BG.png" id="2_ucxut"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_b3wv6"]
+font_size = 25
+
+[sub_resource type="LabelSettings" id="LabelSettings_y22y5"]
+font_size = 25
+
+[node name="Login" type="Node2D"]
+texture_filter = 3
+script = ExtResource("1_4rhoe")
+
+[node name="Bg" type="Sprite2D" parent="."]
+position = Vector2(-4.5, 3)
+scale = Vector2(1.70625, 1.11)
+texture = ExtResource("2_ucxut")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="LoginHTTP" type="HTTPRequest" parent="."]
+
+[node name="Input" type="Node2D" parent="."]
+
+[node name="EMail" type="LineEdit" parent="Input"]
+offset_left = -211.0
+offset_top = -43.0
+offset_right = 213.0
+offset_bottom = -12.0
+alignment = 1
+
+[node name="EnterMail" type="Label" parent="Input/EMail"]
+offset_left = 56.0
+offset_top = -56.0
+offset_right = 367.0
+offset_bottom = -18.0
+text = "Enter Email or Username:"
+label_settings = SubResource("LabelSettings_b3wv6")
+
+[node name="Password" type="LineEdit" parent="Input"]
+offset_left = -100.0
+offset_top = 38.0
+offset_right = 108.0
+offset_bottom = 69.0
+alignment = 1
+
+[node name="EnterPassword" type="Label" parent="Input/Password"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = -45.0
+offset_right = 198.0
+offset_bottom = -7.0
+text = "Enter Password:"
+label_settings = SubResource("LabelSettings_y22y5")
+
+[node name="Login" type="Button" parent="Input"]
+offset_left = 174.0
+offset_top = 35.0
+offset_right = 281.0
+offset_bottom = 79.0
+text = "Login"
+
+[node name="Twitch" type="Button" parent="Input"]
+offset_left = 181.0
+offset_top = 87.0
+offset_right = 276.0
+offset_bottom = 123.0
+text = "Twitch"
+
+[connection signal="pressed" from="Input/Login" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Input/Twitch" to="." method="_on_twitch_pressed"]
