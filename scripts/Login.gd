@@ -2,12 +2,13 @@ extends Node2D
 
 var host = ""
 
+signal login_Complete
 
-func _ready():
-	load_config()
+func _on_main_start_login():
+	host = Main.host
 
 
-func _on_button_pressed():
+func _on_login_button_pressed():
 	$LoginHTTP.request_completed.connect(_on_http_login_completed)
 	var auth = Marshalls.utf8_to_base64($Input/EMail.text + ":" + $Input/Password.text)
 	var err = $LoginHTTP.request("http://" + host + "/login", ["Authorization: Basic " + auth], HTTPClient.METHOD_POST)
@@ -26,11 +27,10 @@ func _on_http_login_completed(result, response_code, headers, body):
 		return
 	print("Login successful: " + data.username)
 	Main.api_token = data.token
+	login_Complete.emit()
 
 
-func load_config():
-	var file = FileAccess.open("res://config.yaml", FileAccess.READ)
-	host = file.get_line()
+
 
 
 func _on_twitch_pressed():

@@ -12,3 +12,7 @@ script = ExtResource("1_whlbn")
 visible = false
 
 [node name="Login" parent="." instance=ExtResource("2_eawfu")]
+
+[connection signal="start_Login" from="." to="Login" method="_on_main_start_login"]
+[connection signal="start_Quiz" from="." to="QuestionScene" method="_on_main_start_quiz"]
+[connection signal="login_Complete" from="Login" to="." method="_on_login_login_complete"]

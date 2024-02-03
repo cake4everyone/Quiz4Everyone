@@ -1,74 +1,55 @@
-[gd_scene load_steps=5 format=3 uid="uid://ifh3d72f4c8r"]
+[gd_scene load_steps=3 format=3 uid="uid://ifh3d72f4c8r"]
 
 [ext_resource type="Script" path="res://question_scene.gd" id="1_24euc"]
-[ext_resource type="Texture2D" uid="uid://bo44t6exvhoqr" path="res://sprites/Quiz.png" id="2_q1q60"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_1ytrn"]
-font_size = 34
-font_color = Color(0, 0, 0, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_aeqsn"]
-font_size = 34
-font_color = Color(0, 0, 0, 1)
+[ext_resource type="Texture2D" uid="uid://bk0hi4cgvmhnm" path="res://sprites/BG.png" id="2_wnggv"]
 
 [node name="QuestionScene" type="Node2D"]
 script = ExtResource("1_24euc")
 
-[node name="Quiz" type="Sprite2D" parent="."]
-scale = Vector2(0.705, 0.705)
-texture = ExtResource("2_q1q60")
+[node name="Bg" type="Sprite2D" parent="."]
+position = Vector2(-1.00002, 3)
+scale = Vector2(1.4775, 1.13)
+texture = ExtResource("2_wnggv")
 
-[node name="Answer1" type="Label" parent="."]
-offset_left = -493.0
-offset_top = 15.0
-offset_right = -91.0
-offset_bottom = 115.0
-text = "Spongebob squarepants"
-label_settings = SubResource("LabelSettings_1ytrn")
-autowrap_mode = 2
-metadata/_edit_use_anchors_ = true
+[node name="Camera2D" type="Camera2D" parent="."]
 
-[node name="Answer2" type="Label" parent="."]
-offset_left = 93.0
-offset_top = 15.0
-offset_right = 495.0
-offset_bottom = 115.0
-text = "Patrick"
-label_settings = SubResource("LabelSettings_1ytrn")
-autowrap_mode = 2
-metadata/_edit_use_anchors_ = true
+[node name="Game Start" type="Button" parent="."]
+offset_left = -384.0
+offset_top = -31.0
+offset_right = -202.0
+offset_bottom = 24.0
+text = "Game Info"
 
-[node name="Answer3" type="Label" parent="."]
-offset_left = -489.0
-offset_top = 181.0
-offset_right = -87.0
-offset_bottom = 281.0
-text = "Mr. Krabs"
-label_settings = SubResource("LabelSettings_1ytrn")
-autowrap_mode = 2
-metadata/_edit_use_anchors_ = true
+[node name="Round Info" type="Button" parent="."]
+offset_left = -90.0
+offset_top = -26.0
+offset_right = 92.0
+offset_bottom = 29.0
+text = "Round Info"
 
-[node name="Answer4" type="Label" parent="."]
-offset_left = 90.0
-offset_top = 179.0
-offset_right = 492.0
-offset_bottom = 279.0
-text = "Squidward"
-label_settings = SubResource("LabelSettings_1ytrn")
-autowrap_mode = 2
-metadata/_edit_use_anchors_ = true
+[node name="Round Next" type="Button" parent="."]
+offset_left = 182.0
+offset_top = -27.0
+offset_right = 364.0
+offset_bottom = 28.0
+text = "Next Round"
 
-[node name="Question" type="Label" parent="."]
-offset_left = -335.0
-offset_top = -264.0
-offset_right = 325.0
-offset_bottom = -53.0
-text = "Who lives in a pineapple under the sea?"
-label_settings = SubResource("LabelSettings_aeqsn")
-autowrap_mode = 3
-metadata/_edit_use_anchors_ = true
+[node name="HTTP_Requests" type="Node2D" parent="."]
 
-[node name="Label" type="Label" parent="."]
-offset_right = 40.0
-offset_bottom = 23.0
-metadata/_edit_use_anchors_ = true
+[node name="HTTP_GameStart" type="HTTPRequest" parent="HTTP_Requests"]
+
+[node name="HTTP_GameInfo" type="HTTPRequest" parent="HTTP_Requests"]
+
+[node name="HTTP_GameQuit" type="HTTPRequest" parent="HTTP_Requests"]
+
+[node name="HTTP_RoundInfo" type="HTTPRequest" parent="HTTP_Requests"]
+
+[node name="HTTP_RoundNext" type="HTTPRequest" parent="HTTP_Requests"]
+
+[node name="HTTP_Category" type="HTTPRequest" parent="HTTP_Requests"]
+
+[node name="HTTP_StreamerVote" type="HTTPRequest" parent="HTTP_Requests"]
+
+[connection signal="pressed" from="Game Start" to="." method="_on_game_start_pressed"]
+[connection signal="pressed" from="Round Info" to="." method="_on_round_info_pressed"]
+[connection signal="pressed" from="Round Next" to="." method="_on_round_next_pressed"]
