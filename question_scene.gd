@@ -28,9 +28,11 @@ func _on_round_info_pressed():
 	$HTTP_Requests/HTTP_RoundInfo.request("http://" + host + "/round", ["Authorization: Q4E " + api_token], HTTPClient.METHOD_GET)
 
 func _on_round_next_pressed():
-	$HTTP_Requests/HTTP_GameStart.request("http://" + host + "/round/next", ["Authorization: Q4E " + api_token], HTTPClient.METHOD_POST)
+	$HTTP_Requests/HTTP_RoundNext.request("http://" + host + "/round/next", ["Authorization: Q4E " + api_token], HTTPClient.METHOD_POST)
 
-
+func _on_game_quit_pressed():
+	$HTTP_Requests/HTTP_GameQuit.request("http://" + host + "/game", ["Authorization: Q4E " + api_token], HTTPClient.METHOD_DELETE)
+	
 
 func _start_game_res(result, response_code, headers, body):
 	print("Response Start Game: " + str(response_code) + "\n" + body.get_string_from_ascii())
@@ -54,6 +56,4 @@ func _category_res(result, response_code, headers, body):
 func _streamervote_res(result, response_code, headers, body):
 	print("Response Streamervote: " + str(response_code) + "\n" + body.get_string_from_ascii())
 	
-
-
 

@@ -34,6 +34,13 @@ offset_right = 364.0
 offset_bottom = 28.0
 text = "Next Round"
 
+[node name="Game Quit" type="Button" parent="."]
+offset_left = 387.0
+offset_top = 263.0
+offset_right = 569.0
+offset_bottom = 318.0
+text = "Quit Game"
+
 [node name="HTTP_Requests" type="Node2D" parent="."]
 
 [node name="HTTP_GameStart" type="HTTPRequest" parent="HTTP_Requests"]
@@ -53,3 +60,4 @@ text = "Next Round"
 [connection signal="pressed" from="Game Start" to="." method="_on_game_start_pressed"]
 [connection signal="pressed" from="Round Info" to="." method="_on_round_info_pressed"]
 [connection signal="pressed" from="Round Next" to="." method="_on_round_next_pressed"]
+[connection signal="pressed" from="Game Quit" to="." method="_on_game_quit_pressed"]
