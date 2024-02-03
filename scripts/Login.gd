@@ -1,7 +1,6 @@
 extends Node2D
 
 var host = ""
-var token = ""
 
 
 func _ready():
@@ -25,8 +24,8 @@ func _on_http_login_completed(result, response_code, headers, body):
 	if typeof(data) != TYPE_DICTIONARY:
 		print("Expected JSON Dictionary, but got TYPE: " + str(typeof(data)))
 		return
-	token = data.token
 	print("Login successful: " + data.username)
+	Main.api_token = data.token
 
 
 func load_config():
