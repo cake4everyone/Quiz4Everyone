@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://ifh3d72f4c8r"]
+[gd_scene load_steps=4 format=3 uid="uid://ifh3d72f4c8r"]
 
 [ext_resource type="Script" path="res://question_scene.gd" id="1_24euc"]
 [ext_resource type="Texture2D" uid="uid://bk0hi4cgvmhnm" path="res://sprites/BG.png" id="2_wnggv"]
+[ext_resource type="Texture2D" uid="uid://cud4wmmwy0xfx" path="res://sprites/BG2.png" id="3_wxncl"]
 
 [node name="QuestionScene" type="Node2D"]
 script = ExtResource("1_24euc")
@@ -12,27 +13,6 @@ scale = Vector2(1.4775, 1.13)
 texture = ExtResource("2_wnggv")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-
-[node name="Game Start" type="Button" parent="."]
-offset_left = -384.0
-offset_top = -31.0
-offset_right = -202.0
-offset_bottom = 24.0
-text = "Game Info"
-
-[node name="Round Info" type="Button" parent="."]
-offset_left = -90.0
-offset_top = -26.0
-offset_right = 92.0
-offset_bottom = 29.0
-text = "Round Info"
-
-[node name="Round Next" type="Button" parent="."]
-offset_left = 182.0
-offset_top = -27.0
-offset_right = 364.0
-offset_bottom = 28.0
-text = "Next Round"
 
 [node name="Game Quit" type="Button" parent="."]
 offset_left = 387.0
@@ -57,7 +37,99 @@ text = "Quit Game"
 
 [node name="HTTP_StreamerVote" type="HTTPRequest" parent="HTTP_Requests"]
 
-[connection signal="pressed" from="Game Start" to="." method="_on_game_start_pressed"]
-[connection signal="pressed" from="Round Info" to="." method="_on_round_info_pressed"]
-[connection signal="pressed" from="Round Next" to="." method="_on_round_next_pressed"]
+[node name="Quiz" type="Node2D" parent="."]
+
+[node name="Answers" type="Node2D" parent="Quiz"]
+position = Vector2(0, 41.62)
+
+[node name="AnswerA" type="Node2D" parent="Quiz/Answers"]
+
+[node name="Bg2" type="Sprite2D" parent="Quiz/Answers/AnswerA"]
+position = Vector2(-196, -104)
+scale = Vector2(33.1, 22)
+texture = ExtResource("3_wxncl")
+
+[node name="Label" type="Label" parent="Quiz/Answers/AnswerA"]
+offset_left = -358.0
+offset_top = -189.0
+offset_right = -31.0
+offset_bottom = -19.0
+text = "Answer A"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnswerB" type="Node2D" parent="Quiz/Answers"]
+position = Vector2(395, 3)
+
+[node name="Bg2" type="Sprite2D" parent="Quiz/Answers/AnswerB"]
+position = Vector2(-196, -104)
+scale = Vector2(33.1, 22)
+texture = ExtResource("3_wxncl")
+
+[node name="Label" type="Label" parent="Quiz/Answers/AnswerB"]
+offset_left = -356.0
+offset_top = -185.0
+offset_right = -35.0
+offset_bottom = -20.0
+text = "Answer B"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnswerC" type="Node2D" parent="Quiz/Answers"]
+position = Vector2(0, 235)
+
+[node name="Bg2" type="Sprite2D" parent="Quiz/Answers/AnswerC"]
+position = Vector2(-196, -104)
+scale = Vector2(33.1, 22)
+texture = ExtResource("3_wxncl")
+
+[node name="Label" type="Label" parent="Quiz/Answers/AnswerC"]
+offset_left = -358.0
+offset_top = -185.0
+offset_right = -33.0
+offset_bottom = -24.0
+text = "Answer C"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnswerD" type="Node2D" parent="Quiz/Answers"]
+position = Vector2(393, 235)
+
+[node name="Bg2" type="Sprite2D" parent="Quiz/Answers/AnswerD"]
+position = Vector2(-196, -104)
+scale = Vector2(33.1, 22)
+texture = ExtResource("3_wxncl")
+
+[node name="Label" type="Label" parent="Quiz/Answers/AnswerD"]
+offset_left = -359.0
+offset_top = -189.0
+offset_right = -33.0
+offset_bottom = -17.0
+text = "Answer D"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Question" type="Node2D" parent="Quiz"]
+
+[node name="Bg2" type="Sprite2D" parent="Quiz/Question"]
+position = Vector2(0.499996, -252.75)
+scale = Vector2(85, 10.188)
+texture = ExtResource("3_wxncl")
+
+[node name="Label" type="Label" parent="Quiz/Question"]
+offset_left = -423.0
+offset_top = -293.0
+offset_right = 422.0
+offset_bottom = -215.0
+text = "Question"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RoundCounter" type="Label" parent="."]
+offset_left = 487.0
+offset_top = -315.0
+offset_right = 568.0
+offset_bottom = -292.0
+text = "Round X/Y"
+
 [connection signal="pressed" from="Game Quit" to="." method="_on_game_quit_pressed"]
