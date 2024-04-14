@@ -65,12 +65,4 @@ offset_right = 281.0
 offset_bottom = 79.0
 text = "Login"
 
-[node name="Twitch" type="Button" parent="Input"]
-offset_left = 181.0
-offset_top = 87.0
-offset_right = 276.0
-offset_bottom = 123.0
-text = "Twitch"
-
 [connection signal="pressed" from="Input/Login" to="." method="_on_login_button_pressed"]
-[connection signal="pressed" from="Input/Twitch" to="." method="_on_twitch_pressed"]

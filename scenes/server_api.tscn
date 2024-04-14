@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=3 uid="uid://b42dpvb4s6yvs"]
+
+[ext_resource type="Script" path="res://scenes/server_api.gd" id="1_l1n5m"]
+
+[node name="Server API" type="Node"]
+script = ExtResource("1_l1n5m")
+
+[node name="HTTP_Category" type="HTTPRequest" parent="."]
+
+[node name="HTTP_GameInfo" type="HTTPRequest" parent="."]
+
+[node name="HTTP_GameQuit" type="HTTPRequest" parent="."]
+
+[node name="HTTP_GameStart" type="HTTPRequest" parent="."]
+
+[node name="HTTP_Login" type="HTTPRequest" parent="."]
+
+[node name="HTTP_Logout" type="HTTPRequest" parent="."]
+
+[node name="HTTP_RoundInfo" type="HTTPRequest" parent="."]
+
+[node name="HTTP_RoundNext" type="HTTPRequest" parent="."]
+
+[node name="HTTP_StreamerVote" type="HTTPRequest" parent="."]

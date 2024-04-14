@@ -90,8 +90,6 @@ func _on_start_pressed():
 	await get_tree().create_timer(1).timeout
 
 
-#HTTP
-
 func _on_http_request_completed(result, response_code, headers, body):
 	print("test ", response_code)
 	print(body.get_string_from_ascii())

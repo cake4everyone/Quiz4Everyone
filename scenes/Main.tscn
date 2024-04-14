@@ -1,23 +1,26 @@
-[gd_scene load_steps=5 format=3 uid="uid://c3x74j3lbrik6"]
+[gd_scene load_steps=6 format=3 uid="uid://c3x74j3lbrik6"]
 
 [ext_resource type="Script" path="res://scripts/Main.gd" id="1_whlbn"]
 [ext_resource type="PackedScene" uid="uid://2ysj36v7ruon" path="res://scenes/login.tscn" id="2_eawfu"]
 [ext_resource type="PackedScene" uid="uid://ifh3d72f4c8r" path="res://scenes/question_scene.tscn" id="2_gkubl"]
 [ext_resource type="PackedScene" uid="uid://yyc1l3e78qgl" path="res://scenes/start_quiz.tscn" id="4_8p47l"]
+[ext_resource type="PackedScene" uid="uid://b42dpvb4s6yvs" path="res://scenes/server_api.tscn" id="5_4hocc"]
 
 [node name="Main" type="Node2D"]
 texture_filter = 1
 script = ExtResource("1_whlbn")
 
 [node name="Login" parent="." instance=ExtResource("2_eawfu")]
-visible = false
 
 [node name="QuestionScene" parent="." instance=ExtResource("2_gkubl")]
 
 [node name="StartQuiz" parent="." instance=ExtResource("4_8p47l")]
 
+[node name="Server API" parent="." instance=ExtResource("5_4hocc")]
+
 [connection signal="start_Login" from="." to="Login" method="_on_main_start_login"]
 [connection signal="start_Quiz" from="." to="QuestionScene" method="_on_main_start_quiz"]
 [connection signal="start_Setup" from="." to="StartQuiz" method="_on_main_start_setup"]
-[connection signal="login_Complete" from="Login" to="." method="_on_login_login_complete"]
+[connection signal="login" from="Login" to="Server API" method="_login"]
 [connection signal="start" from="StartQuiz" to="." method="_on_start_quiz_start"]
+[connection signal="login_complete" from="Server API" to="." method="_on_server_api_login_complete"]
