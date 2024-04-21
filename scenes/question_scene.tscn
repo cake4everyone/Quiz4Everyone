@@ -25,22 +25,6 @@ offset_right = 569.0
 offset_bottom = 318.0
 text = "Quit Game"
 
-[node name="HTTP_Requests" type="Node2D" parent="."]
-
-[node name="HTTP_GameStart" type="HTTPRequest" parent="HTTP_Requests"]
-
-[node name="HTTP_GameInfo" type="HTTPRequest" parent="HTTP_Requests"]
-
-[node name="HTTP_GameQuit" type="HTTPRequest" parent="HTTP_Requests"]
-
-[node name="HTTP_RoundInfo" type="HTTPRequest" parent="HTTP_Requests"]
-
-[node name="HTTP_RoundNext" type="HTTPRequest" parent="HTTP_Requests"]
-
-[node name="HTTP_Category" type="HTTPRequest" parent="HTTP_Requests"]
-
-[node name="HTTP_StreamerVote" type="HTTPRequest" parent="HTTP_Requests"]
-
 [node name="Quiz" type="Node2D" parent="."]
 visible = false
 
@@ -146,5 +130,3 @@ text = "3"
 label_settings = SubResource("LabelSettings_3pa0d")
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[connection signal="pressed" from="Game Quit" to="." method="_on_game_quit_pressed"]

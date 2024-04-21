@@ -3,6 +3,9 @@ extends Node2D
 var quizOn = false
 var streamerAnswer = ""
 
+signal round_info
+signal game_info
+
 func _process(delta):
 	if(quizOn == true):
 		if(Input.is_action_pressed("AnswerA") == true):
@@ -17,6 +20,8 @@ func _process(delta):
 func _on_main_start_quiz():
 	self.show()
 	_start_countdown()
+	round_info.emit()
+	
 
 
 func _start_countdown():
@@ -32,6 +37,4 @@ func _start_countdown():
 	
 func _quizloop():
 	quizOn = true
-	
-	
 	

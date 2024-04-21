@@ -1,5 +1,5 @@
 extends Node2D
-signal start
+signal game_start
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -15,4 +15,10 @@ func _on_main_start_setup():
 	
 
 func _on_btn_start_pressed():
-	pass
+	var body = """{
+		"categories": {
+			"testcookie": 5
+		},
+		"round_duration": 30
+	}"""
+	game_start.emit(body)

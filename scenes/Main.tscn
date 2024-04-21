@@ -22,5 +22,14 @@ script = ExtResource("1_whlbn")
 [connection signal="start_Quiz" from="." to="QuestionScene" method="_on_main_start_quiz"]
 [connection signal="start_Setup" from="." to="StartQuiz" method="_on_main_start_setup"]
 [connection signal="login" from="Login" to="Server API" method="_login"]
-[connection signal="start" from="StartQuiz" to="." method="_on_start_quiz_start"]
+[connection signal="game_info" from="QuestionScene" to="Server API" method="_game_info"]
+[connection signal="round_info" from="QuestionScene" to="Server API" method="_round_info"]
+[connection signal="game_start" from="StartQuiz" to="Server API" method="_game_start"]
+[connection signal="game_informed" from="Server API" to="." method="_on_server_api_game_informed" binds= [{
+"chat_points": 0,
+"chat_won": 0,
+"streamer_points": 0,
+"streamer_won": 0
+}]]
+[connection signal="game_started" from="Server API" to="." method="_on_server_api_game_started"]
 [connection signal="login_complete" from="Server API" to="." method="_on_server_api_login_complete"]
