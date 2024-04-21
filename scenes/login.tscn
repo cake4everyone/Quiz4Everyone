@@ -20,8 +20,6 @@ texture = ExtResource("2_ucxut")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
-[node name="LoginHTTP" type="HTTPRequest" parent="."]
-
 [node name="Input" type="Node2D" parent="."]
 
 [node name="EMail" type="LineEdit" parent="Input"]
@@ -65,4 +63,4 @@ offset_right = 281.0
 offset_bottom = 79.0
 text = "Login"
 
-[connection signal="pressed" from="Input/Login" to="." method="_on_login_button_pressed"]
+[connection signal="pressed" from="Input/Login" to="." method="on_login_button_pressed"]

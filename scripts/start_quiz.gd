@@ -4,17 +4,15 @@ signal game_start
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$dd_mode.add_item("Streamer VS Chat", 0)
-	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta: float):
 	pass
 
-func _on_main_start_setup():
+func on_main_start_setup():
 	self.show()
-	
 
-func _on_btn_start_pressed():
+func on_btn_start_pressed():
 	var body = """{
 		"categories": {
 			"testcookie": 5

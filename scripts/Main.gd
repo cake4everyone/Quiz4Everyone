@@ -10,20 +10,16 @@ func _ready():
 	$QuestionScene.hide()
 	$Login.show()
 
-
-func _on_start_quiz_start():
+func on_start_quiz_start():
 	pass
 
-
-func _on_server_api_login_complete():
+func on_server_api_login_complete():
 	$Login.hide()
 	start_Setup.emit()
 
-
-func _on_server_api_game_started():
+func on_server_api_game_started():
 	$StartQuiz.hide()
 	start_Quiz.emit()
 
-
-func _on_server_api_game_informed(extra_arg_0):
+func on_server_api_game_informed(extra_arg_0):
 	print(extra_arg_0)

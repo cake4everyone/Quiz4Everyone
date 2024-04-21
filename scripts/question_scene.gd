@@ -1,30 +1,28 @@
 extends Node2D
 
-var quizOn = false
-var streamerAnswer = ""
+var quizOn: bool = false
+var streamerAnswer: String = ""
 
 signal round_info
 signal game_info
 
-func _process(delta):
-	if(quizOn == true):
-		if(Input.is_action_pressed("AnswerA") == true):
+func _process(_delta: float):
+	if quizOn:
+		if Input.is_action_pressed("AnswerA"):
 			streamerAnswer = "A"
-		if(Input.is_action_pressed("AnswerB") == true):
+		if Input.is_action_pressed("AnswerB"):
 			streamerAnswer = "B"
-		if(Input.is_action_pressed("AnswerC") == true):
+		if Input.is_action_pressed("AnswerC"):
 			streamerAnswer = "C"
-		if(Input.is_action_pressed("AnswerD") == true):
+		if Input.is_action_pressed("AnswerD"):
 			streamerAnswer = "D"
 
-func _on_main_start_quiz():
+func on_main_start_quiz():
 	self.show()
-	_start_countdown()
+	start_countdown()
 	round_info.emit()
-	
 
-
-func _start_countdown():
+func start_countdown():
 	$StartCountdown.show()
 	$StartCountdown.text = "3"
 	await get_tree().create_timer(1.0).timeout
@@ -33,8 +31,4 @@ func _start_countdown():
 	$StartCountdown.text = "1"
 	await get_tree().create_timer(1.0).timeout
 	$StartCountdown.hide()
-	_quizloop()
-	
-func _quizloop():
 	quizOn = true
-	
