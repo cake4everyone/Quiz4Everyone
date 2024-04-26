@@ -4,6 +4,7 @@ var ws: WebSocketPeer = WebSocketPeer.new()
 var host: String = ""
 var api_token: String = ""
 
+signal got_categories
 signal login_complete
 signal game_started
 signal game_informed
@@ -29,7 +30,10 @@ func category():
 	$HTTP_Category.request(host + "/category", ["Authorization: Q4E " + api_token], HTTPClient.METHOD_GET)
 
 func category_resp(_result, response_code: int, _headers: PackedStringArray, body: PackedByteArray):
-	print("Response Category: " + str(response_code) + "\n" + body.get_string_from_ascii())
+	if response_code != HTTPClient.RESPONSE_OK:
+		print("couldn't get categories: got %d expexted %d: %s" % [response_code, HTTPClient.RESPONSE_OK, body.get_string_from_ascii()])
+		return
+	got_categories.emit(json_parse(body))
 	
 func game_info():
 	$HTTP_GameInfo.request(host + "/game", ["Authorization: Q4E " + api_token], HTTPClient.METHOD_GET)
@@ -49,7 +53,10 @@ func game_start(body: String):
 	$HTTP_GameStart.request(host + "/game", ["Authorization: Q4E " + api_token], HTTPClient.METHOD_POST, body)
 
 func game_start_resp(_result, response_code: int, _headers: PackedStringArray, body: PackedByteArray):
-	print("Response Game Start: " + str(response_code) + "\n" + body.get_string_from_ascii())
+	if response_code != HTTPClient.RESPONSE_CREATED:
+		print("couldn't create new game: got %d expected %d: %s" % [response_code, HTTPClient.RESPONSE_CREATED, body.get_string_from_ascii()])
+		return
+	print(body.get_string_from_ascii())
 	game_started.emit()
 	
 func login(auth: String):

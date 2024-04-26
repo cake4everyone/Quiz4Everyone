@@ -24,6 +24,7 @@ script = ExtResource("1_whlbn")
 [connection signal="game_info" from="QuestionScene" to="Server API" method="game_info"]
 [connection signal="round_info" from="QuestionScene" to="Server API" method="round_info"]
 [connection signal="game_start" from="StartQuiz" to="Server API" method="game_start"]
+[connection signal="get_categories" from="StartQuiz" to="Server API" method="category"]
 [connection signal="game_informed" from="Server API" to="." method="on_server_api_game_informed" binds= [{
 "chat_points": 0,
 "chat_won": 0,
@@ -31,4 +32,5 @@ script = ExtResource("1_whlbn")
 "streamer_won": 0
 }]]
 [connection signal="game_started" from="Server API" to="." method="on_server_api_game_started"]
+[connection signal="got_categories" from="Server API" to="StartQuiz" method="on_server_api_got_categories"]
 [connection signal="login_complete" from="Server API" to="." method="on_server_api_login_complete"]

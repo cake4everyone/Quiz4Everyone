@@ -28,5 +28,37 @@ offset_right = -477.0
 offset_bottom = -258.0
 metadata/_edit_use_anchors_ = true
 
+[node name="copy_category" type="HBoxContainer" parent="."]
+visible = false
+layout_direction = 3
+offset_left = -563.0
+offset_top = -314.0
+offset_right = -463.0
+offset_bottom = -283.0
+
+[node name="amount" type="SpinBox" parent="copy_category"]
+layout_mode = 2
+
+[node name="label" type="Label" parent="copy_category"]
+layout_direction = 2
+layout_mode = 2
+max_lines_visible = 1
+
+[node name="category_box" type="ScrollContainer" parent="."]
+layout_direction = 2
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 465.0
+offset_top = -314.0
+offset_right = 571.0
+grow_horizontal = 0
+horizontal_scroll_mode = 0
+
+[node name="categories" type="VBoxContainer" parent="category_box"]
+layout_direction = 3
+layout_mode = 2
+alignment = 2
+
 [connection signal="pressed" from="btn_start" to="." method="on_btn_start_pressed"]
 [connection signal="item_selected" from="dd_mode" to="." method="on_dd_mode_item_selected"]
