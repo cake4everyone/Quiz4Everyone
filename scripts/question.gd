@@ -3,9 +3,7 @@ extends Node2D
 var quizOn: bool = false
 var streamerAnswer: String = ""
 
-signal next_round
-signal round_info
-signal game_info
+var api_next_round: Callable
 
 func _process(_delta: float):
 	if quizOn:
@@ -18,11 +16,8 @@ func _process(_delta: float):
 		if Input.is_action_pressed("AnswerD"):
 			streamerAnswer = "D"
 
-func on_main_start_quiz():
-	self.show()
-	start_countdown()
-
-func start_countdown():
+## start_next_round shows a 3 second countdown before showing the round data.
+func start_next_round():
 	$StartCountdown.show()
 	$StartCountdown.text = "3"
 	await get_tree().create_timer(1.0).timeout
@@ -31,10 +26,11 @@ func start_countdown():
 	$StartCountdown.text = "1"
 	await get_tree().create_timer(1.0).timeout
 	$StartCountdown.hide()
-	next_round.emit()
+	api_next_round.call()
 	quizOn = true
 
-func on_server_api_next_round_complete(round_data: Dictionary):
+## show_round_data displays the given round data on screen.
+func show_round_data(round_data: Dictionary):
 	$RoundCounter.text = "Round %d/%d (%s)" % [round_data.current_round, round_data.max_round, round_data.category]
 
 	$Quiz/Question/Label.text = round_data.question

@@ -1,9 +1,9 @@
 [gd_scene load_steps=3 format=3 uid="uid://yyc1l3e78qgl"]
 
-[ext_resource type="Script" path="res://scripts/start_quiz.gd" id="1_f4qtc"]
+[ext_resource type="Script" path="res://scripts/menu.gd" id="1_f4qtc"]
 [ext_resource type="Texture2D" uid="uid://bk0hi4cgvmhnm" path="res://sprites/BG.png" id="2_kwh0h"]
 
-[node name="StartQuiz" type="Node2D"]
+[node name="Menu" type="Node2D"]
 texture_filter = 1
 script = ExtResource("1_f4qtc")
 
