@@ -35,3 +35,4 @@ script = ExtResource("1_whlbn")
 [connection signal="game_started" from="Server API" to="." method="on_server_api_game_started"]
 [connection signal="got_categories" from="Server API" to="StartQuiz" method="on_server_api_got_categories"]
 [connection signal="login_complete" from="Server API" to="." method="on_server_api_login_complete"]
+[connection signal="next_round_complete" from="Server API" to="QuestionScene" method="on_server_api_next_round_complete"]

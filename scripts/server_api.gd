@@ -8,6 +8,7 @@ signal got_categories
 signal login_complete
 signal game_started
 signal game_informed
+signal next_round_complete
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -94,7 +95,11 @@ func round_next():
 	$HTTP_RoundNext.request(host + "/round/next", ["Authorization: Q4E " + api_token], HTTPClient.METHOD_POST)
 
 func round_next_resp(_result, response_code: int, _headers: PackedStringArray, body: PackedByteArray):
-	print("Response Round Next: " + str(response_code) + "\n" + body.get_string_from_ascii())
+	if response_code != HTTPClient.RESPONSE_OK:
+		print("Failed to advance to next sound: got %d expected %d: %s" % [response_code, HTTPClient.RESPONSE_OK, body.get_string_from_ascii()])
+		return
+	
+	next_round_complete.emit(json_parse(body))
 	
 func streamervote():
 	$HTTP_StreamerVote.request(host + "/vote", ["Authorization: Q4E " + api_token], HTTPClient.METHOD_POST)
@@ -104,7 +109,7 @@ func streamervote_resp(_result, response_code: int, _headers: PackedStringArray,
 
 func json_parse(body: PackedByteArray) -> Dictionary:
 	var json = JSON.new()
-	var error = json.parse(body.get_string_from_ascii())
+	var error = json.parse(body.get_string_from_utf8())
 	if error != OK:
 		print("JSON Parse Error: ", json.get_error_message())
 		return Dictionary()
