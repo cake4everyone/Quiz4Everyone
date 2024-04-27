@@ -21,7 +21,13 @@ func _ready():
 	$HTTP_RoundNext.request_completed.connect(round_next_resp)
 	$HTTP_StreamerVote.request_completed.connect(streamervote_resp)
 	load_config()
-	
+	set_process(false)
+
+func _process(_delta: float):
+	var msg: PackedByteArray = read_from_ws()
+	if len(msg) > 0:
+		print("WS => %s" % [msg.get_string_from_ascii()])
+
 func load_config():
 	var file = FileAccess.open("res://config.yaml", FileAccess.READ)
 	host = file.get_line()
@@ -69,6 +75,7 @@ func login_resp(_result, response_code: int, _headers: PackedStringArray, body: 
 	var data = json_parse(body)
 	print("Login successful: " + data.username)
 	api_token = data.token
+	connect_to_ws()
 	login_complete.emit()
 	
 func logout():
@@ -111,11 +118,13 @@ func json_parse(body: PackedByteArray) -> Dictionary:
 func connect_to_ws():
 	var headers = PackedStringArray(["Authorization: Q4E " + api_token])
 	ws.set_handshake_headers(headers)
-	var err = ws.connect_to_url("ws://" + host + "/chat")
+	var err = ws.connect_to_url("ws://" + host.trim_prefix("http://") + "/chat")
 	if err != OK:
 		print("Error connecting to WS:", err)
+		return
 
-	print("Connected Succesfully")
+	set_process(true)
+	print("Websocket connected")
 
 func send_message_to_ws(message: String) -> Error:
 	var err = ws.send_text(message)
@@ -125,11 +134,23 @@ func send_message_to_ws(message: String) -> Error:
 	print("WS <= ", message)
 	return OK
 
-# some docs
 func read_from_ws() -> PackedByteArray:
+	ws.poll()
+	var state: int = ws.get_ready_state()
+	if state == WebSocketPeer.STATE_OPEN:
+		if ws.get_available_packet_count() > 0:
+			return ws_read_packets()
+	elif state == WebSocketPeer.STATE_CLOSED:
+		var code = ws.get_close_code()
+		var reason = ws.get_close_reason()
+		print("WebSocket closed with code: %d, reason %s. Clean: %s" % [code, reason, code != - 1])
+		set_process(false)
+
+	return PackedByteArray()
+
+func ws_read_packets() -> PackedByteArray:
 	var received_data: PackedByteArray = PackedByteArray()
 	while ws.get_available_packet_count():
 		received_data += ws.get_packet()
-		print("WS => ", received_data.get_string_from_ascii())
 	
 	return received_data

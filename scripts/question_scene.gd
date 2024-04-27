@@ -3,6 +3,7 @@ extends Node2D
 var quizOn: bool = false
 var streamerAnswer: String = ""
 
+signal next_round
 signal round_info
 signal game_info
 
@@ -20,7 +21,6 @@ func _process(_delta: float):
 func on_main_start_quiz():
 	self.show()
 	start_countdown()
-	round_info.emit()
 
 func start_countdown():
 	$StartCountdown.show()
@@ -31,4 +31,5 @@ func start_countdown():
 	$StartCountdown.text = "1"
 	await get_tree().create_timer(1.0).timeout
 	$StartCountdown.hide()
+	next_round.emit()
 	quizOn = true
