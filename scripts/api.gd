@@ -7,6 +7,7 @@ var api_token: String = ""
 ## set by main scene
 var game_started: Callable
 var got_categories: Callable
+var got_ws_message: Callable
 var login_completed: Callable
 var next_round_completed: Callable
 
@@ -25,9 +26,9 @@ func _ready():
 	set_process(false)
 
 func _process(_delta: float):
-	var msg: PackedByteArray = read_from_ws()
+	var msg: Dictionary = read_from_ws()
 	if len(msg) > 0:
-		print("WS => %s" % [msg.get_string_from_ascii()])
+		got_ws_message.call(msg)
 
 func load_config():
 	var file = FileAccess.open("res://config.yaml", FileAccess.READ)
@@ -150,19 +151,19 @@ func send_message_to_ws(message: String) -> Error:
 	print("WS <= ", message)
 	return OK
 
-func read_from_ws() -> PackedByteArray:
+func read_from_ws() -> Dictionary:
 	ws.poll()
 	var state: int = ws.get_ready_state()
 	if state == WebSocketPeer.STATE_OPEN:
 		if ws.get_available_packet_count() > 0:
-			return ws_read_packets()
+			return json_parse(ws_read_packets())
 	elif state == WebSocketPeer.STATE_CLOSED:
 		var code = ws.get_close_code()
 		var reason = ws.get_close_reason()
 		print("WebSocket closed with code: %d, reason %s. Clean: %s" % [code, reason, code != - 1])
 		set_process(false)
 
-	return PackedByteArray()
+	return {}
 
 func ws_read_packets() -> PackedByteArray:
 	var received_data: PackedByteArray = PackedByteArray()

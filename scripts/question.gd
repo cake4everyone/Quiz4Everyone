@@ -18,6 +18,7 @@ func _process(_delta: float):
 
 ## start_next_round shows a 3 second countdown before showing the round data.
 func start_next_round():
+	$Quiz.hide()
 	$StartCountdown.show()
 	$StartCountdown.text = "3"
 	await get_tree().create_timer(1.0).timeout
@@ -31,6 +32,7 @@ func start_next_round():
 
 ## show_round_data displays the given round data on screen.
 func show_round_data(round_data: Dictionary):
+	print(round_data)
 	$RoundCounter.text = "Round %d/%d (%s)" % [round_data.current_round, round_data.max_round, round_data.category]
 
 	$Quiz/Question/Label.text = round_data.question
@@ -48,3 +50,10 @@ func show_round_data(round_data: Dictionary):
 		$Quiz/Answers/AnswerD.hide()
 
 	$Quiz.show()
+
+func on_round_end(data: Dictionary):
+	print("Got round ending: %s" % [data])
+	if data.current_round == data.max_round:
+		print("game ended!")
+	else:
+		start_next_round()
