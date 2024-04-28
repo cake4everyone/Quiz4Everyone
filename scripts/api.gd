@@ -135,7 +135,7 @@ func json_parse(body: PackedByteArray) -> Dictionary:
 func connect_to_ws():
 	var headers = PackedStringArray(["Authorization: Q4E " + api_token])
 	ws.set_handshake_headers(headers)
-	var err = ws.connect_to_url("ws://" + host.trim_prefix("http://") + "/chat")
+	var err = ws.connect_to_url(host.replace("http", "ws") + "/chat")
 	if err != OK:
 		print("Error connecting to WS:", err)
 		return
