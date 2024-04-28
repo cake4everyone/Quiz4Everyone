@@ -9,9 +9,11 @@ func _ready():
 	$API.got_ws_message = on_server_api_got_ws_message
 	$API.login_completed = on_login_completed
 	$API.next_round_completed = $Question.show_round_data
+	$API.streamervote_completed = $Question.vote_response
 	$Login.api_login = $API.login
 	$Menu.start_game = $API.game_start
 	$Question.api_next_round = $API.round_next
+	$Question.api_vote = $API.streamervote
 
 	$Login.show()
 

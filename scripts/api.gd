@@ -10,6 +10,7 @@ var got_categories: Callable
 var got_ws_message: Callable
 var login_completed: Callable
 var next_round_completed: Callable
+var streamervote_completed: Callable
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -111,11 +112,13 @@ func round_next_resp(_result, response_code: int, _headers: PackedStringArray, b
 	next_round_completed.call(json_parse(body))
 
 ## streamervote sets the selected vote of the streamer. Only available once per round.
-func streamervote():
-	$HTTP_StreamerVote.request(host + "/vote", ["Authorization: Q4E " + api_token], HTTPClient.METHOD_POST)
+func streamervote(vote: String):
+	$HTTP_StreamerVote.request(host + "/vote/streamer", ["Authorization: Q4E " + api_token], HTTPClient.METHOD_POST, JSON.stringify({"vote": vote}))
 
 func streamervote_resp(_result, response_code: int, _headers: PackedStringArray, body: PackedByteArray):
-	print("Response Streamervote: " + str(response_code) + "\n" + body.get_string_from_ascii())
+	if response_code != HTTPClient.RESPONSE_OK:
+		print("Failed to vote for streamer: %d: %s" % [str(response_code), body.get_string_from_ascii()])
+	streamervote_completed.call(response_code == HTTPClient.RESPONSE_OK)
 
 ## json_parse is a helper function that parses the response body as json.
 func json_parse(body: PackedByteArray) -> Dictionary:
