@@ -1,22 +1,34 @@
-[gd_scene load_steps=6 format=3 uid="uid://c3x74j3lbrik6"]
+[gd_scene load_steps=8 format=3 uid="uid://c3x74j3lbrik6"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_whlbn"]
+[ext_resource type="Texture2D" uid="uid://bk0hi4cgvmhnm" path="res://sprites/BG.png" id="2_at3ow"]
 [ext_resource type="PackedScene" uid="uid://2ysj36v7ruon" path="res://scenes/login.tscn" id="2_eawfu"]
 [ext_resource type="PackedScene" uid="uid://ifh3d72f4c8r" path="res://scenes/question.tscn" id="2_gkubl"]
 [ext_resource type="PackedScene" uid="uid://yyc1l3e78qgl" path="res://scenes/menu.tscn" id="4_8p47l"]
 [ext_resource type="PackedScene" uid="uid://b42dpvb4s6yvs" path="res://scenes/api.tscn" id="5_4hocc"]
+[ext_resource type="PackedScene" uid="uid://buscbkvayuu56" path="res://scenes/question_end.tscn" id="6_e3vmo"]
 
 [node name="Main" type="Node2D"]
 texture_filter = 1
 script = ExtResource("1_whlbn")
 
-[node name="Login" parent="." instance=ExtResource("2_eawfu")]
-visible = false
+[node name="Camera2D" type="Camera2D" parent="."]
 
-[node name="Question" parent="." instance=ExtResource("2_gkubl")]
+[node name="Bg" type="Sprite2D" parent="Camera2D"]
+texture_repeat = 2
+scale = Vector2(1.44, 1.08)
+texture = ExtResource("2_at3ow")
+
+[node name="API" parent="." instance=ExtResource("5_4hocc")]
+
+[node name="Login" parent="." instance=ExtResource("2_eawfu")]
 visible = false
 
 [node name="Menu" parent="." instance=ExtResource("4_8p47l")]
 visible = false
 
-[node name="API" parent="." instance=ExtResource("5_4hocc")]
+[node name="Question" parent="." instance=ExtResource("2_gkubl")]
+visible = false
+
+[node name="QuestionEnd" parent="." instance=ExtResource("6_e3vmo")]
+visible = false

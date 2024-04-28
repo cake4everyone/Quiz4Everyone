@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://ifh3d72f4c8r"]
 
 [ext_resource type="Script" path="res://scripts/question.gd" id="1_24euc"]
-[ext_resource type="Texture2D" uid="uid://bk0hi4cgvmhnm" path="res://sprites/BG.png" id="2_wnggv"]
 [ext_resource type="Texture2D" uid="uid://cud4wmmwy0xfx" path="res://sprites/BG2.png" id="3_wxncl"]
+[ext_resource type="Texture2D" uid="uid://b3qkq3la4r5pt" path="res://sprites/vote.png" id="4_bpo00"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_3pa0d"]
 font_size = 60
@@ -10,13 +10,6 @@ font_size = 60
 [node name="Question" type="Node2D"]
 texture_filter = 1
 script = ExtResource("1_24euc")
-
-[node name="Bg" type="Sprite2D" parent="."]
-position = Vector2(-1.00002, 3)
-scale = Vector2(1.4775, 1.13)
-texture = ExtResource("2_wnggv")
-
-[node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="Game Quit" type="Button" parent="."]
 offset_left = 387.0
@@ -26,100 +19,149 @@ offset_bottom = 318.0
 text = "Quit Game"
 
 [node name="Quiz" type="Node2D" parent="."]
-visible = false
 
 [node name="Answers" type="Node2D" parent="Quiz"]
 position = Vector2(0, 41.62)
 
-[node name="AnswerA" type="Node2D" parent="Quiz/Answers"]
+[node name="VoteIcon" type="Sprite2D" parent="Quiz/Answers"]
+position = Vector2(0, 0.380001)
+scale = Vector2(1.9, 1.9)
+texture = ExtResource("4_bpo00")
 
-[node name="Bg2" type="Sprite2D" parent="Quiz/Answers/AnswerA"]
-position = Vector2(-196, -104)
-scale = Vector2(33.1, 22)
+[node name="A" type="Node2D" parent="Quiz/Answers"]
+position = Vector2(-200, -70)
+
+[node name="AnswerBackground" type="Sprite2D" parent="Quiz/Answers/A"]
+position = Vector2(0, 0.380005)
+scale = Vector2(33.1, 13)
 texture = ExtResource("3_wxncl")
 
-[node name="Label" type="Label" parent="Quiz/Answers/AnswerA"]
-offset_left = -358.0
-offset_top = -189.0
-offset_right = -31.0
-offset_bottom = -19.0
-text = "Answer A"
+[node name="AnswerLabel" type="Label" parent="Quiz/Answers/A"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -160.0
+offset_top = -50.5
+offset_right = 160.0
+offset_bottom = 50.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam "
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 3
 
-[node name="AnswerB" type="Node2D" parent="Quiz/Answers"]
-position = Vector2(395, 0)
+[node name="B" type="Node2D" parent="Quiz/Answers"]
+position = Vector2(200, -70)
 
-[node name="Bg2" type="Sprite2D" parent="Quiz/Answers/AnswerB"]
-position = Vector2(-196, -104)
-scale = Vector2(33.1, 22)
+[node name="AnswerBackground" type="Sprite2D" parent="Quiz/Answers/B"]
+position = Vector2(0, 0.380005)
+scale = Vector2(33.1, 13)
 texture = ExtResource("3_wxncl")
 
-[node name="Label" type="Label" parent="Quiz/Answers/AnswerB"]
-offset_left = -356.0
-offset_top = -185.0
-offset_right = -35.0
-offset_bottom = -20.0
-text = "Answer B"
+[node name="AnswerLabel" type="Label" parent="Quiz/Answers/B"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -160.0
+offset_top = -50.5
+offset_right = 160.0
+offset_bottom = 50.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam"
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 3
 
-[node name="AnswerC" type="Node2D" parent="Quiz/Answers"]
-position = Vector2(0, 235)
+[node name="C" type="Node2D" parent="Quiz/Answers"]
+position = Vector2(-200, 70)
 
-[node name="Bg2" type="Sprite2D" parent="Quiz/Answers/AnswerC"]
-position = Vector2(-196, -104)
-scale = Vector2(33.1, 22)
+[node name="AnswerBackground" type="Sprite2D" parent="Quiz/Answers/C"]
+position = Vector2(0, 0.380005)
+scale = Vector2(33.1, 13)
 texture = ExtResource("3_wxncl")
 
-[node name="Label" type="Label" parent="Quiz/Answers/AnswerC"]
-offset_left = -358.0
-offset_top = -185.0
-offset_right = -33.0
-offset_bottom = -24.0
-text = "Answer C"
+[node name="AnswerLabel" type="Label" parent="Quiz/Answers/C"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -160.0
+offset_top = -50.5
+offset_right = 160.0
+offset_bottom = 50.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam"
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 3
 
-[node name="AnswerD" type="Node2D" parent="Quiz/Answers"]
-position = Vector2(393, 235)
+[node name="D" type="Node2D" parent="Quiz/Answers"]
+position = Vector2(200, 70)
 
-[node name="Bg2" type="Sprite2D" parent="Quiz/Answers/AnswerD"]
-position = Vector2(-196, -104)
-scale = Vector2(33.1, 22)
+[node name="AnswerBackground" type="Sprite2D" parent="Quiz/Answers/D"]
+position = Vector2(0, 0.380005)
+scale = Vector2(33.1, 13)
 texture = ExtResource("3_wxncl")
 
-[node name="Label" type="Label" parent="Quiz/Answers/AnswerD"]
-offset_left = -359.0
-offset_top = -189.0
-offset_right = -33.0
-offset_bottom = -17.0
-text = "Answer D"
+[node name="AnswerLabel" type="Label" parent="Quiz/Answers/D"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -160.0
+offset_top = -50.5
+offset_right = 160.0
+offset_bottom = 50.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Lorem ipsum dolor
+sit amet, consetetur
+sadipscing elitr,
+sed diam "
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 3
 
 [node name="Question" type="Node2D" parent="Quiz"]
+position = Vector2(0, -200)
 
-[node name="Bg2" type="Sprite2D" parent="Quiz/Question"]
-position = Vector2(0.499996, -252.75)
-scale = Vector2(85, 10.188)
+[node name="QuestionBackground" type="Sprite2D" parent="Quiz/Question"]
+scale = Vector2(85, 13)
 texture = ExtResource("3_wxncl")
 
-[node name="Label" type="Label" parent="Quiz/Question"]
-offset_left = -423.0
-offset_top = -293.0
-offset_right = 422.0
-offset_bottom = -215.0
-text = "Question"
+[node name="QuestionLabel" type="Label" parent="Quiz/Question"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -420.0
+offset_top = -39.0
+offset_right = 420.0
+offset_bottom = 39.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanc"
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 3
 
 [node name="RoundCounter" type="Label" parent="."]
-offset_left = 487.0
-offset_top = -315.0
-offset_right = 568.0
-offset_bottom = -292.0
-text = "Round X/Y"
+visible = false
+offset_left = -566.0
+offset_top = -317.0
+offset_right = -485.0
+offset_bottom = -294.0
+text = "Round X/Y (some category)"
 
 [node name="StartCountdown" type="Label" parent="."]
 offset_left = -26.0

@@ -17,17 +17,21 @@ func check_vote():
 	elif Input.is_key_pressed(KEY_D)||Input.is_key_pressed(KEY_4)||Input.is_key_pressed(KEY_KP_4): api_vote.call("4")
 	else: return
 	voted = true
+	$Quiz/Answers/VoteIcon.self_modulate = Color.ORANGE
 
 func vote_response(ok: bool):
 	if ok:
 		print("You have voted!")
+		$Quiz/Answers/VoteIcon.self_modulate = Color.GREEN
 	else:
 		print("vote wasnt valid")
+		$Quiz/Answers/VoteIcon.self_modulate = Color.WHITE
 	voted = ok
 
 ## start_next_round shows a 3 second countdown before showing the round data.
 func start_next_round():
 	$Quiz.hide()
+	voted = false
 	$StartCountdown.show()
 	$StartCountdown.text = "3"
 	await get_tree().create_timer(1.0).timeout
@@ -38,33 +42,37 @@ func start_next_round():
 	$StartCountdown.hide()
 	api_next_round.call()
 	quizOn = true
-	voted = false
 
 ## show_round_data displays the given round data on screen.
 func show_round_data(round_data: Dictionary):
 	print(round_data)
-	$RoundCounter.text = "Round %d/%d (%s)" % [round_data.current_round, round_data.max_round, round_data.category]
+	$RoundCounter.text = "Runde %d/%d (%s)" % [round_data.current_round, round_data.max_round, round_data.category]
+	$RoundCounter.show()
 
-	$Quiz/Question/Label.text = round_data.question
-	$Quiz/Answers/AnswerA/Label.text = round_data.answers[0]
-	$Quiz/Answers/AnswerB/Label.text = round_data.answers[1]
+	$Quiz/Question/QuestionLabel.text = round_data.question
+	$Quiz/Answers/A/AnswerLabel.text = round_data.answers[0]
+	$Quiz/Answers/B/AnswerLabel.text = round_data.answers[1]
 	if len(round_data.answers) >= 3:
-		$Quiz/Answers/AnswerC/Label.text = round_data.answers[2]
-		$Quiz/Answers/AnswerC.show()
+		$Quiz/Answers/C/AnswerLabel.text = round_data.answers[2]
+		$Quiz/Answers/C.show()
 	else:
-		$Quiz/Answers/AnswerC.hide()
+		$Quiz/Answers/C.hide()
 	if len(round_data.answers) >= 4:
-		$Quiz/Answers/AnswerD/Label.text = round_data.answers[3]
-		$Quiz/Answers/AnswerD.show()
+		$Quiz/Answers/D/AnswerLabel.text = round_data.answers[3]
+		$Quiz/Answers/D.show()
 	else:
-		$Quiz/Answers/AnswerD.hide()
+		$Quiz/Answers/D.hide()
 
+	$Quiz/Answers/VoteIcon.self_modulate = Color.WHITE
+	$Quiz/Answers/VoteIcon.show()
 	$Quiz.show()
 
 func on_round_end(data: Dictionary):
 	print("Got round ending: %s" % [data])
-	quizOn = true
+	quizOn = false
 	voted = false
+	$RoundCounter.hide()
+	$Quiz/Answers/VoteIcon.hide()
 	if data.current_round == data.max_round:
 		print("game ended!")
 	else:

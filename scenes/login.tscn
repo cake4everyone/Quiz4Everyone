@@ -1,7 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://2ysj36v7ruon"]
+[gd_scene load_steps=4 format=3 uid="uid://2ysj36v7ruon"]
 
 [ext_resource type="Script" path="res://scripts/login.gd" id="1_4rhoe"]
-[ext_resource type="Texture2D" uid="uid://bk0hi4cgvmhnm" path="res://sprites/BG.png" id="2_ucxut"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_b3wv6"]
 font_size = 25
@@ -10,19 +9,9 @@ font_size = 25
 font_size = 25
 
 [node name="Login" type="Node2D"]
-texture_filter = 3
 script = ExtResource("1_4rhoe")
 
-[node name="Bg" type="Sprite2D" parent="."]
-position = Vector2(-4.5, 3)
-scale = Vector2(1.70625, 1.11)
-texture = ExtResource("2_ucxut")
-
-[node name="Camera2D" type="Camera2D" parent="."]
-
-[node name="Input" type="Node2D" parent="."]
-
-[node name="EMail" type="LineEdit" parent="Input"]
+[node name="EMail" type="LineEdit" parent="."]
 offset_left = -211.0
 offset_top = -43.0
 offset_right = 213.0
@@ -30,7 +19,7 @@ offset_bottom = -12.0
 text = "Nicolix"
 alignment = 1
 
-[node name="EnterMail" type="Label" parent="Input/EMail"]
+[node name="EnterMail" type="Label" parent="EMail"]
 layout_mode = 0
 offset_left = 56.0
 offset_top = -56.0
@@ -39,7 +28,7 @@ offset_bottom = -18.0
 text = "Enter Email or Username:"
 label_settings = SubResource("LabelSettings_b3wv6")
 
-[node name="Password" type="LineEdit" parent="Input"]
+[node name="Password" type="LineEdit" parent="."]
 offset_left = -100.0
 offset_top = 38.0
 offset_right = 108.0
@@ -47,7 +36,7 @@ offset_bottom = 69.0
 text = "1234"
 alignment = 1
 
-[node name="EnterPassword" type="Label" parent="Input/Password"]
+[node name="EnterPassword" type="Label" parent="Password"]
 layout_mode = 0
 offset_left = 3.0
 offset_top = -45.0
@@ -56,11 +45,11 @@ offset_bottom = -7.0
 text = "Enter Password:"
 label_settings = SubResource("LabelSettings_y22y5")
 
-[node name="Login" type="Button" parent="Input"]
+[node name="Login" type="Button" parent="."]
 offset_left = 174.0
 offset_top = 35.0
 offset_right = 281.0
 offset_bottom = 79.0
 text = "Login"
 
-[connection signal="pressed" from="Input/Login" to="." method="on_login_button_pressed"]
+[connection signal="pressed" from="Login" to="." method="on_login_button_pressed"]

@@ -1,18 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://yyc1l3e78qgl"]
+[gd_scene load_steps=2 format=3 uid="uid://yyc1l3e78qgl"]
 
 [ext_resource type="Script" path="res://scripts/menu.gd" id="1_f4qtc"]
-[ext_resource type="Texture2D" uid="uid://bk0hi4cgvmhnm" path="res://sprites/BG.png" id="2_kwh0h"]
 
 [node name="Menu" type="Node2D"]
 texture_filter = 1
 script = ExtResource("1_f4qtc")
-
-[node name="Bg" type="Sprite2D" parent="."]
-position = Vector2(-1.00002, 3)
-scale = Vector2(1.4775, 1.13)
-texture = ExtResource("2_kwh0h")
-
-[node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="btn_start" type="Button" parent="."]
 offset_left = 363.0
