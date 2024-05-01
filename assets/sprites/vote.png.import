@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bo44t6exvhoqr"
-path="res://.godot/imported/Quiz.png-d70e79002f67617ac9ead629cc0abf44.ctex"
+uid="uid://b3qkq3la4r5pt"
+path="res://.godot/imported/vote.png-67b80cf26fbf8d001b9061a062b56a80.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/Quiz.png"
-dest_files=["res://.godot/imported/Quiz.png-d70e79002f67617ac9ead629cc0abf44.ctex"]
+source_file="res://assets/sprites/vote.png"
+dest_files=["res://.godot/imported/vote.png-67b80cf26fbf8d001b9061a062b56a80.ctex"]
 
 [params]
 

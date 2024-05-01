@@ -1,16 +1,15 @@
-extends Node2D
+class_name API extends Node
 
 var ws: WebSocketPeer = WebSocketPeer.new()
 var host: String = ""
 var api_token: String = ""
 
-## set by main scene
-var game_started: Callable
-var got_categories: Callable
+var category_callback: Callable
+var game_start_callback: Callable
 var got_ws_message: Callable
-var login_completed: Callable
-var next_round_completed: Callable
-var streamervote_completed: Callable
+var login_callback: Callable
+var round_next_callback: Callable
+var streamervote_callback: Callable
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -25,6 +24,7 @@ func _ready():
 	$HTTP_StreamerVote.request_completed.connect(streamervote_resp)
 	load_config()
 	set_process(false)
+	print("api loaded")
 
 func _process(_delta: float):
 	var msg: Dictionary = read_from_ws()
@@ -36,14 +36,17 @@ func load_config():
 	host = file.get_line()
 
 ## category gets the available categories from the server.
-func category():
+func category(callback: Callable):
+	category_callback = callback
 	$HTTP_Category.request(host + "/category", ["Authorization: Q4E " + api_token], HTTPClient.METHOD_GET)
 
 func category_resp(_result, response_code: int, _headers: PackedStringArray, body: PackedByteArray):
-	if response_code != HTTPClient.RESPONSE_OK:
+	if response_code == HTTPClient.RESPONSE_OK:
+		category_callback.call(true, json_parse(body))
+	else:
 		print("couldn't get categories: got %d expexted %d: %s" % [response_code, HTTPClient.RESPONSE_OK, body.get_string_from_ascii()])
-		return
-	got_categories.call(json_parse(body))
+		category_callback.call(false)
+	category_callback = Callable()
 
 ## game_info gets information about the current state of the game.
 func game_info():
@@ -60,29 +63,32 @@ func game_quit_resp(_result, response_code: int, _headers: PackedStringArray, bo
 	print("Response Game Quit: " + str(response_code) + "\n" + body.get_string_from_ascii())
 
 ## game_start starts new game with the selected categories.
-func game_start(body: String):
+func game_start(body: String, callback: Callable):
+	game_start_callback = callback
 	$HTTP_GameStart.request(host + "/game", ["Authorization: Q4E " + api_token], HTTPClient.METHOD_POST, body)
 
 func game_start_resp(_result, response_code: int, _headers: PackedStringArray, body: PackedByteArray):
-	if response_code != HTTPClient.RESPONSE_CREATED:
+	if response_code == HTTPClient.RESPONSE_CREATED:
+		game_start_callback.call(true)
+	else:
 		print("couldn't create new game: got %d expected %d: %s" % [response_code, HTTPClient.RESPONSE_CREATED, body.get_string_from_ascii()])
-		return
-	print(body.get_string_from_ascii())
-	game_started.call()
+		game_start_callback.call(false)
+	game_start_callback = Callable()
 
 ## login sends a login request to the server.
-func login(auth: String):
+func login(auth: String, callback: Callable):
+	login_callback = callback
 	$HTTP_Login.request(host + "/login", ["Authorization: Basic " + auth], HTTPClient.METHOD_POST)
 
 func login_resp(_result, response_code: int, _headers: PackedStringArray, body: PackedByteArray):
-	if (response_code != 200):
-		print("Login failed: ", response_code)
-		return
-	var data = json_parse(body)
-	print("Login successful: " + data.username)
-	api_token = data.token
-	connect_to_ws()
-	login_completed.call()
+	if response_code == HTTPClient.RESPONSE_OK:
+		var data = json_parse(body)
+		api_token = data.token
+		connect_to_ws()
+		login_callback.call(true, data.username)
+	else:
+		login_callback.call(false)
+	login_callback = Callable()
 
 ## logout sends a logout request to the server. Resulting in an invalid token until a new login request is
 ## made.
@@ -101,24 +107,28 @@ func round_info_resp(_result, response_code: int, _headers: PackedStringArray, b
 
 ## round_next advances the game to the round and returning information about the new active round. This is also
 ## required for the first round after a freshly created game.
-func round_next():
+func round_next(callback: Callable):
+	round_next_callback = callback
 	$HTTP_RoundNext.request(host + "/round/next", ["Authorization: Q4E " + api_token], HTTPClient.METHOD_POST)
 
 func round_next_resp(_result, response_code: int, _headers: PackedStringArray, body: PackedByteArray):
-	if response_code != HTTPClient.RESPONSE_OK:
+	if response_code == HTTPClient.RESPONSE_OK:
+		round_next_callback.call(true, json_parse(body))
+	else:
 		print("Failed to advance to next sound: got %d expected %d: %s" % [response_code, HTTPClient.RESPONSE_OK, body.get_string_from_ascii()])
-		return
-
-	next_round_completed.call(json_parse(body))
+		round_next_callback.call(false)
+	round_next_callback = Callable()
 
 ## streamervote sets the selected vote of the streamer. Only available once per round.
-func streamervote(vote: String):
+func streamervote(vote: String, callback: Callable):
+	streamervote_callback = callback
 	$HTTP_StreamerVote.request(host + "/vote/streamer", ["Authorization: Q4E " + api_token], HTTPClient.METHOD_POST, JSON.stringify({"vote": vote}))
 
 func streamervote_resp(_result, response_code: int, _headers: PackedStringArray, body: PackedByteArray):
 	if response_code != HTTPClient.RESPONSE_OK:
 		print("Failed to vote for streamer: %d: %s" % [str(response_code), body.get_string_from_ascii()])
-	streamervote_completed.call(response_code == HTTPClient.RESPONSE_OK)
+	streamervote_callback.call(response_code == HTTPClient.RESPONSE_OK)
+	streamervote_callback = Callable()
 
 ## json_parse is a helper function that parses the response body as json.
 func json_parse(body: PackedByteArray) -> Dictionary:
@@ -174,3 +184,6 @@ func ws_read_packets() -> PackedByteArray:
 		received_data += ws.get_packet()
 
 	return received_data
+
+func set_ws_response(callback: Callable):
+	got_ws_message = callback

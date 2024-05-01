@@ -1,55 +1,100 @@
-[gd_scene load_steps=4 format=3 uid="uid://2ysj36v7ruon"]
+[gd_scene load_steps=3 format=3 uid="uid://2ysj36v7ruon"]
 
 [ext_resource type="Script" path="res://scripts/login.gd" id="1_4rhoe"]
+[ext_resource type="LabelSettings" uid="uid://jfhijl2ucmeq" path="res://assets/label_settings.tres" id="2_hmd01"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_b3wv6"]
-font_size = 25
-
-[sub_resource type="LabelSettings" id="LabelSettings_y22y5"]
-font_size = 25
-
-[node name="Login" type="Node2D"]
+[node name="Login" type="CanvasLayer"]
 script = ExtResource("1_4rhoe")
+scene_after_login = "menu"
 
-[node name="EMail" type="LineEdit" parent="."]
-offset_left = -211.0
-offset_top = -43.0
-offset_right = 213.0
-offset_bottom = -12.0
-text = "Nicolix"
+[node name="LoginBox" type="ColorRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -458.0
+offset_top = -226.0
+offset_right = 459.0
+offset_bottom = 164.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.277528, 0.277528, 0.277528, 1)
+
+[node name="Title" type="Label" parent="LoginBox"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 16.0
+offset_bottom = 114.0
+grow_horizontal = 2
+text = "Login with C4E"
+label_settings = ExtResource("2_hmd01")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EMail" type="LineEdit" parent="LoginBox"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -1.5
+offset_top = -53.0
+offset_right = 1.5
+offset_bottom = -11.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_next = NodePath("../Password")
+theme_override_font_sizes/font_size = 30
+placeholder_text = "e-mail or username"
 alignment = 1
+expand_to_text_length = true
+context_menu_enabled = false
+clear_button_enabled = true
+flat = true
 
-[node name="EnterMail" type="Label" parent="EMail"]
-layout_mode = 0
-offset_left = 56.0
-offset_top = -56.0
-offset_right = 367.0
-offset_bottom = -18.0
-text = "Enter Email or Username:"
-label_settings = SubResource("LabelSettings_b3wv6")
-
-[node name="Password" type="LineEdit" parent="."]
-offset_left = -100.0
-offset_top = 38.0
-offset_right = 108.0
-offset_bottom = 69.0
-text = "1234"
+[node name="Password" type="LineEdit" parent="LoginBox"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = 11.0
+offset_bottom = 53.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_next = NodePath("../Login")
+focus_previous = NodePath("../EMail")
+theme_override_font_sizes/font_size = 30
+placeholder_text = "password"
 alignment = 1
+expand_to_text_length = true
+context_menu_enabled = false
+clear_button_enabled = true
+drag_and_drop_selection_enabled = false
+flat = true
+select_all_on_focus = true
+secret = true
 
-[node name="EnterPassword" type="Label" parent="Password"]
-layout_mode = 0
-offset_left = 3.0
-offset_top = -45.0
-offset_right = 198.0
-offset_bottom = -7.0
-text = "Enter Password:"
-label_settings = SubResource("LabelSettings_y22y5")
+[node name="Login" type="Button" parent="LoginBox"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -97.5
+offset_top = -82.0
+offset_right = 97.5
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 0
+focus_previous = NodePath("../Password")
+theme_override_font_sizes/font_size = 40
+disabled = true
+text = "Login ->"
 
-[node name="Login" type="Button" parent="."]
-offset_left = 174.0
-offset_top = 35.0
-offset_right = 281.0
-offset_bottom = 79.0
-text = "Login"
-
-[connection signal="pressed" from="Login" to="." method="on_login_button_pressed"]
+[connection signal="text_changed" from="LoginBox/EMail" to="." method="on_email_text_changed"]
+[connection signal="text_changed" from="LoginBox/Password" to="." method="on_password_text_changed"]
+[connection signal="pressed" from="LoginBox/Login" to="." method="on_login_button_pressed"]

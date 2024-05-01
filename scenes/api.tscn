@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/api.gd" id="1_l1n5m"]
 
-[node name="API" type="Node2D"]
+[node name="API" type="Node"]
 script = ExtResource("1_l1n5m")
 
 [node name="HTTP_Category" type="HTTPRequest" parent="."]

@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://jnv88pha68gf"
-path="res://.godot/imported/Nunito-Medium.ttf-bd3af7c608a0e5a008c7e74541648d45.fontdata"
+uid="uid://dtx0x177daya8"
+path="res://.godot/imported/Ubuntu-Medium.ttf-fe4a49215601c61f85341a35ad5230fd.fontdata"
 
 [deps]
 
-source_file="res://fonts/Nunito-Medium.ttf"
-dest_files=["res://.godot/imported/Nunito-Medium.ttf-bd3af7c608a0e5a008c7e74541648d45.fontdata"]
+source_file="res://assets/fonts/Ubuntu-Medium.ttf"
+dest_files=["res://.godot/imported/Ubuntu-Medium.ttf-fe4a49215601c61f85341a35ad5230fd.fontdata"]
 
 [params]
 
@@ -27,7 +27,12 @@ Fallbacks=null
 fallbacks=[]
 Compress=null
 compress=true
-preload=[]
+preload=[{
+"chars": [],
+"glyphs": [],
+"name": "New Configuration",
+"size": Vector2i(16, 0)
+}]
 language_support={}
 script_support={}
 opentype_features={}

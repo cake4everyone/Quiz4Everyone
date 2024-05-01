@@ -2,5 +2,5 @@
 
 [ext_resource type="Script" path="res://scripts/question_end.gd" id="7_hegvr"]
 
-[node name="QuestionEnd" type="Node2D"]
+[node name="QuestionEnd" type="CanvasLayer"]
 script = ExtResource("7_hegvr")

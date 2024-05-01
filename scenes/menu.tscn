@@ -2,55 +2,61 @@
 
 [ext_resource type="Script" path="res://scripts/menu.gd" id="1_f4qtc"]
 
-[node name="Menu" type="Node2D"]
-texture_filter = 1
+[node name="Menu" type="CanvasLayer"]
 script = ExtResource("1_f4qtc")
 
-[node name="btn_start" type="Button" parent="."]
-offset_left = 363.0
-offset_top = 248.0
-offset_right = 492.0
-offset_bottom = 293.0
+[node name="Start" type="Button" parent="."]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -264.0
+offset_top = -102.0
+offset_right = -48.0
+offset_bottom = -48.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 40
 text = "Start Game"
 
-[node name="dd_mode" type="OptionButton" parent="."]
-offset_left = -522.0
-offset_top = -278.0
-offset_right = -477.0
-offset_bottom = -258.0
+[node name="ModeSelect" type="OptionButton" parent="."]
+offset_left = 56.0
+offset_top = 56.0
+offset_right = 101.0
+offset_bottom = 76.0
+theme_override_font_sizes/font_size = 40
 metadata/_edit_use_anchors_ = true
 
-[node name="copy_category" type="HBoxContainer" parent="."]
+[node name="CopyCategory" type="HBoxContainer" parent="."]
 visible = false
 layout_direction = 3
-offset_left = -563.0
-offset_top = -314.0
-offset_right = -463.0
-offset_bottom = -283.0
+offset_right = 100.0
+offset_bottom = 31.0
 
-[node name="amount" type="SpinBox" parent="copy_category"]
+[node name="Amount" type="SpinBox" parent="CopyCategory"]
 layout_mode = 2
 
-[node name="label" type="Label" parent="copy_category"]
+[node name="Name" type="Label" parent="CopyCategory"]
 layout_direction = 2
 layout_mode = 2
 max_lines_visible = 1
 
-[node name="category_box" type="ScrollContainer" parent="."]
+[node name="CategoryBox" type="ScrollContainer" parent="."]
 layout_direction = 2
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = 465.0
-offset_top = -314.0
-offset_right = 571.0
+offset_left = -154.0
+offset_top = 48.0
+offset_right = -48.0
+offset_bottom = 362.0
 grow_horizontal = 0
 horizontal_scroll_mode = 0
 
-[node name="categories" type="VBoxContainer" parent="category_box"]
+[node name="Categories" type="VBoxContainer" parent="CategoryBox"]
 layout_direction = 3
 layout_mode = 2
 alignment = 2
 
-[connection signal="pressed" from="btn_start" to="." method="on_btn_start_pressed"]
-[connection signal="item_selected" from="dd_mode" to="." method="on_dd_mode_item_selected"]
+[connection signal="pressed" from="Start" to="." method="on_btn_start_pressed"]
