@@ -1,7 +1,8 @@
-extends CanvasLayer
+class_name QuestionScene extends CanvasLayer
 
 var quizOn: bool = false
 var voted: bool = false
+var round_data: Dictionary = {}
 
 func _ready():
 	api.set_ws_response(on_server_api_got_ws_message)
@@ -29,7 +30,7 @@ func on_streamervote_response(ok: bool):
 		$Quiz/Answers/VoteIcon/Icon.self_modulate = Color.WHITE
 	voted = ok
 
-## start_next_round shows a 3 second countdown before showing the round data.
+## start_next_round shows a 3 second countdown before showing the round_data data.
 func start_next_round():
 	$Quiz.hide()
 	$RoundCounter.hide()
@@ -45,28 +46,28 @@ func start_next_round():
 	api.round_next(on_round_next_response)
 	quizOn = true
 
-func on_round_next_response(success: bool, round_data: Dictionary={}):
+func on_round_next_response(success: bool, data: Dictionary={}):
 	if !success:
-		print("Faild to get next round!")
+		print("Faild to get next data!")
 		return
-	show_round_data(round_data)
+	show_round_data(data)
 
-## show_round_data displays the given round data on screen.
-func show_round_data(round_data: Dictionary):
-	print(round_data)
-	$RoundCounter.text = "Runde %d/%d (%s)" % [round_data.current_round, round_data.max_round, round_data.category]
+## show_round_data displays the given round_data data on screen.
+func show_round_data(data: Dictionary):
+	print(data)
+	$RoundCounter.text = "Runde %d/%d (%s)" % [data.current_round, data.max_round, data.category]
 	$RoundCounter.show()
 
-	$Quiz/Question/Label.text = round_data.question
-	$Quiz/Answers/A/Label.text = round_data.answers[0]
-	$Quiz/Answers/B/Label.text = round_data.answers[1]
-	if len(round_data.answers) >= 3:
-		$Quiz/Answers/C/Label.text = round_data.answers[2]
+	$Quiz/Question/Label.text = data.question
+	$Quiz/Answers/A/Label.text = data.answers[0]
+	$Quiz/Answers/B/Label.text = data.answers[1]
+	if len(data.answers) >= 3:
+		$Quiz/Answers/C/Label.text = data.answers[2]
 		$Quiz/Answers/C.show()
 	else:
 		$Quiz/Answers/C.hide()
-	if len(round_data.answers) >= 4:
-		$Quiz/Answers/D/Label.text = round_data.answers[3]
+	if len(data.answers) >= 4:
+		$Quiz/Answers/D/Label.text = data.answers[3]
 		$Quiz/Answers/D.show()
 	else:
 		$Quiz/Answers/D.hide()
@@ -76,7 +77,7 @@ func show_round_data(round_data: Dictionary):
 	$Quiz.show()
 
 func on_round_end(data: Dictionary):
-	print("Got round ending: %s" % [data])
+	print("Got round_data ending: %s" % [data])
 	quizOn = false
 	voted = false
 	$RoundCounter.hide()
@@ -84,7 +85,8 @@ func on_round_end(data: Dictionary):
 	if data.current_round == data.max_round:
 		print("game ended!")
 	else:
-		start_next_round()
+		self.round_data = data
+		scene_manager.change_scene(self, "question_end")
 
 const CHAT_VOTE: String = "CHAT_VOTE"
 const ROUND_END: String = "ROUND_END"

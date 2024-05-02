@@ -1,6 +1,197 @@
-[gd_scene load_steps=2 format=3 uid="uid://buscbkvayuu56"]
+[gd_scene load_steps=4 format=3 uid="uid://buscbkvayuu56"]
 
+[ext_resource type="LabelSettings" uid="uid://jfhijl2ucmeq" path="res://assets/label_settings.tres" id="2_ki58g"]
+[ext_resource type="LabelSettings" uid="uid://cv8jjunexoatt" path="res://assets/label_settings_small.tres" id="3_bslnc"]
 [ext_resource type="Script" path="res://scripts/question_end.gd" id="7_hegvr"]
 
 [node name="QuestionEnd" type="CanvasLayer"]
 script = ExtResource("7_hegvr")
+
+[node name="RoundCounter" type="Label" parent="."]
+offset_left = 32.0
+offset_top = 32.0
+offset_right = 541.0
+offset_bottom = 78.0
+text = "Round X/Y (some category)"
+label_settings = ExtResource("2_ki58g")
+
+[node name="Question" type="ColorRect" parent="."]
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 60.0
+offset_top = 140.0
+offset_right = -580.0
+offset_bottom = 300.0
+grow_horizontal = 2
+color = Color(0.252028, 0.252028, 0.252028, 1)
+
+[node name="Label" type="Label" parent="Question"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_right = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanc"
+label_settings = ExtResource("3_bslnc")
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Answer" type="ColorRect" parent="."]
+offset_left = 60.0
+offset_top = 340.0
+offset_right = 564.0
+offset_bottom = 480.0
+color = Color(0, 0.258824, 0, 1)
+
+[node name="Title" type="Label" parent="Answer"]
+layout_mode = 0
+offset_top = -40.0
+offset_right = 157.0
+text = "Answer 1:"
+label_settings = ExtResource("3_bslnc")
+
+[node name="Label" type="Label" parent="Answer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_right = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam "
+label_settings = ExtResource("3_bslnc")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="StreamerAnswer" type="ColorRect" parent="."]
+offset_left = 120.0
+offset_top = 520.0
+offset_right = 500.0
+offset_bottom = 580.0
+color = Color(0.470588, 0, 0, 1)
+
+[node name="Label" type="Label" parent="StreamerAnswer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "You voted 1"
+label_settings = ExtResource("2_ki58g")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ChatVotes" type="VBoxContainer" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -540.0
+offset_top = 80.0
+offset_right = -60.0
+offset_bottom = 540.0
+grow_horizontal = 0
+
+[node name="Label" type="Label" parent="ChatVotes"]
+custom_minimum_size = Vector2(2.08165e-12, 60)
+layout_mode = 2
+size_flags_vertical = 0
+text = "Chat"
+label_settings = ExtResource("2_ki58g")
+vertical_alignment = 2
+
+[node name="Background" type="ColorRect" parent="ChatVotes"]
+layout_mode = 2
+size_flags_vertical = 3
+color = Color(0.392157, 0.254902, 0.643137, 1)
+
+[node name="Graphs" type="HBoxContainer" parent="ChatVotes/Background"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Points" type="VBoxContainer" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -540.0
+offset_top = 560.0
+offset_right = -60.0
+offset_bottom = 680.0
+grow_horizontal = 0
+
+[node name="Label" type="Label" parent="Points"]
+custom_minimum_size = Vector2(2.08165e-12, 60)
+layout_mode = 2
+text = "Points
+"
+label_settings = ExtResource("2_ki58g")
+vertical_alignment = 2
+
+[node name="Graph" type="HBoxContainer" parent="Points"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="StreamerPoints" type="ColorRect" parent="Points/Graph"]
+layout_mode = 2
+size_flags_horizontal = 3
+color = Color(0.55, 0.286825, 0.0715, 1)
+
+[node name="Label" type="Label" parent="Points/Graph/StreamerPoints"]
+z_index = 1
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_right = 40.0
+grow_vertical = 2
+text = "0"
+label_settings = ExtResource("3_bslnc")
+vertical_alignment = 1
+
+[node name="ChatPoints" type="ColorRect" parent="Points/Graph"]
+layout_mode = 2
+size_flags_horizontal = 3
+color = Color(0.392157, 0.254902, 0.643137, 1)
+
+[node name="Label" type="Label" parent="Points/Graph/ChatPoints"]
+z_index = 1
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -37.0
+offset_right = -20.0
+grow_horizontal = 0
+grow_vertical = 2
+text = "0"
+label_settings = ExtResource("3_bslnc")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Next" type="Button" parent="."]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -360.0
+offset_top = -140.0
+offset_right = -60.0
+offset_bottom = -60.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 40
+text = "Next Round..."
+
+[connection signal="pressed" from="Next" to="." method="on_next_pressed"]

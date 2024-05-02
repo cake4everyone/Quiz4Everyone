@@ -27,9 +27,10 @@ func _ready():
 	print("api loaded")
 
 func _process(_delta: float):
-	var msg: Dictionary = read_from_ws()
-	if len(msg) > 0:
-		got_ws_message.call(msg)
+	if got_ws_message:
+		var msg: Dictionary = read_from_ws()
+		if len(msg) > 0:
+			got_ws_message.call(msg)
 
 func load_config():
 	var file = FileAccess.open("res://config.yaml", FileAccess.READ)
