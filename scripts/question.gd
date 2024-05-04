@@ -82,10 +82,11 @@ func on_round_end(data: Dictionary):
 	voted = false
 	$RoundCounter.hide()
 	$Quiz/Answers/VoteIcon.hide()
+
+	self.round_data = data
 	if data.current_round == data.max_round:
-		print("game ended!")
+		scene_manager.change_scene(self, "game_end")
 	else:
-		self.round_data = data
 		scene_manager.change_scene(self, "question_end")
 
 const CHAT_VOTE: String = "CHAT_VOTE"
