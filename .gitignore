@@ -16,4 +16,5 @@ mono_crash.*.json
 
 # other
 .vscode/
+/export
 .DS_Store

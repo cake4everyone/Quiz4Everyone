@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="Quiz4EveryoneApp"
+config/version="0.0.0.1"
 run/main_scene="res://scenes/login.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 
