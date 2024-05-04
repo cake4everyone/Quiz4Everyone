@@ -32,12 +32,16 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
+      - name: Set output
+        id: vars
+        run: |
+          echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
       - name: Deploy to Steamworks
         uses: game-ci/steam-deploy@v3
         with:
           username: ${{ secrets.STEAM_USERNAME }}
           configVdf: ${{ secrets.STEAM_CONFIG_VDF}}
           appId: 2978800
-          buildDescription: github-${{ github.event.head_commit.id }} ${{ github.event.head_commit.message }}
+          buildDescription: github-${{ steps.vars.outputs.sha_short }} ${{ github.event.head_commit.message }}
           depot1Path: Quiz4Everyone_windows
           releaseBranch: alpha
