@@ -39,6 +39,5 @@ jobs:
           configVdf: ${{ secrets.STEAM_CONFIG_VDF}}
           appId: 2978800
           buildDescription: github-${{ github.event.head_commit.id }} ${{ github.event.head_commit.message }}
-          rootPath: build
           depot1Path: Quiz4Everyone_windows
           releaseBranch: alpha
