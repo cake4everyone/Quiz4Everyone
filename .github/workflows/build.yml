@@ -28,3 +28,17 @@ jobs:
         with:
           name: Quiz4Everyone_${{ matrix.os }}
           path: ${{ steps.build.outputs.build }}
+  upload:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to Steamworks
+        uses: game-ci/steam-deploy@v3
+        with:
+          username: ${{ secrets.STEAM_USERNAME }}
+          configVdf: ${{ secrets.STEAM_CONFIG_VDF}}
+          appId: 2978800
+          buildDescription: github-${{ github.event.head_commit.id }} ${{ github.event.head_commit.message }}
+          rootPath: build
+          depot1Path: Quiz4Everyone_windows
+          releaseBranch: alpha
