@@ -13,8 +13,15 @@ jobs:
     strategy:
       matrix:
         os: [windows, linux]
+    outputs:
+      sha_short: ${{ steps.vars.outputs.sha_short }}
+      build: ${{ steps.build.outputs.build }}
     steps:
       - uses: actions/checkout@v4
+      - name: Set output
+        id: vars
+        run: |
+          echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
       - name: Godot Build
         id: build
         # workaround for https://github.com/yeslayla/build-godot-action/issues/30
@@ -27,21 +34,18 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: Quiz4Everyone_${{ matrix.os }}
-          path: ${{ steps.build.outputs.build }}
+          path: ${{ github.workspace }}/${{ steps.build.outputs.build }}
   upload:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: Set output
-        id: vars
-        run: |
-          echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
       - name: Deploy to Steamworks
         uses: game-ci/steam-deploy@v3
         with:
           username: ${{ secrets.STEAM_USERNAME }}
           configVdf: ${{ secrets.STEAM_CONFIG_VDF}}
           appId: 2978800
-          buildDescription: github-${{ steps.vars.outputs.sha_short }} ${{ github.event.head_commit.message }}
+          buildDescription: github-${{ needs.build.outputs.sha_short }} ${{ github.event.head_commit.message }}
+          rootPath: ${{ needs.build.outputs.build }}
           depot1Path: Quiz4Everyone_windows
           releaseBranch: alpha
