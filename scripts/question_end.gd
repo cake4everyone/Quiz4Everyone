@@ -8,11 +8,24 @@ func show_round_data(data: Dictionary):
 	print(data)
 	$RoundCounter.text = "Runde %d/%d (%s)" % [data.current_round, data.max_round, data.category]
 
-	$Question/Label.text = data.question
-	$Answer/Title.text = "Answer %d:" % [data.correct]
-	$Answer/Label.text = data.answers[data.correct - 1]
+	$Quiz/Question/Label.text = data.question
+	$Quiz/Answers/A/Label.text = data.answers[0]
+	$Quiz/Answers/B/Label.text = data.answers[1]
+	if len(data.answers) >= 3:
+		$Quiz/Answers/C/Label.text = data.answers[2]
+		$Quiz/Answers/C.show()
+	else:
+		$Quiz/Answers/C.hide()
+	if len(data.answers) >= 4:
+		$Quiz/Answers/D/Label.text = data.answers[3]
+		$Quiz/Answers/D.show()
+	else:
+		$Quiz/Answers/D.hide()
+	var answer: ColorRect = $Quiz/Answers.get_child(data.correct - 1)
+	answer.color = Color.hex(0x004200ff)
+
 	$StreamerAnswer.color = Color.hex(0x004200ff) if data.streamer_vote == data.correct else Color.hex(0x780000ff)
-	$StreamerAnswer/Label.text = "You voted %d" % [data.streamer_vote]
+	$StreamerAnswer/Label.text = "You voted %s" % [String.chr(65 + data.streamer_vote - 1)]
 
 	var total_votes: int = data.chat_vote_count[0] + data.chat_vote_count[1] + data.chat_vote_count[2] + data.chat_vote_count[3]
 

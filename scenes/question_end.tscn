@@ -15,45 +15,76 @@ offset_bottom = 78.0
 text = "Round X/Y (some category)"
 label_settings = ExtResource("2_ki58g")
 
-[node name="Question" type="ColorRect" parent="."]
-anchors_preset = 10
-anchor_right = 1.0
+[node name="Quiz" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
 offset_left = 60.0
 offset_top = 140.0
-offset_right = -580.0
-offset_bottom = 300.0
+offset_right = 1340.0
+offset_bottom = 740.0
+
+[node name="Question" type="ColorRect" parent="Quiz"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 160.0
 grow_horizontal = 2
 color = Color(0.252028, 0.252028, 0.252028, 1)
 
-[node name="Label" type="Label" parent="Question"]
+[node name="Label" type="Label" parent="Quiz/Question"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 20.0
+offset_top = -2.0
 offset_right = -20.0
+offset_bottom = 3.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanc"
 label_settings = ExtResource("3_bslnc")
+horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="Answer" type="ColorRect" parent="."]
-offset_left = 60.0
-offset_top = 340.0
-offset_right = 564.0
-offset_bottom = 480.0
-color = Color(0, 0.258824, 0, 1)
+[node name="Answers" type="Control" parent="Quiz"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -540.0
+offset_top = -120.0
+offset_right = 540.0
+offset_bottom = 280.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="Title" type="Label" parent="Answer"]
-layout_mode = 0
+[node name="A" type="ColorRect" parent="Quiz/Answers"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -520.0
+offset_top = -160.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.25098, 0.25098, 0.25098, 1)
+
+[node name="Title" type="Label" parent="Quiz/Answers/A"]
+layout_mode = 1
 offset_top = -40.0
-offset_right = 157.0
-text = "Answer 1:"
+offset_right = 160.0
+text = "Answer A:"
 label_settings = ExtResource("3_bslnc")
 
-[node name="Label" type="Label" parent="Answer"]
+[node name="Label" type="Label" parent="Quiz/Answers/A"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -68,11 +99,125 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
+[node name="B" type="ColorRect" parent="Quiz/Answers"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 20.0
+offset_top = -160.0
+offset_right = 520.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.25098, 0.25098, 0.25098, 1)
+
+[node name="Title" type="Label" parent="Quiz/Answers/B"]
+layout_mode = 1
+offset_top = -40.0
+offset_right = 160.0
+text = "Answer B:"
+label_settings = ExtResource("3_bslnc")
+
+[node name="Label" type="Label" parent="Quiz/Answers/B"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_right = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam"
+label_settings = ExtResource("3_bslnc")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="C" type="ColorRect" parent="Quiz/Answers"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -520.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = 160.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.25098, 0.25098, 0.25098, 1)
+
+[node name="Title" type="Label" parent="Quiz/Answers/C"]
+layout_mode = 1
+offset_top = -40.0
+offset_right = 160.0
+text = "Answer C:"
+label_settings = ExtResource("3_bslnc")
+
+[node name="Label" type="Label" parent="Quiz/Answers/C"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_right = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam"
+label_settings = ExtResource("3_bslnc")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="D" type="ColorRect" parent="Quiz/Answers"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 520.0
+offset_bottom = 160.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.25098, 0.25098, 0.25098, 1)
+
+[node name="Title" type="Label" parent="Quiz/Answers/D"]
+layout_mode = 1
+offset_top = -40.0
+offset_right = 160.0
+text = "Answer D:"
+label_settings = ExtResource("3_bslnc")
+
+[node name="Label" type="Label" parent="Quiz/Answers/D"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_right = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Lorem ipsum dolor
+sit amet, consetetur
+sadipscing elitr,
+sed diam "
+label_settings = ExtResource("3_bslnc")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
 [node name="StreamerAnswer" type="ColorRect" parent="."]
-offset_left = 120.0
-offset_top = 520.0
-offset_right = 500.0
-offset_bottom = 580.0
+offset_left = 520.0
+offset_top = 780.0
+offset_right = 900.0
+offset_bottom = 840.0
 color = Color(0.470588, 0, 0, 1)
 
 [node name="Label" type="Label" parent="StreamerAnswer"]
