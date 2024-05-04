@@ -1,0 +1,29 @@
+name: Build Godot Executeable
+
+on:
+  push:
+    branches: main
+
+  pull_request:
+    branches: main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [windows, linux]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Godot Build
+        id: build
+        uses: manleydev/build-godot-action@v1.5.0
+        with:
+          name: Quiz4Everyone
+          preset: ${{ matrix.os }}
+          debugMode: ${{ github.event_name != 'push' || github.ref != 'main' }}
+      - name: Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Quiz4Everyone_${{ matrix.os }}
+          path: ${{ steps.build.outputs.build }}
