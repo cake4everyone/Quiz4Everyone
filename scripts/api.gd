@@ -1,7 +1,7 @@
 class_name API extends Node
 
 var ws: WebSocketPeer = WebSocketPeer.new()
-var host: String = ""
+const host: String = "https://api.cake4everyone.de/quiz"
 var api_token: String = ""
 
 var category_callback: Callable
@@ -22,7 +22,6 @@ func _ready():
 	$HTTP_RoundInfo.request_completed.connect(round_info_resp)
 	$HTTP_RoundNext.request_completed.connect(round_next_resp)
 	$HTTP_StreamerVote.request_completed.connect(streamervote_resp)
-	load_config()
 	set_process(false)
 	print("api loaded")
 
@@ -31,10 +30,6 @@ func _process(_delta: float):
 		var msg: Dictionary = read_from_ws()
 		if len(msg) > 0:
 			got_ws_message.call(msg)
-
-func load_config():
-	var file = FileAccess.open("res://config.yaml", FileAccess.READ)
-	host = file.get_line()
 
 ## category gets the available categories from the server.
 func category(callback: Callable):

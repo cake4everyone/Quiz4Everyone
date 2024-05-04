@@ -17,4 +17,3 @@ mono_crash.*.json
 # other
 .vscode/
 .DS_Store
-config.yaml
