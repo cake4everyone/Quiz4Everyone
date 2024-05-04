@@ -1,5 +1,7 @@
-extends CanvasLayer
-var start_game: Callable
+class_name Menu extends CanvasLayer
+
+## Time for each round in seconds
+var round_duration: int = 30
 
 ## ready is called when the node enters the scene tree for the first time.
 func _ready():
@@ -34,7 +36,7 @@ func on_btn_start_pressed():
 
 	var game_data: Dictionary = {}
 	game_data["categories"] = categories
-	game_data["round_duration"] = 30 # time for each round in seconds
+	game_data["round_duration"] = round_duration
 	api.game_start(JSON.stringify(game_data), on_game_start_response)
 
 func on_game_start_response(success: bool):

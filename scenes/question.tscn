@@ -15,6 +15,32 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="Question" type="ColorRect" parent="Quiz"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 80.0
+offset_top = 140.0
+offset_right = -80.0
+offset_bottom = 360.0
+grow_horizontal = 2
+color = Color(0.252028, 0.252028, 0.252028, 1)
+
+[node name="Label" type="Label" parent="Quiz/Question"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_right = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanc"
+label_settings = ExtResource("3_24026")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
 [node name="Answers" type="Control" parent="Quiz"]
 layout_mode = 1
 anchors_preset = 8
@@ -64,7 +90,7 @@ layout_mode = 1
 offset_top = -60.0
 offset_right = 181.0
 offset_bottom = -14.0
-text = "Answer 1:"
+text = "Answer A:"
 label_settings = ExtResource("3_24026")
 
 [node name="Label" type="Label" parent="Quiz/Answers/A"]
@@ -102,7 +128,7 @@ layout_mode = 1
 offset_top = -60.0
 offset_right = 181.0
 offset_bottom = -14.0
-text = "Answer 2:"
+text = "Answer B:"
 label_settings = ExtResource("3_24026")
 
 [node name="Label" type="Label" parent="Quiz/Answers/B"]
@@ -140,7 +166,7 @@ layout_mode = 1
 offset_top = -60.0
 offset_right = 181.0
 offset_bottom = -14.0
-text = "Answer 3:"
+text = "Answer C:"
 label_settings = ExtResource("3_24026")
 
 [node name="Label" type="Label" parent="Quiz/Answers/C"]
@@ -178,7 +204,7 @@ layout_mode = 1
 offset_top = -60.0
 offset_right = 181.0
 offset_bottom = -14.0
-text = "Answer 4:"
+text = "Answer D:"
 label_settings = ExtResource("3_24026")
 
 [node name="Label" type="Label" parent="Quiz/Answers/D"]
@@ -199,32 +225,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="Question" type="ColorRect" parent="Quiz"]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_left = 80.0
-offset_top = 140.0
-offset_right = -80.0
-offset_bottom = 360.0
-grow_horizontal = 2
-color = Color(0.252028, 0.252028, 0.252028, 1)
-
-[node name="Label" type="Label" parent="Quiz/Question"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 20.0
-offset_right = -20.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanc"
-label_settings = ExtResource("3_24026")
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 3
-
 [node name="StartCountdown" type="Label" parent="."]
 anchors_preset = 8
 anchor_left = 0.5
@@ -240,6 +240,21 @@ grow_vertical = 2
 theme_override_font_sizes/font_size = 100
 text = "3"
 horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Countdown" type="Label" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -97.0
+offset_top = 40.0
+offset_right = -40.0
+offset_bottom = 86.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 100
+text = "30"
+label_settings = ExtResource("3_24026")
+horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="RoundCounter" type="Label" parent="."]

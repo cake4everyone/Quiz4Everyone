@@ -2,15 +2,23 @@ class_name QuestionScene extends CanvasLayer
 
 var quizOn: bool = false
 var voted: bool = false
+var countdown: float
 var round_data: Dictionary = {}
 
 func _ready():
+	countdown = scene_manager.round_duration
+
 	api.set_ws_response(on_server_api_got_ws_message)
 	start_next_round()
 
-func _process(_delta: float):
-	if quizOn&&!voted:
-		check_vote()
+func _process(delta: float):
+	if quizOn:
+		countdown -= delta
+		if countdown < 0:
+			countdown = 0
+		$Countdown.text = str(floor(countdown))
+		if !voted:
+			check_vote()
 
 func check_vote():
 	if Input.is_key_pressed(KEY_A)||Input.is_key_pressed(KEY_1)||Input.is_key_pressed(KEY_KP_1): api.streamervote("1", on_streamervote_response)
@@ -33,6 +41,7 @@ func on_streamervote_response(ok: bool):
 ## start_next_round shows a 3 second countdown before showing the round_data data.
 func start_next_round():
 	$Quiz.hide()
+	$Countdown.hide()
 	$RoundCounter.hide()
 	voted = false
 	$StartCountdown.show()
@@ -55,6 +64,7 @@ func on_round_next_response(success: bool, data: Dictionary={}):
 ## show_round_data displays the given round_data data on screen.
 func show_round_data(data: Dictionary):
 	print(data)
+	$Countdown.show()
 	$RoundCounter.text = "Runde %d/%d (%s)" % [data.current_round, data.max_round, data.category]
 	$RoundCounter.show()
 
