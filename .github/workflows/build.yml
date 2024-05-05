@@ -51,10 +51,9 @@ jobs:
       - name: Deploy to Steamworks
         uses: game-ci/steam-deploy@v3
         with:
-          username: ${{ secrets.STEAM_USERNAME }}
+          username: ${{ vars.SteamUsername }}
           configVdf: ${{ secrets.STEAM_CONFIG_VDF}}
-          appId: 2978800
+          appId: ${{ vars.SteamAppID }}
           buildDescription: github-${{ steps.vars.outputs.sha_short }} ${{ github.event.head_commit.message }}
           rootPath: build
           depot1Path: '.'
-          releaseBranch: alpha
