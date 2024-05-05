@@ -15,7 +15,6 @@ jobs:
         os: [windows, linux]
     outputs:
       sha_short: ${{ steps.vars.outputs.sha_short }}
-      build: ${{ steps.build.outputs.build }}
     steps:
       - uses: actions/checkout@v4
       - name: Set output
@@ -39,6 +38,9 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: build
       - name: Deploy to Steamworks
         uses: game-ci/steam-deploy@v3
         with:
@@ -46,6 +48,7 @@ jobs:
           configVdf: ${{ secrets.STEAM_CONFIG_VDF}}
           appId: 2978800
           buildDescription: github-${{ needs.build.outputs.sha_short }} ${{ github.event.head_commit.message }}
-          rootPath: ${{ needs.build.outputs.build }}
+          rootPath: build
           depot1Path: Quiz4Everyone_windows
+          depot2Path: Quiz4Everyone_linux
           releaseBranch: alpha
