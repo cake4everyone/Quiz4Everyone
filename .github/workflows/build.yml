@@ -12,43 +12,49 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        os: [windows, linux]
-    outputs:
-      sha_short: ${{ steps.vars.outputs.sha_short }}
+        platform:
+          - os: windows
+            file_extension: .exe
+          - os: linux
+            file_extension: .zip
+          - os: mac
+            file_extension: ''
     steps:
       - uses: actions/checkout@v4
-      - name: Set output
-        id: vars
-        run: |
-          echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
       - name: Godot Build
         id: build
         # workaround for https://github.com/yeslayla/build-godot-action/issues/30
         uses: manleydev/build-godot-action@f759ed7f8fcb5137cb70873ecf663aa8a1bd998b
         with:
-          name: Quiz4Everyone
-          preset: ${{ matrix.os }}
+          name: Quiz4Everyone${{ matrix.platform.file_extension }}
+          preset: ${{ matrix.platform.os }}
           debugMode: ${{ github.event_name != 'push' || github.ref != 'main' }}
-      - name: Artifact
+      - name: Save Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: Quiz4Everyone_${{ matrix.os }}
+          name: Quiz4Everyone_${{ matrix.platform.os }}
           path: ${{ github.workspace }}/${{ steps.build.outputs.build }}
   upload:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/download-artifact@v4
+      - name: Get Artifacts
+        uses: actions/download-artifact@v4
         with:
           path: build
+      - name: Set output
+        id: vars
+        run: |
+          echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
       - name: Deploy to Steamworks
         uses: game-ci/steam-deploy@v3
         with:
           username: ${{ secrets.STEAM_USERNAME }}
           configVdf: ${{ secrets.STEAM_CONFIG_VDF}}
           appId: 2978800
-          buildDescription: github-${{ needs.build.outputs.sha_short }} ${{ github.event.head_commit.message }}
+          buildDescription: github-${{ steps.vars.outputs.sha_short }} ${{ github.event.head_commit.message }}
           rootPath: build
           depot1Path: Quiz4Everyone_windows
           depot2Path: Quiz4Everyone_linux
+          depot3Path: Quiz4Everyone_mac
           releaseBranch: alpha
