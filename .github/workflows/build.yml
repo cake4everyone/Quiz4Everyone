@@ -16,7 +16,7 @@ jobs:
           - os: windows
             file_extension: .exe
           - os: linux
-            file_extension: .zip
+            file_extension: ''
     steps:
       - uses: actions/checkout@v4
       - name: Godot Build
@@ -30,7 +30,7 @@ jobs:
       - name: Save Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: Quiz4Everyone_${{ matrix.platform.os }}
+          name: ${{ matrix.platform.os }}
           path: ${{ github.workspace }}/${{ steps.build.outputs.build }}
   upload:
     needs: build
