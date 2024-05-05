@@ -17,8 +17,6 @@ jobs:
             file_extension: .exe
           - os: linux
             file_extension: .zip
-          - os: mac
-            file_extension: ''
     steps:
       - uses: actions/checkout@v4
       - name: Godot Build
@@ -54,7 +52,4 @@ jobs:
           appId: 2978800
           buildDescription: github-${{ steps.vars.outputs.sha_short }} ${{ github.event.head_commit.message }}
           rootPath: build
-          depot1Path: Quiz4Everyone_windows
-          depot2Path: Quiz4Everyone_linux
-          depot3Path: Quiz4Everyone_mac
           releaseBranch: alpha
