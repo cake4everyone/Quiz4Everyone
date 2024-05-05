@@ -52,4 +52,5 @@ jobs:
           appId: 2978800
           buildDescription: github-${{ steps.vars.outputs.sha_short }} ${{ github.event.head_commit.message }}
           rootPath: build
+          depot1Path: '.'
           releaseBranch: alpha
