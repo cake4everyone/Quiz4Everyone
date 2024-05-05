@@ -1,0 +1,61 @@
+name: Build Godot Executeable
+
+on:
+  push:
+    branches: main
+
+  pull_request:
+    branches: main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        platform:
+          - os: windows
+            file_extension: .exe
+          - os: linux
+            file_extension: ''
+    steps:
+      - uses: actions/checkout@v4
+      - name: Godot Build
+        id: build
+        # workaround for https://github.com/yeslayla/build-godot-action/issues/30
+        uses: manleydev/build-godot-action@f759ed7f8fcb5137cb70873ecf663aa8a1bd998b
+        with:
+          name: Quiz4Everyone${{ matrix.platform.file_extension }}
+          preset: ${{ matrix.platform.os }}
+          debugMode: ${{ github.event_name != 'push' || github.ref != 'main' }}
+      - name: Save Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.platform.os }}
+          path: ${{ github.workspace }}/${{ steps.build.outputs.build }}
+  upload:
+    needs: build
+    runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'push' && github.ref == 'main' }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: Quiz4Everyone
+      - name: Get Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: build
+      - name: Set output
+        id: vars
+        run: |
+          cd Quiz4Everyone
+          echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+      - name: Deploy to Steamworks
+        uses: game-ci/steam-deploy@v3
+        with:
+          username: ${{ vars.SteamUsername }}
+          configVdf: ${{ secrets.STEAM_CONFIG_VDF}}
+          appId: ${{ vars.SteamAppID }}
+          buildDescription: github-${{ steps.vars.outputs.sha_short }} ${{ github.event.head_commit.message }}
+          rootPath: build
+          depot1Path: '.'
+          releaseBranch: alpha
