@@ -36,6 +36,9 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
+        with:
+          path: Quiz4Everyone
       - name: Get Artifacts
         uses: actions/download-artifact@v4
         with:
@@ -43,6 +46,7 @@ jobs:
       - name: Set output
         id: vars
         run: |
+          cd Quiz4Everyone
           echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
       - name: Deploy to Steamworks
         uses: game-ci/steam-deploy@v3
