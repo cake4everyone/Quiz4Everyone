@@ -1,11 +1,14 @@
 class_name Menu extends CanvasLayer
 
 ## Time for each round in seconds
-var round_duration: int = 30
+var round_duration: int
 
 ## ready is called when the node enters the scene tree for the first time.
 func _ready():
 	$ModeSelect.add_item("Streamer VS Chat", 0)
+	if(scene_manager.round_duration > 0):
+		round_duration = scene_manager.round_duration
+		$RoundDuration.value = round_duration
 	api.category(on_category_response)
 
 ## on_category_response is called as when the categories api call completed.
@@ -27,6 +30,7 @@ func update_category_list(categories: Dictionary):
 ## on_btn_start_pressed is called when pressed the start game button.
 ## It collects all the selected categories and creates a new game on the server.
 func on_btn_start_pressed():
+	round_duration = $RoundDuration.value
 	var categories: Dictionary = {}
 	for category: HBoxContainer in $CategoryBox/Categories.get_children():
 		var amount: int = category.get_child(0).value

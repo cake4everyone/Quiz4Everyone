@@ -25,7 +25,10 @@ func show_round_data(data: Dictionary):
 	answer.color = Color.hex(0x004200ff)
 
 	$StreamerAnswer.color = Color.hex(0x004200ff) if data.streamer_vote == data.correct else Color.hex(0x780000ff)
-	$StreamerAnswer/Label.text = "You voted %s" % [String.chr(65 + data.streamer_vote - 1)]
+	if data.streamer_vote == 0:
+		$StreamerAnswer/Label.text = "You voted nothing"
+	else:
+		$StreamerAnswer/Label.text = "You voted %s" % [String.chr(64 + data.streamer_vote)]
 
 	var total_votes: int = data.chat_vote_count[0] + data.chat_vote_count[1] + data.chat_vote_count[2] + data.chat_vote_count[3]
 
