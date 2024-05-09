@@ -26,7 +26,7 @@ jobs:
         with:
           name: Quiz4Everyone${{ matrix.platform.file_extension }}
           preset: ${{ matrix.platform.os }}
-          debugMode: ${{ github.event_name != 'push' || github.ref != 'main' }}
+          debugMode: ${{ github.event_name != 'push' || github.ref != 'refs/heads/main' }}
       - name: Save Artifact
         uses: actions/upload-artifact@v4
         with:
@@ -35,7 +35,7 @@ jobs:
   upload:
     needs: build
     runs-on: ubuntu-latest
-    if: ${{ github.event_name == 'push' && github.ref == 'main' }}
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
     steps:
       - uses: actions/checkout@v4
         with:
