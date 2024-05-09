@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://yyc1l3e78qgl"]
+[gd_scene load_steps=3 format=3 uid="uid://yyc1l3e78qgl"]
 
 [ext_resource type="Script" path="res://scripts/menu.gd" id="1_f4qtc"]
+
+[sub_resource type="Theme" id="Theme_31w7n"]
+default_font_size = 70
 
 [node name="Menu" type="CanvasLayer"]
 script = ExtResource("1_f4qtc")
@@ -58,5 +61,16 @@ horizontal_scroll_mode = 0
 layout_direction = 3
 layout_mode = 2
 alignment = 2
+
+[node name="RoundDuration" type="SpinBox" parent="."]
+offset_left = 54.0
+offset_top = 190.0
+offset_right = 326.225
+offset_bottom = 278.0
+theme = SubResource("Theme_31w7n")
+min_value = 5.0
+max_value = 90.0
+value = 30.0
+suffix = "s"
 
 [connection signal="pressed" from="Start" to="." method="on_btn_start_pressed"]
