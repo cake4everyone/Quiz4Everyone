@@ -20,6 +20,7 @@ func on_password_text_changed(password_text: String):
 
 ## on_login_button_pressed is called when user pressed the login button on the screen.
 func on_login_button_pressed():
+	$LoginBox/Login.disabled = true
 	var auth: String = Marshalls.utf8_to_base64("%s:%s" % [$LoginBox/EMail.text, $LoginBox/Password.text])
 	api.login(auth, on_login_reponse)
 
@@ -27,6 +28,7 @@ func on_login_button_pressed():
 func on_login_reponse(success: bool, _username: String=""):
 	if !success:
 		print("login failed!")
+		$LoginBox/Login.disabled = false
 		return
 
 	scene_manager.change_scene(self, scene_after_login)

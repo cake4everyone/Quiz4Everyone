@@ -14,14 +14,14 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -264.0
-offset_top = -102.0
-offset_right = -48.0
-offset_bottom = -48.0
+offset_left = -360.0
+offset_top = -140.0
+offset_right = -60.0
+offset_bottom = -60.0
 grow_horizontal = 0
 grow_vertical = 0
 theme_override_font_sizes/font_size = 40
-text = "Start Game"
+text = "Spiel starten"
 
 [node name="ModeSelect" type="OptionButton" parent="."]
 offset_left = 56.0

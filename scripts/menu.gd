@@ -6,7 +6,7 @@ var round_duration: int
 ## ready is called when the node enters the scene tree for the first time.
 func _ready():
 	$ModeSelect.add_item("Streamer VS Chat", 0)
-	if(scene_manager.round_duration > 0):
+	if (scene_manager.round_duration > 0):
 		round_duration = scene_manager.round_duration
 		$RoundDuration.value = round_duration
 	api.category(on_category_response)
@@ -30,6 +30,7 @@ func update_category_list(categories: Dictionary):
 ## on_btn_start_pressed is called when pressed the start game button.
 ## It collects all the selected categories and creates a new game on the server.
 func on_btn_start_pressed():
+	$Start.disabled = true
 	round_duration = $RoundDuration.value
 	var categories: Dictionary = {}
 	for category: HBoxContainer in $CategoryBox/Categories.get_children():
@@ -46,5 +47,6 @@ func on_btn_start_pressed():
 func on_game_start_response(success: bool):
 	if !success:
 		print("failed to create new game!")
+		$Start.disabled = false
 		return
 	scene_manager.change_scene(self, "question")
