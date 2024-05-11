@@ -90,7 +90,7 @@ layout_mode = 1
 offset_top = -60.0
 offset_right = 181.0
 offset_bottom = -14.0
-text = "Answer A:"
+text = "Antwort A"
 label_settings = ExtResource("3_24026")
 
 [node name="Label" type="Label" parent="Quiz/Answers/A"]
@@ -128,7 +128,7 @@ layout_mode = 1
 offset_top = -60.0
 offset_right = 181.0
 offset_bottom = -14.0
-text = "Answer B:"
+text = "Antwort B"
 label_settings = ExtResource("3_24026")
 
 [node name="Label" type="Label" parent="Quiz/Answers/B"]
@@ -166,7 +166,7 @@ layout_mode = 1
 offset_top = -60.0
 offset_right = 181.0
 offset_bottom = -14.0
-text = "Answer C:"
+text = "Antwort C"
 label_settings = ExtResource("3_24026")
 
 [node name="Label" type="Label" parent="Quiz/Answers/C"]
@@ -204,7 +204,7 @@ layout_mode = 1
 offset_top = -60.0
 offset_right = 181.0
 offset_bottom = -14.0
-text = "Answer D:"
+text = "Antwort D"
 label_settings = ExtResource("3_24026")
 
 [node name="Label" type="Label" parent="Quiz/Answers/D"]

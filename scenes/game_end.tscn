@@ -81,7 +81,7 @@ color = Color(0.25098, 0.25098, 0.25098, 1)
 layout_mode = 1
 offset_top = -40.0
 offset_right = 160.0
-text = "Answer A:"
+text = "Antwort A"
 label_settings = ExtResource("3_fxqrh")
 
 [node name="Label" type="Label" parent="Quiz/Answers/A"]
@@ -118,7 +118,7 @@ color = Color(0.25098, 0.25098, 0.25098, 1)
 layout_mode = 1
 offset_top = -40.0
 offset_right = 160.0
-text = "Answer B:"
+text = "Antwort B"
 label_settings = ExtResource("3_fxqrh")
 
 [node name="Label" type="Label" parent="Quiz/Answers/B"]
@@ -155,7 +155,7 @@ color = Color(0.25098, 0.25098, 0.25098, 1)
 layout_mode = 1
 offset_top = -40.0
 offset_right = 160.0
-text = "Answer C:"
+text = "Antwort C"
 label_settings = ExtResource("3_fxqrh")
 
 [node name="Label" type="Label" parent="Quiz/Answers/C"]
@@ -192,7 +192,7 @@ color = Color(0.25098, 0.25098, 0.25098, 1)
 layout_mode = 1
 offset_top = -40.0
 offset_right = 160.0
-text = "Answer D:"
+text = "Antwort D"
 label_settings = ExtResource("3_fxqrh")
 
 [node name="Label" type="Label" parent="Quiz/Answers/D"]
@@ -227,8 +227,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "You voted 1"
-label_settings = ExtResource("2_dorbm")
+text = "Du hast A gewählt"
+label_settings = ExtResource("3_fxqrh")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -276,9 +276,9 @@ grow_horizontal = 0
 [node name="Label" type="Label" parent="Points"]
 custom_minimum_size = Vector2(2.08165e-12, 60)
 layout_mode = 2
-text = "Points
-"
+text = "Du Chat"
 label_settings = ExtResource("2_dorbm")
+horizontal_alignment = 3
 vertical_alignment = 2
 
 [node name="Graph" type="HBoxContainer" parent="Points"]
@@ -337,6 +337,6 @@ grow_horizontal = 0
 grow_vertical = 0
 mouse_default_cursor_shape = 2
 theme_override_font_sizes/font_size = 40
-text = "Main Menu"
+text = "Hauptmenü"
 
 [connection signal="pressed" from="Next" to="." method="on_next_pressed"]
