@@ -26,9 +26,8 @@ func _ready():
 	print("api loaded")
 
 func _process(_delta: float):
-	if got_ws_message:
-		var msg: Dictionary = read_from_ws()
-		if len(msg) > 0:
+	var msg: Dictionary = read_from_ws()
+	if got_ws_message&&len(msg) > 0:
 			got_ws_message.call(msg)
 
 ## category gets the available categories from the server.
