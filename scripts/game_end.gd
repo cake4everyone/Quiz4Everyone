@@ -8,16 +8,16 @@ func show_round_data(data: Dictionary):
 	print(data)
 	$RoundCounter.text = "Runde %d/%d (%s)" % [data.current_round, data.max_round, data.category.title]
 
-	$Quiz/Question/Label.text = data.question
-	$Quiz/Answers/A/Label.text = data.answers[0]
-	$Quiz/Answers/B/Label.text = data.answers[1]
+	$Quiz/Question/Label.text = data.question.text
+	$Quiz/Answers/A/Label.text = data.answers[0].text
+	$Quiz/Answers/B/Label.text = data.answers[1].text
 	if len(data.answers) >= 3:
-		$Quiz/Answers/C/Label.text = data.answers[2]
+		$Quiz/Answers/C/Label.text = data.answers[2].text
 		$Quiz/Answers/C.show()
 	else:
 		$Quiz/Answers/C.hide()
 	if len(data.answers) >= 4:
-		$Quiz/Answers/D/Label.text = data.answers[3]
+		$Quiz/Answers/D/Label.text = data.answers[3].text
 		$Quiz/Answers/D.show()
 	else:
 		$Quiz/Answers/D.hide()
