@@ -41,6 +41,20 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
+[node name="Image" type="TextureRect" parent="Quiz/Question"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -103.0
+offset_top = -103.0
+offset_right = 97.0
+offset_bottom = 97.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="Answers" type="Control" parent="Quiz"]
 layout_mode = 1
 anchors_preset = 8
@@ -108,6 +122,20 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
+[node name="Image" type="TextureRect" parent="Quiz/Answers/A"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -103.0
+offset_top = -103.0
+offset_right = 97.0
+offset_bottom = 97.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="B" type="ColorRect" parent="Quiz/Answers"]
 layout_mode = 1
 anchors_preset = 8
@@ -146,6 +174,20 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
+[node name="Image" type="TextureRect" parent="Quiz/Answers/B"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -103.0
+offset_top = -103.0
+offset_right = 97.0
+offset_bottom = 97.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="C" type="ColorRect" parent="Quiz/Answers"]
 layout_mode = 1
 anchors_preset = 8
@@ -183,6 +225,20 @@ label_settings = ExtResource("3_24026")
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
+
+[node name="Image" type="TextureRect" parent="Quiz/Answers/C"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -103.0
+offset_top = -103.0
+offset_right = 97.0
+offset_bottom = 97.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="D" type="ColorRect" parent="Quiz/Answers"]
 layout_mode = 1
@@ -224,6 +280,20 @@ label_settings = ExtResource("3_24026")
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
+
+[node name="Image" type="TextureRect" parent="Quiz/Answers/D"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -103.0
+offset_top = -103.0
+offset_right = 97.0
+offset_bottom = 97.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="StartCountdown" type="Label" parent="."]
 anchors_preset = 8
