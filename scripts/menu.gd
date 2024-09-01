@@ -39,12 +39,12 @@ func on_btn_start_pressed():
 		if amount == 0:
 			continue
 		categories[category.get_child(2).text] = amount
-		
+
 	var game_data: Dictionary = {}
 	game_data["categories"] = categories
 	game_data["round_duration"] = round_duration
 	api.game_start(JSON.stringify(game_data), on_game_start_response)
-	
+
 func on_cancel_pressed():
 	$RoundCreation.hide()
 
@@ -55,10 +55,8 @@ func on_game_start_response(success: bool):
 		return
 	scene_manager.change_scene(self, "question")
 
-
 func on_play_pressed():
 	$RoundCreation.show()
-
 
 func on_quit_pressed():
 	get_tree().quit()
