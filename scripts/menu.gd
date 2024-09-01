@@ -20,13 +20,21 @@ func on_category_response(success: bool, categories: Dictionary={}):
 	update_category_list(categories)
 
 ## update_category_list updates the category selection list with the given dictionary (mapping String to int).
-func update_category_list(categories: Dictionary):
-	for category in categories:
-		var c = CATEGORY.instantiate()
-		c.get_child(1).max_value = categories[category]
-		c.get_child(2).text = category
-		c.show()
-		$RoundCreation/CreationMenu/CategoryBox/Categories.add_child(c)
+func update_category_list(groups: Dictionary):
+	var category_tree: Tree = $RoundCreation/CreationMenu/Categories
+	var tree_root: TreeItem = category_tree.create_item()
+	category_tree.set_column_title(0, "Group")
+	category_tree.set_column_title(1, "Category")
+	for group in groups:
+		var tree_group: TreeItem = category_tree.create_item(tree_root)
+		tree_group.set_text(0, group)
+		for cat in groups[group]:
+			var category: TreeItem = category_tree.create_item(tree_group)
+			category.set_text(0, cat.title)
+			category.set_tooltip_text(0, cat.description)
+			category.set_range(1, 0)
+			category.set_range_config(1, 0, cat.count, 1)
+			category.set_editable(1, true)
 
 ## on_btn_start_pressed is called when pressed the start game button.
 ## It collects all the selected categories and creates a new game on the server.

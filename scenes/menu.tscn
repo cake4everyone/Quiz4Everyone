@@ -201,6 +201,16 @@ layout_direction = 3
 layout_mode = 2
 theme_override_constants/separation = 3
 
+[node name="Categories" type="Tree" parent="RoundCreation/CreationMenu"]
+layout_mode = 0
+offset_left = 58.0
+offset_top = 295.0
+offset_right = 478.0
+offset_bottom = 775.0
+columns = 2
+column_titles_visible = true
+hide_root = true
+
 [node name="RoundDuration" type="SpinBox" parent="RoundCreation/CreationMenu"]
 layout_mode = 1
 anchors_preset = 6
