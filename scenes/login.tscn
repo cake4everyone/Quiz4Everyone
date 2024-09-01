@@ -1,7 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://2ysj36v7ruon"]
+[gd_scene load_steps=4 format=3 uid="uid://2ysj36v7ruon"]
 
 [ext_resource type="Script" path="res://scripts/login.gd" id="1_4rhoe"]
 [ext_resource type="LabelSettings" uid="uid://jfhijl2ucmeq" path="res://assets/label_settings.tres" id="2_hmd01"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_cvayw"]
+font_size = 20
+font_color = Color(0.984314, 0.443137, 0.345098, 1)
 
 [node name="Login" type="CanvasLayer"]
 script = ExtResource("1_4rhoe")
@@ -47,7 +51,7 @@ grow_horizontal = 2
 grow_vertical = 2
 focus_next = NodePath("../Password")
 theme_override_font_sizes/font_size = 30
-placeholder_text = "EMail oder Benutzername"
+placeholder_text = "E-Mail oder Benutzername"
 alignment = 1
 expand_to_text_length = true
 context_menu_enabled = false
@@ -93,7 +97,25 @@ grow_vertical = 0
 focus_previous = NodePath("../Password")
 theme_override_font_sizes/font_size = 40
 disabled = true
-text = "Anmelden ->"
+text = "Login"
+
+[node name="Error" type="Label" parent="LoginBox"]
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -170.0
+offset_top = -108.0
+offset_right = 170.0
+offset_bottom = -85.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "E-Mail/Benutzername oder Passwort sind falsch!"
+label_settings = SubResource("LabelSettings_cvayw")
+horizontal_alignment = 1
 
 [connection signal="text_changed" from="LoginBox/EMail" to="." method="on_email_text_changed"]
 [connection signal="text_changed" from="LoginBox/Password" to="." method="on_password_text_changed"]

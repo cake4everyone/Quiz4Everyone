@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://yyc1l3e78qgl"]
+[gd_scene load_steps=10 format=3 uid="uid://yyc1l3e78qgl"]
 
 [ext_resource type="Script" path="res://scripts/menu.gd" id="1_f4qtc"]
 
@@ -30,6 +30,25 @@ border_width_right = 8
 border_width_bottom = 8
 border_color = Color(0, 0, 0, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r78im"]
+bg_color = Color(0.0980392, 0.0980392, 0.0980392, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v1l70"]
+bg_color = Color(0.137255, 0.137255, 0.137255, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eb82c"]
+bg_color = Color(0.137255, 0.137255, 0.137255, 1)
+
 [sub_resource type="Theme" id="Theme_31w7n"]
 default_font_size = 70
 
@@ -38,15 +57,26 @@ script = ExtResource("1_f4qtc")
 
 [node name="BG" type="Sprite2D" parent="."]
 
-[node name="Play" type="Button" parent="."]
+[node name="Buttons" type="Control" parent="."]
+layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -228.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Play" type="Button" parent="Buttons"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -229.5
 offset_top = -214.0
-offset_right = 231.0
+offset_right = 229.5
 offset_bottom = -86.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -56,15 +86,16 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_r2tkh")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_e6ve8")
 text = "Play"
 
-[node name="Options" type="Button" parent="."]
+[node name="Options" type="Button" parent="Buttons"]
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -229.0
+offset_left = -229.5
 offset_top = -64.0
-offset_right = 230.0
+offset_right = 229.5
 offset_bottom = 64.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -74,16 +105,17 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_r2tkh")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_e6ve8")
 text = "Options"
 
-[node name="Quit" type="Button" parent="."]
+[node name="Quit" type="Button" parent="Buttons"]
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -227.0
-offset_top = 82.0
-offset_right = 232.0
-offset_bottom = 210.0
+offset_left = -229.5
+offset_top = 86.0
+offset_right = 229.5
+offset_bottom = 214.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 60
@@ -94,52 +126,53 @@ theme_override_styles/focus = SubResource("StyleBoxFlat_sdl70")
 text = "Quit Game"
 
 [node name="RoundCreation" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="ColorRect" type="ColorRect" parent="RoundCreation"]
-offset_left = -360.0
-offset_top = -210.0
-offset_right = 2263.0
-offset_bottom = 1201.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 color = Color(0.137255, 0.137255, 0.137255, 0.431373)
 
 [node name="CreationMenu" type="Panel" parent="RoundCreation"]
-anchors_preset = 6
-anchor_left = 1.0
+anchors_preset = 8
+anchor_left = 0.5
 anchor_top = 0.5
-anchor_right = 1.0
+anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -602.0
-offset_top = -436.0
-offset_right = -86.0
-offset_bottom = 473.0
-grow_horizontal = 0
+offset_left = -258.0
+offset_top = -454.5
+offset_right = 258.0
+offset_bottom = 454.5
+grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_yhbp7")
-
-[node name="Start" type="Button" parent="RoundCreation/CreationMenu"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = 1.0
-offset_top = -85.0
-offset_right = 217.0
-offset_bottom = -10.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_font_sizes/font_size = 30
-text = "Start Game"
 
 [node name="Cancel" type="Button" parent="RoundCreation/CreationMenu"]
 layout_mode = 0
 offset_left = 45.0
-offset_top = 825.0
+offset_top = 821.0
 offset_right = 233.0
-offset_bottom = 900.0
+offset_bottom = 896.0
 theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_r78im")
+theme_override_styles/hover = SubResource("StyleBoxFlat_v1l70")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_eb82c")
 text = "Cancel"
+
+[node name="Start" type="Button" parent="RoundCreation/CreationMenu"]
+layout_mode = 0
+offset_left = 286.0
+offset_top = 821.0
+offset_right = 474.0
+offset_bottom = 896.0
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_r78im")
+theme_override_styles/hover = SubResource("StyleBoxFlat_v1l70")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_eb82c")
+text = "Start Game"
 
 [node name="ModeSelect" type="OptionButton" parent="RoundCreation/CreationMenu"]
 layout_mode = 1
@@ -155,17 +188,18 @@ layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_left = 47.0
-offset_top = -186.5
-offset_right = 331.0
-offset_bottom = 306.499
+offset_left = 126.0
+offset_top = -182.5
+offset_right = 269.0
+offset_bottom = 310.5
 grow_vertical = 2
+follow_focus = true
 horizontal_scroll_mode = 0
 
 [node name="Categories" type="VBoxContainer" parent="RoundCreation/CreationMenu/CategoryBox"]
 layout_direction = 3
 layout_mode = 2
-alignment = 2
+theme_override_constants/separation = 3
 
 [node name="RoundDuration" type="SpinBox" parent="RoundCreation/CreationMenu"]
 layout_mode = 1
@@ -186,7 +220,7 @@ max_value = 90.0
 value = 30.0
 suffix = "s"
 
-[connection signal="pressed" from="Play" to="." method="on_play_pressed"]
-[connection signal="pressed" from="Quit" to="." method="on_quit_pressed"]
-[connection signal="pressed" from="RoundCreation/CreationMenu/Start" to="." method="on_btn_start_pressed"]
+[connection signal="pressed" from="Buttons/Play" to="." method="on_play_pressed"]
+[connection signal="pressed" from="Buttons/Quit" to="." method="on_quit_pressed"]
 [connection signal="pressed" from="RoundCreation/CreationMenu/Cancel" to="." method="on_cancel_pressed"]
+[connection signal="pressed" from="RoundCreation/CreationMenu/Start" to="." method="on_btn_start_pressed"]

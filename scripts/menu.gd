@@ -2,6 +2,7 @@ class_name Menu extends CanvasLayer
 
 ## Time for each round in seconds
 var round_duration: int
+const CATEGORY = preload("res://scenes/components/copy_category.tscn")
 
 ## ready is called when the node enters the scene tree for the first time.
 func _ready():
@@ -20,11 +21,10 @@ func on_category_response(success: bool, categories: Dictionary={}):
 
 ## update_category_list updates the category selection list with the given dictionary (mapping String to int).
 func update_category_list(categories: Dictionary):
-	const copy_category = preload("res://scenes/Objects/copy_category.tscn")
 	for category in categories:
-		var c = copy_category.instantiate()
-		c.get_child(0).max_value = categories[category]
-		c.get_child(1).text = category
+		var c = CATEGORY.instantiate()
+		c.get_child(1).max_value = categories[category]
+		c.get_child(2).text = category
 		c.show()
 		$RoundCreation/CreationMenu/CategoryBox/Categories.add_child(c)
 
@@ -35,10 +35,10 @@ func on_btn_start_pressed():
 	round_duration = $RoundCreation/CreationMenu/RoundDuration.value
 	var categories: Dictionary = {}
 	for category: HBoxContainer in $RoundCreation/CreationMenu/CategoryBox/Categories.get_children():
-		var amount: int = category.get_child(0).value
+		var amount: int = category.get_child(1).value
 		if amount == 0:
 			continue
-		categories[category.get_child(1).text] = amount
+		categories[category.get_child(2).text] = amount
 		
 	var game_data: Dictionary = {}
 	game_data["categories"] = categories
