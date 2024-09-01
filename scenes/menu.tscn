@@ -1,6 +1,53 @@
-[gd_scene load_steps=3 format=3 uid="uid://yyc1l3e78qgl"]
+[gd_scene load_steps=10 format=3 uid="uid://yyc1l3e78qgl"]
 
 [ext_resource type="Script" path="res://scripts/menu.gd" id="1_f4qtc"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r2tkh"]
+bg_color = Color(0.239216, 0.239216, 0.239216, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e6ve8"]
+bg_color = Color(0.239216, 0.239216, 0.239216, 1)
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sdl70"]
+bg_color = Color(0.239216, 0.239216, 0.239216, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yhbp7"]
+bg_color = Color(0.192157, 0.192157, 0.192157, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r78im"]
+bg_color = Color(0.0980392, 0.0980392, 0.0980392, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v1l70"]
+bg_color = Color(0.137255, 0.137255, 0.137255, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eb82c"]
+bg_color = Color(0.137255, 0.137255, 0.137255, 1)
 
 [sub_resource type="Theme" id="Theme_31w7n"]
 default_font_size = 70
@@ -8,69 +55,172 @@ default_font_size = 70
 [node name="Menu" type="CanvasLayer"]
 script = ExtResource("1_f4qtc")
 
-[node name="Start" type="Button" parent="."]
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
+[node name="BG" type="Sprite2D" parent="."]
+
+[node name="Buttons" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Play" type="Button" parent="Buttons"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -229.5
+offset_top = -214.0
+offset_right = 229.5
+offset_bottom = -86.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 60
+theme_override_styles/normal = SubResource("StyleBoxFlat_r2tkh")
+theme_override_styles/hover = SubResource("StyleBoxFlat_r2tkh")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_e6ve8")
+text = "Play"
+
+[node name="Options" type="Button" parent="Buttons"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -229.5
+offset_top = -64.0
+offset_right = 229.5
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 60
+theme_override_styles/normal = SubResource("StyleBoxFlat_r2tkh")
+theme_override_styles/hover = SubResource("StyleBoxFlat_r2tkh")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_e6ve8")
+text = "Options"
+
+[node name="Quit" type="Button" parent="Buttons"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -229.5
+offset_top = 86.0
+offset_right = 229.5
+offset_bottom = 214.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 60
+theme_override_styles/normal = SubResource("StyleBoxFlat_r2tkh")
+theme_override_styles/hover = SubResource("StyleBoxFlat_r2tkh")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_e6ve8")
+theme_override_styles/focus = SubResource("StyleBoxFlat_sdl70")
+text = "Quit Game"
+
+[node name="RoundCreation" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="RoundCreation"]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -360.0
-offset_top = -140.0
-offset_right = -60.0
-offset_bottom = -60.0
-grow_horizontal = 0
-grow_vertical = 0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.137255, 0.137255, 0.137255, 0.431373)
+
+[node name="CreationMenu" type="Panel" parent="RoundCreation"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -258.0
+offset_top = -454.5
+offset_right = 258.0
+offset_bottom = 454.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_yhbp7")
+
+[node name="Cancel" type="Button" parent="RoundCreation/CreationMenu"]
+layout_mode = 0
+offset_left = 45.0
+offset_top = 821.0
+offset_right = 233.0
+offset_bottom = 896.0
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_r78im")
+theme_override_styles/hover = SubResource("StyleBoxFlat_v1l70")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_eb82c")
+text = "Cancel"
+
+[node name="Start" type="Button" parent="RoundCreation/CreationMenu"]
+layout_mode = 0
+offset_left = 286.0
+offset_top = 821.0
+offset_right = 474.0
+offset_bottom = 896.0
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_r78im")
+theme_override_styles/hover = SubResource("StyleBoxFlat_v1l70")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_eb82c")
+text = "Start Game"
+
+[node name="ModeSelect" type="OptionButton" parent="RoundCreation/CreationMenu"]
+layout_mode = 1
+offset_left = 43.0
+offset_top = 44.0
+offset_right = 299.0
+offset_bottom = 114.0
 theme_override_font_sizes/font_size = 40
-text = "Spiel starten"
 
-[node name="ModeSelect" type="OptionButton" parent="."]
-offset_left = 56.0
-offset_top = 56.0
-offset_right = 101.0
-offset_bottom = 76.0
-theme_override_font_sizes/font_size = 40
-metadata/_edit_use_anchors_ = true
-
-[node name="CopyCategory" type="HBoxContainer" parent="."]
-visible = false
-layout_direction = 3
-offset_right = 100.0
-offset_bottom = 31.0
-
-[node name="Amount" type="SpinBox" parent="CopyCategory"]
-layout_mode = 2
-
-[node name="Name" type="Label" parent="CopyCategory"]
+[node name="CategoryBox" type="ScrollContainer" parent="RoundCreation/CreationMenu"]
 layout_direction = 2
-layout_mode = 2
-max_lines_visible = 1
-
-[node name="CategoryBox" type="ScrollContainer" parent="."]
-layout_direction = 2
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -154.0
-offset_top = 48.0
-offset_right = -48.0
-offset_bottom = 362.0
-grow_horizontal = 0
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 126.0
+offset_top = -182.5
+offset_right = 269.0
+offset_bottom = 310.5
+grow_vertical = 2
+follow_focus = true
 horizontal_scroll_mode = 0
 
-[node name="Categories" type="VBoxContainer" parent="CategoryBox"]
+[node name="Categories" type="VBoxContainer" parent="RoundCreation/CreationMenu/CategoryBox"]
 layout_direction = 3
 layout_mode = 2
-alignment = 2
+theme_override_constants/separation = 3
 
-[node name="RoundDuration" type="SpinBox" parent="."]
-offset_left = 54.0
-offset_top = 190.0
-offset_right = 326.225
-offset_bottom = 278.0
+[node name="RoundDuration" type="SpinBox" parent="RoundCreation/CreationMenu"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -472.0
+offset_top = -304.5
+offset_right = -199.775
+offset_bottom = -216.5
+grow_horizontal = 0
+grow_vertical = 2
 theme = SubResource("Theme_31w7n")
 min_value = 5.0
 max_value = 90.0
 value = 30.0
 suffix = "s"
 
-[connection signal="pressed" from="Start" to="." method="on_btn_start_pressed"]
+[connection signal="pressed" from="Buttons/Play" to="." method="on_play_pressed"]
+[connection signal="pressed" from="Buttons/Quit" to="." method="on_quit_pressed"]
+[connection signal="pressed" from="RoundCreation/CreationMenu/Cancel" to="." method="on_cancel_pressed"]
+[connection signal="pressed" from="RoundCreation/CreationMenu/Start" to="." method="on_btn_start_pressed"]
