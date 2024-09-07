@@ -32,7 +32,7 @@ func update_category_list(groups: Dictionary):
 			var category: TreeItem = category_tree.create_item(tree_group)
 			category.set_text(0, cat.title)
 			category.set_tooltip_text(0, cat.description)
-			category.set_range(1, 0)
+			category.set_cell_mode(1, TreeItem.CELL_MODE_RANGE)
 			category.set_range_config(1, 0, cat.count, 1)
 			category.set_editable(1, true)
 
