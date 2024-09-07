@@ -35,12 +35,30 @@ func update_category_list(groups: Dictionary):
 			category.set_range_config(1, 0, cat.count, 1)
 			category.set_editable(1, true)
 
+			var category_data: CategoryData = CategoryData.new()
+			category_data.id = cat.title
+			category_data.group = group
+			category.set_metadata(0, category_data)
+
 ## on_btn_start_pressed is called when pressed the start game button.
 ## It collects all the selected categories and creates a new game on the server.
 func on_btn_start_pressed():
 	$RoundCreation/CreationMenu/Start.disabled = true
 	round_duration = $RoundCreation/CreationMenu/RoundDuration.value
 	var categories: Dictionary = {}
+	var category: TreeItem = $RoundCreation/CreationMenu/CategoryBox.get_root().get_first_child()
+	while category != null:
+		var amount: int = int(category.get_range(1))
+		if amount == 0:
+			category = category.get_next_in_tree()
+			continue
+		var category_data: CategoryData = category.get_metadata(0)
+		categories[category_data.id] = amount
+		category = category.get_next_in_tree()
+
+	if categories.size() == 0:
+		print("no categories selected!")
+		return
 
 	var game_data: Dictionary = {}
 	game_data["categories"] = categories
@@ -62,3 +80,7 @@ func on_play_pressed():
 
 func on_quit_pressed():
 	get_tree().quit()
+
+class CategoryData:
+	var id: String
+	var group: String
