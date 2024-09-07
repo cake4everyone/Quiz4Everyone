@@ -21,17 +21,16 @@ func on_category_response(success: bool, categories: Dictionary={}):
 
 ## update_category_list updates the category selection list with the given dictionary (mapping String to int).
 func update_category_list(groups: Dictionary):
-	var category_tree: Tree = $RoundCreation/CreationMenu/Categories
+	var category_tree: Tree = $RoundCreation/CreationMenu/CategoryBox
 	var tree_root: TreeItem = category_tree.create_item()
-	category_tree.set_column_title(0, "Group")
-	category_tree.set_column_title(1, "Category")
+	category_tree.set_column_title(0, "Category")
+	category_tree.set_column_title(1, "Amount")
 	for group in groups:
 		var tree_group: TreeItem = category_tree.create_item(tree_root)
 		tree_group.set_text(0, group)
 		for cat in groups[group]:
 			var category: TreeItem = category_tree.create_item(tree_group)
-			category.set_text(0, cat.title)
-			category.set_tooltip_text(0, cat.description)
+			category.set_text(0, cat.description)
 			category.set_cell_mode(1, TreeItem.CELL_MODE_RANGE)
 			category.set_range_config(1, 0, cat.count, 1)
 			category.set_editable(1, true)
