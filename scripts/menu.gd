@@ -42,11 +42,6 @@ func on_btn_start_pressed():
 	$RoundCreation/CreationMenu/Start.disabled = true
 	round_duration = $RoundCreation/CreationMenu/RoundDuration.value
 	var categories: Dictionary = {}
-	for category: HBoxContainer in $RoundCreation/CreationMenu/CategoryBox/Categories.get_children():
-		var amount: int = category.get_child(1).value
-		if amount == 0:
-			continue
-		categories[category.get_child(2).text] = amount
 
 	var game_data: Dictionary = {}
 	game_data["categories"] = categories
