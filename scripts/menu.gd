@@ -41,7 +41,7 @@ func update_category_list(groups: Dictionary):
 		var bg_light: bool = false
 		for cat in group.categories:
 			var category: TreeItem = category_tree.create_item(tree_group)
-			category.set_text(0, cat.description)
+			category.set_text(0, cat.title)
 			category.set_cell_mode(1, TreeItem.CELL_MODE_RANGE)
 			category.set_range_config(1, 0, cat.count, 1)
 			category.set_editable(1, true)
@@ -54,7 +54,7 @@ func update_category_list(groups: Dictionary):
 			bg_light = !bg_light
 
 			var category_data: CategoryData = CategoryData.new()
-			category_data.id = cat.title
+			category_data.id = cat.id
 			category_data.group = group_id
 			category.set_metadata(0, category_data)
 
