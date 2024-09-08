@@ -31,9 +31,8 @@ func update_category_list(groups: Dictionary):
 	var category_tree: Tree = $RoundCreation/CreationMenu/CategoryBox
 	var tree_root: TreeItem = category_tree.get_root()
 	print(groups)
-	for group_id in groups:
-		print(group_id)
-		var group: Dictionary = groups[group_id]
+	for group_color in groups:
+		var group: Dictionary = groups[group_color]
 		var tree_group: TreeItem = category_tree.create_item(tree_root)
 		tree_group.set_text(0, group.title)
 		tree_group.set_custom_bg_color(0, Color(0.23, 0.23, 0.23))
@@ -55,7 +54,7 @@ func update_category_list(groups: Dictionary):
 
 			var category_data: CategoryData = CategoryData.new()
 			category_data.id = cat.id
-			category_data.group = group_id
+			category_data.group = group.id
 			category.set_metadata(0, category_data)
 
 ## on_btn_start_pressed is called when pressed the start game button.
