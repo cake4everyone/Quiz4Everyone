@@ -15,6 +15,8 @@ func change_scene(from: Node, to_scene_name: String):
 		self.round_duration = from.round_duration
 	elif from is QuestionScene:
 		self.round_data = from.round_data
+	elif from is QuestionEndScene:
+		self.round_data = {}
 
 	var scene_path = scene_path_format % [to_scene_name]
 	from.get_tree().call_deferred("change_scene_to_file", scene_path)
@@ -22,7 +24,9 @@ func change_scene(from: Node, to_scene_name: String):
 
 	update_discord(to_scene_name)
 
-func update_discord(to_scene_name: String):
+func update_discord(to_scene_name: String, data: Dictionary = {}):
+	if data == {}:
+		data = self.round_data
 	match to_scene_name:
 		"login":
 			DiscordRPC.details = ""
@@ -35,14 +39,20 @@ func update_discord(to_scene_name: String):
 			DiscordRPC.large_image = "cake"
 			DiscordRPC.large_image_text = "by Cake4Everyone"
 		"question":
-			print("round data: ", round_data)
-			DiscordRPC.details = "Question (%d/%s)" % [0, 0]
+			print("round data: ", data)
+			if data == {}:
+				DiscordRPC.details = "Question"
+			else:
+				DiscordRPC.details = "Question (%d/%s)" % [data.current_round, data.max_round]
 			DiscordRPC.state = "In game"
 			DiscordRPC.large_image = "cake"
 			DiscordRPC.large_image_text = "by Cake4Everyone"
 		"question_end":
-			print("round data: ", round_data)
-			DiscordRPC.details = "Question Result (%d/%s)" % [0, 0]
+			print("round data: ", data)
+			if data == {}:
+				DiscordRPC.details = "Question Result"
+			else:
+				DiscordRPC.details = "Question Result (%d/%s)" % [data.current_round, data.max_round]
 			DiscordRPC.state = "In game"
 			DiscordRPC.large_image = "cake"
 			DiscordRPC.large_image_text = "by Cake4Everyone"
