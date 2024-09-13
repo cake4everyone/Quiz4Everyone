@@ -124,6 +124,7 @@ theme_override_styles/focus = SubResource("StyleBoxFlat_sdl70")
 text = "Quit Game"
 
 [node name="RoundCreation" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="ColorRect" type="ColorRect" parent="RoundCreation"]
 anchors_preset = 15
