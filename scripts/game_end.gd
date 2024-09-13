@@ -6,7 +6,7 @@ func _ready():
 ## show_round_data displays the given round_data data on screen.
 func show_round_data(data: Dictionary):
 	print(data)
-	$RoundCounter.text = "Runde %d/%d (%s)" % [data.current_round, data.max_round, data.category]
+	$RoundCounter.text = "Runde %d/%d (%s)" % [data.current_round, data.max_round, data.category.title]
 
 	$Quiz/Question/Label.text = data.question
 	$Quiz/Answers/A/Label.text = data.answers[0]
