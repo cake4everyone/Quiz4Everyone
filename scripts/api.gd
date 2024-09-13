@@ -1,7 +1,7 @@
 class_name API extends Node
 
 var ws: WebSocketPeer = WebSocketPeer.new()
-const host: String = "https://api.cake4everyone.de/quiz"
+var host: String = "https://api.cake4everyone.de/quiz"
 var api_token: String = ""
 
 var category_callback: Callable
@@ -13,6 +13,12 @@ var streamervote_callback: Callable
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	var flags: PackedStringArray = OS.get_cmdline_args()
+	for flag in flags:
+		if flag.begins_with("--host="):
+			host = flag.trim_prefix("--host=")
+			print("[DEBUG] overwrote host with ", host)
+
 	$HTTP_Category.request_completed.connect(category_resp)
 	$HTTP_GameInfo.request_completed.connect(game_info_resp)
 	$HTTP_GameQuit.request_completed.connect(game_quit_resp)
