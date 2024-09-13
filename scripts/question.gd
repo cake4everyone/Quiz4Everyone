@@ -65,7 +65,7 @@ func on_round_next_response(success: bool, data: Dictionary={}):
 func show_round_data(data: Dictionary):
 	print(data)
 	$Countdown.show()
-	$RoundCounter.text = "Runde %d/%d (%s)" % [data.current_round, data.max_round, data.category]
+	$RoundCounter.text = "Runde %d/%d (%s)" % [data.current_round, data.max_round, data.category.title]
 	$RoundCounter.show()
 
 	$Quiz/Question/Label.text = data.question
