@@ -42,26 +42,34 @@ func update_discord(to_scene_name: String, data: Dictionary = {}):
 			print("round data: ", data)
 			if data == {}:
 				DiscordRPC.details = "Question"
+				DiscordRPC.large_image = "cake"
+				DiscordRPC.small_image = ""
 			else:
 				DiscordRPC.details = "Question (%d/%s)" % [data.current_round, data.max_round]
+				DiscordRPC.large_image = data.group.id
 			DiscordRPC.state = "In game"
-			DiscordRPC.large_image = "cake"
-			DiscordRPC.large_image_text = "by Cake4Everyone"
+			DiscordRPC.small_image = "cake"
+			DiscordRPC.small_image_text = "by Cake4Everyone"
 		"question_end":
 			print("round data: ", data)
 			if data == {}:
 				DiscordRPC.details = "Question Result"
 			else:
 				DiscordRPC.details = "Question Result (%d/%s)" % [data.current_round, data.max_round]
+				DiscordRPC.large_image = data.group.id
 			DiscordRPC.state = "In game"
-			DiscordRPC.large_image = "cake"
-			DiscordRPC.large_image_text = "by Cake4Everyone"
+			DiscordRPC.small_image = "cake"
+			DiscordRPC.small_image_text = "by Cake4Everyone"
 		"game_end":
 			print("round data: ", round_data)
+			if data == {}:
+				DiscordRPC.large_image = "cake"
+			else:
+				DiscordRPC.large_image = data.group.id
 			DiscordRPC.details = "Game result"
 			DiscordRPC.state = "Game overview"
-			DiscordRPC.large_image = "cake"
-			DiscordRPC.large_image_text = "by Cake4Everyone"
+			DiscordRPC.small_image = "cake"
+			DiscordRPC.small_image_text = "by Cake4Everyone"
 		_:
 			DiscordRPC.details = ""
 			DiscordRPC.state = ""
