@@ -62,7 +62,7 @@ func update_category_list(groups: Dictionary):
 func on_btn_start_pressed():
 	$RoundCreation/CreationMenu/Start.disabled = true
 	round_duration = $RoundCreation/CreationMenu/RoundDuration.value
-	var categories: Dictionary = {}
+	var groups: Dictionary = {}
 	var category: TreeItem = $RoundCreation/CreationMenu/CategoryBox.get_root().get_first_child()
 	while category != null:
 		var amount: int = int(category.get_range(1))
@@ -70,16 +70,27 @@ func on_btn_start_pressed():
 			category = category.get_next_in_tree()
 			continue
 		var category_data: CategoryData = category.get_metadata(0)
+
+		var group_data: Dictionary = {}
+		if groups.has(category_data.group):
+			group_data = groups[category_data.group]
+		var categories: Dictionary = {}
+		if group_data.has("categories"):
+			categories = group_data["categories"]
+
 		categories[category_data.id] = amount
+		group_data["categories"] = categories
+		groups[category_data.group] = group_data
 		category = category.get_next_in_tree()
 
-	if categories.size() == 0:
+	if groups.size() == 0:
 		print("no categories selected!")
 		return
 
 	var game_data: Dictionary = {}
-	game_data["categories"] = categories
+	game_data["groups"] = groups
 	game_data["round_duration"] = round_duration
+	print(game_data)
 	api.game_start(JSON.stringify(game_data), on_game_start_response)
 
 func on_cancel_pressed():
