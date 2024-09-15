@@ -33,41 +33,37 @@ func update_discord(to_scene_name: String, data: Dictionary = {}):
 			DiscordRPC.state = "Logging in..."
 			DiscordRPC.large_image = "cake"
 			DiscordRPC.large_image_text = "by Cake4Everyone"
+			DiscordRPC.small_image = ""
 		"menu":
 			DiscordRPC.details = ""
 			DiscordRPC.state = "In Menu"
 			DiscordRPC.large_image = "cake"
 			DiscordRPC.large_image_text = "by Cake4Everyone"
+			DiscordRPC.small_image = ""
 		"question":
-			print("round data: ", data)
+			DiscordRPC.details = ""
 			if data == {}:
-				DiscordRPC.details = "Question"
+				DiscordRPC.state = "In question"
 				DiscordRPC.large_image = "cake"
-				DiscordRPC.small_image = ""
+				DiscordRPC.large_image_text = "Loading Question..."
 			else:
-				DiscordRPC.details = "Question (%d/%s)" % [data.current_round, data.max_round]
+				DiscordRPC.state = "In question %d/%d" % [data.current_round, data.max_round]
 				DiscordRPC.large_image = data.group.id
-			DiscordRPC.state = "In game"
+				DiscordRPC.large_image_text = "%s (%s)" % [data.category.title, data.group.title]
 			DiscordRPC.small_image = "cake"
 			DiscordRPC.small_image_text = "by Cake4Everyone"
 		"question_end":
-			print("round data: ", data)
-			if data == {}:
-				DiscordRPC.details = "Question Result"
-			else:
-				DiscordRPC.details = "Question Result (%d/%s)" % [data.current_round, data.max_round]
-				DiscordRPC.large_image = data.group.id
-			DiscordRPC.state = "In game"
+			DiscordRPC.details = "Points: %d:%d" % [data.streamer_points, data.chat_points]
+			DiscordRPC.state = "In question result %d/%d" % [data.current_round, data.max_round]
+			DiscordRPC.large_image = data.group.id
+			DiscordRPC.large_image_text = "%s (%s)" % [data.category.title, data.group.title]
 			DiscordRPC.small_image = "cake"
 			DiscordRPC.small_image_text = "by Cake4Everyone"
 		"game_end":
-			print("round data: ", round_data)
-			if data == {}:
-				DiscordRPC.large_image = "cake"
-			else:
-				DiscordRPC.large_image = data.group.id
-			DiscordRPC.details = "Game result"
-			DiscordRPC.state = "Game overview"
+			DiscordRPC.details = "Points: %d:%d" % [data.streamer_points, data.chat_points]
+			DiscordRPC.state = "Game overview %d/%d" % [data.current_round, data.max_round]
+			DiscordRPC.large_image = data.group.id
+			DiscordRPC.large_image_text = "%s (%s)" % [data.category.title, data.group.title]
 			DiscordRPC.small_image = "cake"
 			DiscordRPC.small_image_text = "by Cake4Everyone"
 		_:
@@ -75,6 +71,7 @@ func update_discord(to_scene_name: String, data: Dictionary = {}):
 			DiscordRPC.state = ""
 			DiscordRPC.large_image = "cake"
 			DiscordRPC.large_image_text = "by Cake4Everyone"
+			DiscordRPC.small_image = ""
 	
 	DiscordRPC.start_timestamp = int(Time.get_unix_time_from_system())
 	DiscordRPC.refresh()
