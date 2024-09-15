@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://dng8ra0oyui1j"]
+[gd_scene load_steps=5 format=3 uid="uid://dng8ra0oyui1j"]
 
 [ext_resource type="Script" path="res://scripts/game_end.gd" id="1_41dkj"]
 [ext_resource type="LabelSettings" uid="uid://jfhijl2ucmeq" path="res://assets/label_settings.tres" id="2_dorbm"]
 [ext_resource type="LabelSettings" uid="uid://cv8jjunexoatt" path="res://assets/label_settings_small.tres" id="3_fxqrh"]
+[ext_resource type="PackedScene" uid="uid://ckacep0trv8up" path="res://scenes/konfetti.tscn" id="4_gfo1r"]
 
 [node name="QuestionEnd" type="CanvasLayer"]
 script = ExtResource("1_41dkj")
@@ -288,7 +289,7 @@ size_flags_vertical = 3
 [node name="StreamerPoints" type="ColorRect" parent="Points/Graph"]
 layout_mode = 2
 size_flags_horizontal = 3
-color = Color(0.55, 0.286825, 0.0715, 1)
+color = Color(0.67451, 0.286275, 0.0705882, 1)
 
 [node name="Label" type="Label" parent="Points/Graph/StreamerPoints"]
 z_index = 1
@@ -322,6 +323,8 @@ text = "0"
 label_settings = ExtResource("3_fxqrh")
 horizontal_alignment = 2
 vertical_alignment = 1
+
+[node name="Konfetti" parent="." instance=ExtResource("4_gfo1r")]
 
 [node name="Next" type="Button" parent="."]
 anchors_preset = 3

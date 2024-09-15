@@ -54,7 +54,15 @@ func show_round_data(data: Dictionary):
 	$Points/Graph/StreamerPoints/Label.text = str(data.streamer_points)
 	$Points/Graph/ChatPoints.size_flags_stretch_ratio = data.chat_points if data.streamer_points != data.chat_points else 1
 	$Points/Graph/ChatPoints/Label.text = str(data.chat_points)
+	
+	
+	if(data.chat_points < data.streamer_points):
+		$Konfetti.shoot(true)
+	elif(data.chat_points > data.streamer_points):
+		$Konfetti.shoot(false)
+
 
 ## on_next_pressed is called when the user clicks the next button to continue to the next question.
 func on_next_pressed():
+	print("\n Hiiiiiiiiiiiiiii")
 	scene_manager.change_scene(self, "menu")

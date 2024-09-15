@@ -1,0 +1,60 @@
+[gd_scene load_steps=4 format=3 uid="uid://ckacep0trv8up"]
+
+[ext_resource type="Script" path="res://scripts/konfetti.gd" id="1_lcdo6"]
+[ext_resource type="Texture2D" uid="uid://bgsp818tjx4mw" path="res://assets/sprites/Cube.png" id="1_xbrun"]
+
+[sub_resource type="Curve" id="Curve_bacls"]
+min_value = -200.0
+max_value = 200.0
+_data = [Vector2(0, 200), 0.0, 0.0, 0, 0, Vector2(1, -112.088), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="Konfetti" type="Control"]
+modulate = Color(0.392157, 0.254902, 0.643137, 1)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_lcdo6")
+
+[node name="canon1" type="CPUParticles2D" parent="."]
+position = Vector2(5, 1078)
+emitting = false
+amount = 160
+lifetime = 5.0
+one_shot = true
+speed_scale = 2.0
+explosiveness = 0.91
+randomness = 1.0
+lifetime_randomness = 0.25
+texture = ExtResource("1_xbrun")
+direction = Vector2(0.5, -1)
+spread = 10.45
+gravity = Vector2(0, 300)
+initial_velocity_min = 500.01
+initial_velocity_max = 850.29
+angular_velocity_min = -29.09
+angular_velocity_max = 327.27
+linear_accel_curve = SubResource("Curve_bacls")
+
+[node name="canon2" type="CPUParticles2D" parent="."]
+position = Vector2(1919, 1079)
+emitting = false
+amount = 160
+lifetime = 5.0
+one_shot = true
+speed_scale = 2.0
+explosiveness = 0.91
+randomness = 1.0
+lifetime_randomness = 0.25
+texture = ExtResource("1_xbrun")
+direction = Vector2(-0.5, -1)
+spread = 10.45
+gravity = Vector2(0, 300)
+initial_velocity_min = 500.01
+initial_velocity_max = 850.29
+angular_velocity_min = -29.09
+angular_velocity_max = 327.27
+linear_accel_curve = SubResource("Curve_bacls")
