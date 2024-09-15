@@ -6,13 +6,13 @@ const CATEGORY = preload("res://scenes/components/copy_category.tscn")
 
 ## ready is called when the node enters the scene tree for the first time.
 func _ready():
-	$RoundCreation/CreationMenu/ModeSelect.add_item("Streamer VS Chat", 0)
+	$CreationMenu/ModeSelect.add_item("Streamer VS Chat", 0)
 	if (scene_manager.round_duration > 0):
 		round_duration = scene_manager.round_duration
-		$RoundCreation/CreationMenu/RoundDuration.value = round_duration
+		$CreationMenu/RoundDuration.value = round_duration
 	api.category(on_category_response)
 
-	var category_tree: Tree = $RoundCreation/CreationMenu/CategoryBox
+	var category_tree: Tree = $CreationMenu/CategoryBox
 	category_tree.create_item()
 	category_tree.set_column_title(0, "Category")
 	category_tree.set_column_title(1, "Amount")
@@ -28,7 +28,7 @@ func on_category_response(success: bool, categories: Dictionary = {}):
 
 ## update_category_list updates the category selection list with the given dictionary (mapping String to int).
 func update_category_list(groups: Dictionary):
-	var category_tree: Tree = $RoundCreation/CreationMenu/CategoryBox
+	var category_tree: Tree = $CreationMenu/CategoryBox
 	var tree_root: TreeItem = category_tree.get_root()
 	print(groups)
 	for group_color in groups:
@@ -60,10 +60,10 @@ func update_category_list(groups: Dictionary):
 ## on_btn_start_pressed is called when pressed the start game button.
 ## It collects all the selected categories and creates a new game on the server.
 func on_btn_start_pressed():
-	$RoundCreation/CreationMenu/Start.disabled = true
-	round_duration = $RoundCreation/CreationMenu/RoundDuration.value
+	$CreationMenu/Start.disabled = true
+	round_duration = $CreationMenu/RoundDuration.value
 	var groups: Dictionary = {}
-	var category: TreeItem = $RoundCreation/CreationMenu/CategoryBox.get_root().get_first_child()
+	var category: TreeItem = $CreationMenu/CategoryBox.get_root().get_first_child()
 	while category != null:
 		var amount: int = int(category.get_range(1))
 		if amount == 0:
@@ -94,17 +94,17 @@ func on_btn_start_pressed():
 	api.game_start(JSON.stringify(game_data), on_game_start_response)
 
 func on_cancel_pressed():
-	$RoundCreation.hide()
+	$CreationMenu.hide()
 
 func on_game_start_response(success: bool):
 	if !success:
 		print("failed to create new game!")
-		$RoundCreation/CreationMenu/Start.disabled = false
+		$CreationMenu/Start.disabled = false
 		return
 	scene_manager.change_scene(self, "question")
 
 func on_play_pressed():
-	$RoundCreation.show()
+	$CreationMenu.show()
 
 func on_quit_pressed():
 	get_tree().quit()
