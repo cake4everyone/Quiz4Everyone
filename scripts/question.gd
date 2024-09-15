@@ -68,16 +68,70 @@ func show_round_data(data: Dictionary):
 	$RoundCounter.text = "Runde %d/%d (%s)" % [data.current_round, data.max_round, data.category.title]
 	$RoundCounter.show()
 
-	$Quiz/Question/Label.text = data.question
-	$Quiz/Answers/A/Label.text = data.answers[0]
-	$Quiz/Answers/B/Label.text = data.answers[1]
+	if data.question.type == 0:
+		$Quiz/Question/Image.hide()
+		$Quiz/Question/Label.text = data.question.text
+		$Quiz/Question/Label.show()
+	elif data.question.type == 1:
+		$Quiz/Question/Label.hide()
+		var img: Image = Image.new()
+		var err: Error = img.load_png_from_buffer(data.question.text.to_utf8_buffer())
+		if err != OK:
+			print("img error ", err)
+		print("img ", img)
+			
+		var imgtex: ImageTexture = ImageTexture.new()
+		imgtex.set_image(img)
+		print("imgtex ", imgtex)
+		$Quiz/Question/Image.texture = imgtex
+		$Quiz/Question/Image.show()
+
+	if data.answers[0].type == 0:
+		$Quiz/Answers/A/Image.hide()
+		$Quiz/Answers/A/Label.text = data.answers[0].text
+		$Quiz/Answers/A/Label.show()
+	elif data.answers[0].type == 1:
+		$Quiz/Answers/A/Label.hide()
+		var img: Image = Image.new()
+		img.load_png_from_buffer(data.question.text.to_utf8_buffer())
+		$Quiz/Answers/A/Quiz/Answers/A/Image.Texture = ImageTexture.create_from_image(img)
+		$Quiz/Answers/A/Image.show()
+	if data.answers[1].type == 0:
+		$Quiz/Answers/B/Image.hide()
+		$Quiz/Answers/B/Label.text = data.answers[1].text
+		$Quiz/Answers/B/Label.show()
+	elif data.answers[1].type == 1:
+		$Quiz/Answers/B/Label.hide()
+		var img: Image = Image.new()
+		img.load_png_from_buffer(data.question.text.to_utf8_buffer())
+		$Quiz/Answers/B/Image.Texture = ImageTexture.create_from_image(img)
+		$Quiz/Answers/B/Image.show()
+
 	if len(data.answers) >= 3:
-		$Quiz/Answers/C/Label.text = data.answers[2]
+		if data.answers[2].type == 0:
+			$Quiz/Answers/C/Image.hide()
+			$Quiz/Answers/C/Label.text = data.answers[2].text
+			$Quiz/Answers/C/Label.show()
+		elif data.answers[2].type == 1:
+			$Quiz/Answers/C/Label.hide()
+			var img: Image = Image.new()
+			img.load_png_from_buffer(data.question.text.to_utf8_buffer())
+			$Quiz/Answers/C/Image.Texture = ImageTexture.create_from_image(img)
+			$Quiz/Answers/C/Image.show()
 		$Quiz/Answers/C.show()
 	else:
 		$Quiz/Answers/C.hide()
 	if len(data.answers) >= 4:
-		$Quiz/Answers/D/Label.text = data.answers[3]
+		if data.answers[3].type == 0:
+			$Quiz/Answers/D/Image.hide()
+			$Quiz/Answers/D/Label.text = data.answers[3].text
+			$Quiz/Answers/D/Label.show()
+		elif data.answers[3].type == 1:
+			$Quiz/Answers/D/Label.hide()
+			var img: Image = Image.new()
+			img.load_png_from_buffer(data.question.text.to_utf8_buffer())
+			$Quiz/Answers/D/Image.Texture = ImageTexture.create_from_image(img)
+			$Quiz/Answers/D/Image.show()
 		$Quiz/Answers/D.show()
 	else:
 		$Quiz/Answers/D.hide()
