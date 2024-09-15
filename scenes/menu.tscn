@@ -123,17 +123,8 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_e6ve8")
 theme_override_styles/focus = SubResource("StyleBoxFlat_sdl70")
 text = "Quit Game"
 
-[node name="RoundCreation" type="CanvasLayer" parent="."]
-
-[node name="ColorRect" type="ColorRect" parent="RoundCreation"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.137255, 0.137255, 0.137255, 0.431373)
-
-[node name="CreationMenu" type="Panel" parent="RoundCreation"]
+[node name="CreationMenu" type="Panel" parent="."]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -145,7 +136,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_yhbp7")
 
-[node name="ModeSelect" type="OptionButton" parent="RoundCreation/CreationMenu"]
+[node name="ModeSelect" type="OptionButton" parent="CreationMenu"]
 layout_mode = 1
 offset_left = 40.0
 offset_top = 100.0
@@ -154,7 +145,7 @@ offset_bottom = 140.0
 theme = ExtResource("2_7ph5j")
 theme_override_font_sizes/font_size = 40
 
-[node name="Label" type="Label" parent="RoundCreation/CreationMenu/ModeSelect"]
+[node name="Label" type="Label" parent="CreationMenu/ModeSelect"]
 layout_mode = 1
 offset_top = -40.0
 offset_right = 120.0
@@ -162,7 +153,7 @@ theme = ExtResource("2_7ph5j")
 text = "Game Mode"
 vertical_alignment = 1
 
-[node name="RoundDuration" type="SpinBox" parent="RoundCreation/CreationMenu"]
+[node name="RoundDuration" type="SpinBox" parent="CreationMenu"]
 layout_mode = 1
 offset_left = 40.0
 offset_top = 200.0
@@ -175,7 +166,7 @@ value = 30.0
 suffix = "s"
 custom_arrow_step = 5.0
 
-[node name="Label" type="Label" parent="RoundCreation/CreationMenu/RoundDuration"]
+[node name="Label" type="Label" parent="CreationMenu/RoundDuration"]
 layout_mode = 1
 offset_top = -40.0
 offset_right = 160.0
@@ -183,7 +174,7 @@ theme = ExtResource("2_7ph5j")
 text = "Round Duration"
 vertical_alignment = 1
 
-[node name="CategoryBox" type="Tree" parent="RoundCreation/CreationMenu"]
+[node name="CategoryBox" type="Tree" parent="CreationMenu"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -208,7 +199,7 @@ columns = 2
 column_titles_visible = true
 hide_root = true
 
-[node name="Cancel" type="Button" parent="RoundCreation/CreationMenu"]
+[node name="Cancel" type="Button" parent="CreationMenu"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -227,7 +218,7 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_v1l70")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_eb82c")
 text = "Cancel"
 
-[node name="Start" type="Button" parent="RoundCreation/CreationMenu"]
+[node name="Start" type="Button" parent="CreationMenu"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -248,5 +239,5 @@ text = "Start Game"
 
 [connection signal="pressed" from="Buttons/Play" to="." method="on_play_pressed"]
 [connection signal="pressed" from="Buttons/Quit" to="." method="on_quit_pressed"]
-[connection signal="pressed" from="RoundCreation/CreationMenu/Cancel" to="." method="on_cancel_pressed"]
-[connection signal="pressed" from="RoundCreation/CreationMenu/Start" to="." method="on_btn_start_pressed"]
+[connection signal="pressed" from="CreationMenu/Cancel" to="." method="on_cancel_pressed"]
+[connection signal="pressed" from="CreationMenu/Start" to="." method="on_btn_start_pressed"]

@@ -1,4 +1,4 @@
-extends CanvasLayer
+class_name QuestionEndScene extends CanvasLayer
 
 func _ready():
 	show_round_data(scene_manager.round_data)
