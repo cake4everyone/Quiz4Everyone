@@ -65,7 +65,7 @@ func on_round_next_response(success: bool, data: Dictionary={}):
 func show_round_data(data: Dictionary):
 	print(data)
 	$Countdown.show()
-	$RoundCounter.text = "Runde %d/%d (%s)" % [data.current_round, data.max_round, data.category]
+	$RoundCounter.text = "Runde %d/%d (%s)" % [data.current_round, data.max_round, data.category.title]
 	$RoundCounter.show()
 
 	$Quiz/Question/Label.text = data.question
@@ -85,6 +85,8 @@ func show_round_data(data: Dictionary):
 	$Quiz/Answers/VoteIcon/Icon.self_modulate = Color.WHITE
 	$Quiz/Answers/VoteIcon.show()
 	$Quiz.show()
+
+	scene_manager.update_discord("question", data)
 
 func on_round_end(data: Dictionary):
 	print("Got round_data ending: %s" % [data])
