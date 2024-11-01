@@ -8,6 +8,8 @@ var category_callback: Callable
 var game_start_callback: Callable
 var got_ws_message: Callable
 var login_callback: Callable
+var round_media_callback: Callable
+var round_media_media: String
 var round_next_callback: Callable
 var streamervote_callback: Callable
 
@@ -26,6 +28,7 @@ func _ready():
 	$HTTP_Login.request_completed.connect(login_resp)
 	$HTTP_Logout.request_completed.connect(logout_resp)
 	$HTTP_RoundInfo.request_completed.connect(round_info_resp)
+	$HTTP_RoundMedia.request_completed.connect(round_media_resp)
 	$HTTP_RoundNext.request_completed.connect(round_next_resp)
 	$HTTP_StreamerVote.request_completed.connect(streamervote_resp)
 	set_process(false)
@@ -106,6 +109,23 @@ func round_info():
 func round_info_resp(_result, response_code: int, _headers: PackedStringArray, body: PackedByteArray):
 	print("Response Round Info: " + str(response_code) + "\n" + body.get_string_from_ascii())
 
+## round_media gets the named media from the current round.
+func round_media(media: String, callback: Callable):
+	round_media_callback = callback
+	round_media_media = media
+	var error: Error = $HTTP_RoundMedia.request(host + "/round/media/" + media, ["Authorization: Q4E " + api_token], HTTPClient.METHOD_GET)
+	if error != OK:
+		print("Error requesting round media: %s" % error)
+
+func round_media_resp(result, response_code: int, _headers: PackedStringArray, body: PackedByteArray):
+	if response_code == HTTPClient.RESPONSE_OK:
+		round_media_callback.call(true, round_media_media, body)
+	else:
+		print("Failed to get round media: (%s) got %d expected %d: %s" % [result, response_code, HTTPClient.RESPONSE_OK, body.get_string_from_ascii()])
+		round_media_callback.call(false, round_media_media, body)
+	round_media_callback = Callable()
+	round_media_media = ""
+
 ## round_next advances the game to the round and returning information about the new active round. This is also
 ## required for the first round after a freshly created game.
 func round_next(callback: Callable):
@@ -116,7 +136,7 @@ func round_next_resp(_result, response_code: int, _headers: PackedStringArray, b
 	if response_code == HTTPClient.RESPONSE_OK:
 		round_next_callback.call(true, json_parse(body))
 	else:
-		print("Failed to advance to next sound: got %d expected %d: %s" % [response_code, HTTPClient.RESPONSE_OK, body.get_string_from_ascii()])
+		print("Failed to advance to next round: got %d expected %d: %s" % [response_code, HTTPClient.RESPONSE_OK, body.get_string_from_ascii()])
 		round_next_callback.call(false)
 	round_next_callback = Callable()
 

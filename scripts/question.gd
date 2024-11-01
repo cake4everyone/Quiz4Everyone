@@ -4,6 +4,7 @@ var quizOn: bool = false
 var voted: bool = false
 var countdown: float
 var round_data: Dictionary = {}
+var mediaDict: Dictionary = {}
 
 func _ready():
 	countdown = scene_manager.round_duration
@@ -74,17 +75,8 @@ func show_round_data(data: Dictionary):
 		$Quiz/Question/Label.show()
 	elif data.question.type == 1:
 		$Quiz/Question/Label.hide()
-		var img: Image = Image.new()
-		var err: Error = img.load_png_from_buffer(data.question.text.to_utf8_buffer())
-		if err != OK:
-			print("img error ", err)
-		print("img ", img)
-			
-		var imgtex: ImageTexture = ImageTexture.new()
-		imgtex.set_image(img)
-		print("imgtex ", imgtex)
-		$Quiz/Question/Image.texture = imgtex
-		$Quiz/Question/Image.show()
+		$Quiz/Question/Image.hide()
+		mediaDict[data.question.text] = $Quiz/Question/Image
 
 	if data.answers[0].type == 0:
 		$Quiz/Answers/A/Image.hide()
@@ -92,20 +84,16 @@ func show_round_data(data: Dictionary):
 		$Quiz/Answers/A/Label.show()
 	elif data.answers[0].type == 1:
 		$Quiz/Answers/A/Label.hide()
-		var img: Image = Image.new()
-		img.load_png_from_buffer(data.question.text.to_utf8_buffer())
-		$Quiz/Answers/A/Quiz/Answers/A/Image.Texture = ImageTexture.create_from_image(img)
-		$Quiz/Answers/A/Image.show()
+		$Quiz/Answers/A/Image.hide()
+		mediaDict[data.answers[0].text] = $Quiz/Question/A/Image
 	if data.answers[1].type == 0:
 		$Quiz/Answers/B/Image.hide()
 		$Quiz/Answers/B/Label.text = data.answers[1].text
 		$Quiz/Answers/B/Label.show()
 	elif data.answers[1].type == 1:
 		$Quiz/Answers/B/Label.hide()
-		var img: Image = Image.new()
-		img.load_png_from_buffer(data.question.text.to_utf8_buffer())
-		$Quiz/Answers/B/Image.Texture = ImageTexture.create_from_image(img)
-		$Quiz/Answers/B/Image.show()
+		$Quiz/Answers/B/Image.hide()
+		mediaDict[data.answers[1].text] = $Quiz/Answers/B/Image
 
 	if len(data.answers) >= 3:
 		if data.answers[2].type == 0:
@@ -114,10 +102,8 @@ func show_round_data(data: Dictionary):
 			$Quiz/Answers/C/Label.show()
 		elif data.answers[2].type == 1:
 			$Quiz/Answers/C/Label.hide()
-			var img: Image = Image.new()
-			img.load_png_from_buffer(data.question.text.to_utf8_buffer())
-			$Quiz/Answers/C/Image.Texture = ImageTexture.create_from_image(img)
-			$Quiz/Answers/C/Image.show()
+			$Quiz/Answers/C/Image.hide()
+			mediaDict[data.answers[2].text] = $Quiz/Answers/C/Image
 		$Quiz/Answers/C.show()
 	else:
 		$Quiz/Answers/C.hide()
@@ -128,13 +114,14 @@ func show_round_data(data: Dictionary):
 			$Quiz/Answers/D/Label.show()
 		elif data.answers[3].type == 1:
 			$Quiz/Answers/D/Label.hide()
-			var img: Image = Image.new()
-			img.load_png_from_buffer(data.question.text.to_utf8_buffer())
-			$Quiz/Answers/D/Image.Texture = ImageTexture.create_from_image(img)
-			$Quiz/Answers/D/Image.show()
+			$Quiz/Answers/D/Image.hide()
+			mediaDict[data.answers[3].text] = $Quiz/Answers/D/Image
 		$Quiz/Answers/D.show()
 	else:
 		$Quiz/Answers/D.hide()
+	
+	if len(mediaDict) > 0:
+		api.round_media(data.question.text, on_round_media_response)
 
 	$Quiz/Answers/VoteIcon/Icon.self_modulate = Color.WHITE
 	$Quiz/Answers/VoteIcon.show()
@@ -166,3 +153,19 @@ func on_server_api_got_ws_message(msg: Dictionary):
 			on_round_end(msg)
 		_:
 			print("Got unkown ws message type: '%s': %s" % [msg.type, msg])
+
+func on_round_media_response(success: bool, media: String, data: PackedByteArray):
+	if success:
+		var img: Image = Image.new()
+		img.load_png_from_buffer(data)
+		mediaDict[media].texture = ImageTexture.create_from_image(img)
+		mediaDict[media].show()
+	else:
+		print("Faild to get media %s data: %s" % [media, data.get_string_from_ascii()])
+
+	mediaDict.erase(media)
+	if len(mediaDict) == 0:
+		return
+
+	var next_media = mediaDict.keys()[0]
+	api.round_media(next_media, on_round_media_response)
