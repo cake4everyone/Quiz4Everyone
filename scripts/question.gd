@@ -22,10 +22,10 @@ func _process(delta: float):
 			check_vote()
 
 func check_vote():
-	if Input.is_key_pressed(KEY_A)||Input.is_key_pressed(KEY_1)||Input.is_key_pressed(KEY_KP_1): api.streamervote("1", on_streamervote_response)
-	elif Input.is_key_pressed(KEY_B)||Input.is_key_pressed(KEY_2)||Input.is_key_pressed(KEY_KP_2): api.streamervote("2", on_streamervote_response)
-	elif Input.is_key_pressed(KEY_C)||Input.is_key_pressed(KEY_3)||Input.is_key_pressed(KEY_KP_3): api.streamervote("3", on_streamervote_response)
-	elif Input.is_key_pressed(KEY_D)||Input.is_key_pressed(KEY_4)||Input.is_key_pressed(KEY_KP_4): api.streamervote("4", on_streamervote_response)
+	if Input.is_key_pressed(KEY_A) || Input.is_key_pressed(KEY_1) || Input.is_key_pressed(KEY_KP_1): api.streamervote("1", on_streamervote_response)
+	elif Input.is_key_pressed(KEY_B) || Input.is_key_pressed(KEY_2) || Input.is_key_pressed(KEY_KP_2): api.streamervote("2", on_streamervote_response)
+	elif Input.is_key_pressed(KEY_C) || Input.is_key_pressed(KEY_3) || Input.is_key_pressed(KEY_KP_3): api.streamervote("3", on_streamervote_response)
+	elif Input.is_key_pressed(KEY_D) || Input.is_key_pressed(KEY_4) || Input.is_key_pressed(KEY_KP_4): api.streamervote("4", on_streamervote_response)
 	else: return
 	voted = true
 	$Quiz/Answers/VoteIcon/Icon.self_modulate = Color.ORANGE
@@ -56,7 +56,7 @@ func start_next_round():
 	api.round_next(on_round_next_response)
 	quizOn = true
 
-func on_round_next_response(success: bool, data: Dictionary={}):
+func on_round_next_response(success: bool, data: Dictionary = {}):
 	if !success:
 		print("Faild to get next data!")
 		return
@@ -156,6 +156,7 @@ func on_server_api_got_ws_message(msg: Dictionary):
 
 func on_round_media_response(success: bool, media: String, data: PackedByteArray):
 	if success:
+		print("media ", media)
 		var img: Image = Image.new()
 		img.load_png_from_buffer(data)
 		mediaDict[media].texture = ImageTexture.create_from_image(img)

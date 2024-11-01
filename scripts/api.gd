@@ -36,7 +36,7 @@ func _ready():
 
 func _process(_delta: float):
 	var msg: Dictionary = read_from_ws()
-	if got_ws_message&&len(msg) > 0:
+	if got_ws_message && len(msg) > 0:
 			got_ws_message.call(msg)
 
 ## category gets the available categories from the server.
@@ -194,7 +194,7 @@ func read_from_ws() -> Dictionary:
 	elif state == WebSocketPeer.STATE_CLOSED:
 		var code = ws.get_close_code()
 		var reason = ws.get_close_reason()
-		print("WebSocket closed with code: %d, reason %s. Clean: %s" % [code, reason, code != - 1])
+		print("WebSocket closed with code: %d, reason %s. Clean: %s" % [code, reason, code != -1])
 		set_process(false)
 
 	return {}
