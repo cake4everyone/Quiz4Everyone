@@ -127,7 +127,7 @@ func streamervote(vote: String, callback: Callable):
 
 func streamervote_resp(_result, response_code: int, _headers: PackedStringArray, body: PackedByteArray):
 	if response_code != HTTPClient.RESPONSE_OK:
-		print("Failed to vote for streamer: %d: %s" % [str(response_code), body.get_string_from_ascii()])
+		print("Failed to vote for streamer: %d: %s" % [response_code, body.get_string_from_ascii()])
 	streamervote_callback.call(response_code == HTTPClient.RESPONSE_OK)
 	streamervote_callback = Callable()
 
