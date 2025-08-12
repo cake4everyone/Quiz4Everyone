@@ -123,8 +123,8 @@ func round_media_resp(result, response_code: int, _headers: PackedStringArray, b
 	else:
 		print("Failed to get round media: (%s) got %d expected %d: %s" % [result, response_code, HTTPClient.RESPONSE_OK, body.get_string_from_ascii()])
 		round_media_callback.call(false, round_media_media, body)
-	round_media_callback = Callable()
-	round_media_media = ""
+		round_media_callback = Callable()
+		round_media_media = ""
 
 ## round_next advances the game to the round and returning information about the new active round. This is also
 ## required for the first round after a freshly created game.

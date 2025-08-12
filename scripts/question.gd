@@ -85,7 +85,7 @@ func show_round_data(data: Dictionary):
 	elif data.answers[0].type == 1:
 		$Quiz/Answers/A/Label.hide()
 		$Quiz/Answers/A/Image.hide()
-		mediaDict[data.answers[0].text] = $Quiz/Question/A/Image
+		mediaDict[data.answers[0].text] = $Quiz/Answers/A/Image
 	if data.answers[1].type == 0:
 		$Quiz/Answers/B/Image.hide()
 		$Quiz/Answers/B/Label.text = data.answers[1].text
@@ -121,7 +121,7 @@ func show_round_data(data: Dictionary):
 		$Quiz/Answers/D.hide()
 	
 	if len(mediaDict) > 0:
-		api.round_media(data.question.text, on_round_media_response)
+		api.round_media(mediaDict.keys()[0], on_round_media_response)
 
 	$Quiz/Answers/VoteIcon/Icon.self_modulate = Color.WHITE
 	$Quiz/Answers/VoteIcon.show()
@@ -168,5 +168,4 @@ func on_round_media_response(success: bool, media: String, data: PackedByteArray
 	if len(mediaDict) == 0:
 		return
 
-	var next_media = mediaDict.keys()[0]
-	api.round_media(next_media, on_round_media_response)
+	api.round_media(next_mmediaDict.keys()[0]edia, on_round_media_response)
