@@ -19,6 +19,8 @@ script = ExtResource("1_l1n5m")
 
 [node name="HTTP_RoundInfo" type="HTTPRequest" parent="."]
 
+[node name="HTTP_RoundMedia" type="HTTPRequest" parent="."]
+
 [node name="HTTP_RoundNext" type="HTTPRequest" parent="."]
 
 [node name="HTTP_StreamerVote" type="HTTPRequest" parent="."]

@@ -4,6 +4,8 @@ var quizOn: bool = false
 var voted: bool = false
 var countdown: float
 var round_data: Dictionary = {}
+var mediaDict: Dictionary = {}
+var question_data: QuestionData
 
 func _ready():
 	countdown = scene_manager.round_duration
@@ -21,10 +23,10 @@ func _process(delta: float):
 			check_vote()
 
 func check_vote():
-	if Input.is_key_pressed(KEY_A)||Input.is_key_pressed(KEY_1)||Input.is_key_pressed(KEY_KP_1): api.streamervote("1", on_streamervote_response)
-	elif Input.is_key_pressed(KEY_B)||Input.is_key_pressed(KEY_2)||Input.is_key_pressed(KEY_KP_2): api.streamervote("2", on_streamervote_response)
-	elif Input.is_key_pressed(KEY_C)||Input.is_key_pressed(KEY_3)||Input.is_key_pressed(KEY_KP_3): api.streamervote("3", on_streamervote_response)
-	elif Input.is_key_pressed(KEY_D)||Input.is_key_pressed(KEY_4)||Input.is_key_pressed(KEY_KP_4): api.streamervote("4", on_streamervote_response)
+	if Input.is_key_pressed(KEY_A) || Input.is_key_pressed(KEY_1) || Input.is_key_pressed(KEY_KP_1): api.streamervote("1", on_streamervote_response)
+	elif Input.is_key_pressed(KEY_B) || Input.is_key_pressed(KEY_2) || Input.is_key_pressed(KEY_KP_2): api.streamervote("2", on_streamervote_response)
+	elif Input.is_key_pressed(KEY_C) || Input.is_key_pressed(KEY_3) || Input.is_key_pressed(KEY_KP_3): api.streamervote("3", on_streamervote_response)
+	elif Input.is_key_pressed(KEY_D) || Input.is_key_pressed(KEY_4) || Input.is_key_pressed(KEY_KP_4): api.streamervote("4", on_streamervote_response)
 	else: return
 	voted = true
 	$Quiz/Answers/VoteIcon/Icon.self_modulate = Color.ORANGE
@@ -55,7 +57,7 @@ func start_next_round():
 	api.round_next(on_round_next_response)
 	quizOn = true
 
-func on_round_next_response(success: bool, data: Dictionary={}):
+func on_round_next_response(success: bool, data: Dictionary = {}):
 	if !success:
 		print("Faild to get next data!")
 		return
@@ -63,24 +65,9 @@ func on_round_next_response(success: bool, data: Dictionary={}):
 
 ## show_round_data displays the given round_data data on screen.
 func show_round_data(data: Dictionary):
-	print(data)
 	$Countdown.show()
-	$RoundCounter.text = "Runde %d/%d (%s)" % [data.current_round, data.max_round, data.category.title]
 	$RoundCounter.show()
-
-	$Quiz/Question/Label.text = data.question
-	$Quiz/Answers/A/Label.text = data.answers[0]
-	$Quiz/Answers/B/Label.text = data.answers[1]
-	if len(data.answers) >= 3:
-		$Quiz/Answers/C/Label.text = data.answers[2]
-		$Quiz/Answers/C.show()
-	else:
-		$Quiz/Answers/C.hide()
-	if len(data.answers) >= 4:
-		$Quiz/Answers/D/Label.text = data.answers[3]
-		$Quiz/Answers/D.show()
-	else:
-		$Quiz/Answers/D.hide()
+	QuestionData.new(data, self)
 
 	$Quiz/Answers/VoteIcon/Icon.self_modulate = Color.WHITE
 	$Quiz/Answers/VoteIcon.show()
@@ -112,3 +99,20 @@ func on_server_api_got_ws_message(msg: Dictionary):
 			on_round_end(msg)
 		_:
 			print("Got unkown ws message type: '%s': %s" % [msg.type, msg])
+
+func on_round_media_response(success: bool, media: String, data: PackedByteArray):
+	if success:
+		print("media ", media)
+		var img: Image = Image.new()
+		img.load_png_from_buffer(data)
+		mediaDict[media].texture = ImageTexture.create_from_image(img)
+		mediaDict[media].show()
+	else:
+		print("Faild to get media %s data: %s" % [media, data.get_string_from_ascii()])
+
+	mediaDict.erase(media)
+	if len(mediaDict) == 0:
+		return
+
+	var next_media: String = mediaDict.keys()[0]
+	api.round_media(next_media, on_round_media_response, mediaDict[next_media].size.x, mediaDict[next_media].size.y)
