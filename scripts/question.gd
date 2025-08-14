@@ -121,7 +121,8 @@ func show_round_data(data: Dictionary):
 		$Quiz/Answers/D.hide()
 	
 	if len(mediaDict) > 0:
-		api.round_media(mediaDict.keys()[0], on_round_media_response)
+		var media: String = mediaDict.keys()[0]
+		api.round_media(media, on_round_media_response, mediaDict[media].size.x, mediaDict[media].size.y)
 
 	$Quiz/Answers/VoteIcon/Icon.self_modulate = Color.WHITE
 	$Quiz/Answers/VoteIcon.show()
@@ -168,4 +169,5 @@ func on_round_media_response(success: bool, media: String, data: PackedByteArray
 	if len(mediaDict) == 0:
 		return
 
-	api.round_media(next_mmediaDict.keys()[0]edia, on_round_media_response)
+	var next_media: String = mediaDict.keys()[0]
+	api.round_media(next_media, on_round_media_response, mediaDict[next_media].size.x, mediaDict[next_media].size.y)

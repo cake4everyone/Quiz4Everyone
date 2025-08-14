@@ -110,10 +110,10 @@ func round_info_resp(_result, response_code: int, _headers: PackedStringArray, b
 	print("Response Round Info: " + str(response_code) + "\n" + body.get_string_from_ascii())
 
 ## round_media gets the named media from the current round.
-func round_media(media: String, callback: Callable):
+func round_media(media: String, callback: Callable, width: int, height: int):
 	round_media_callback = callback
 	round_media_media = media
-	var error: Error = $HTTP_RoundMedia.request(host + "/round/media/" + media, ["Authorization: Q4E " + api_token], HTTPClient.METHOD_GET)
+	var error: Error = $HTTP_RoundMedia.request(host + "/round/media/%s?width=%d&height=%d" % [media, width, height], ["Authorization: Q4E " + api_token], HTTPClient.METHOD_GET)
 	if error != OK:
 		print("Error requesting round media: %s" % error)
 
