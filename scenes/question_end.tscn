@@ -48,6 +48,16 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
+[node name="Image" type="TextureRect" parent="Quiz/Question"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+stretch_mode = 5
+
 [node name="Answers" type="Control" parent="Quiz"]
 layout_mode = 1
 anchors_preset = 8
@@ -99,6 +109,16 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
+[node name="Image" type="TextureRect" parent="Quiz/Answers/A"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+stretch_mode = 5
+
 [node name="B" type="ColorRect" parent="Quiz/Answers"]
 layout_mode = 1
 anchors_preset = 8
@@ -135,6 +155,16 @@ label_settings = ExtResource("3_bslnc")
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
+
+[node name="Image" type="TextureRect" parent="Quiz/Answers/B"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+stretch_mode = 5
 
 [node name="C" type="ColorRect" parent="Quiz/Answers"]
 layout_mode = 1
@@ -173,6 +203,16 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
+[node name="Image" type="TextureRect" parent="Quiz/Answers/C"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+stretch_mode = 5
+
 [node name="D" type="ColorRect" parent="Quiz/Answers"]
 layout_mode = 1
 anchors_preset = 8
@@ -204,14 +244,21 @@ offset_left = 20.0
 offset_right = -20.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Lorem ipsum dolor
-sit amet, consetetur
-sadipscing elitr,
-sed diam "
+text = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam "
 label_settings = ExtResource("3_bslnc")
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
+
+[node name="Image" type="TextureRect" parent="Quiz/Answers/D"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+stretch_mode = 5
 
 [node name="StreamerAnswer" type="ColorRect" parent="."]
 offset_left = 520.0

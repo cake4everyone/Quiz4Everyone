@@ -5,22 +5,8 @@ func _ready():
 
 ## show_round_data displays the given round_data data on screen.
 func show_round_data(data: Dictionary):
-	print(data)
-	$RoundCounter.text = "Runde %d/%d (%s)" % [data.current_round, data.max_round, data.category.title]
+	QuestionData.new(data, self)
 
-	$Quiz/Question/Label.text = data.question.text
-	$Quiz/Answers/A/Label.text = data.answers[0].text
-	$Quiz/Answers/B/Label.text = data.answers[1].text
-	if len(data.answers) >= 3:
-		$Quiz/Answers/C/Label.text = data.answers[2].text
-		$Quiz/Answers/C.show()
-	else:
-		$Quiz/Answers/C.hide()
-	if len(data.answers) >= 4:
-		$Quiz/Answers/D/Label.text = data.answers[3].text
-		$Quiz/Answers/D.show()
-	else:
-		$Quiz/Answers/D.hide()
 	var answer: ColorRect = $Quiz/Answers.get_child(data.correct - 1)
 	answer.color = Color.hex(0x004200ff)
 

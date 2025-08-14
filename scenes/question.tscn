@@ -7,6 +7,14 @@
 [node name="Question" type="CanvasLayer"]
 script = ExtResource("1_24euc")
 
+[node name="RoundCounter" type="Label" parent="."]
+offset_left = 32.0
+offset_top = 32.0
+offset_right = 541.0
+offset_bottom = 78.0
+text = "Round X/Y (some category)"
+label_settings = ExtResource("3_24026")
+
 [node name="Quiz" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
@@ -306,14 +314,6 @@ text = "30"
 label_settings = ExtResource("3_24026")
 horizontal_alignment = 2
 vertical_alignment = 1
-
-[node name="RoundCounter" type="Label" parent="."]
-offset_left = 32.0
-offset_top = 32.0
-offset_right = 541.0
-offset_bottom = 78.0
-text = "Round X/Y (some category)"
-label_settings = ExtResource("3_24026")
 
 [node name="Game Quit" type="Button" parent="."]
 visible = false

@@ -5,6 +5,7 @@ var voted: bool = false
 var countdown: float
 var round_data: Dictionary = {}
 var mediaDict: Dictionary = {}
+var question_data: QuestionData
 
 func _ready():
 	countdown = scene_manager.round_duration
@@ -64,65 +65,9 @@ func on_round_next_response(success: bool, data: Dictionary = {}):
 
 ## show_round_data displays the given round_data data on screen.
 func show_round_data(data: Dictionary):
-	print(data)
 	$Countdown.show()
-	$RoundCounter.text = "Runde %d/%d (%s)" % [data.current_round, data.max_round, data.category.title]
 	$RoundCounter.show()
-
-	if data.question.type == 0:
-		$Quiz/Question/Image.hide()
-		$Quiz/Question/Label.text = data.question.text
-		$Quiz/Question/Label.show()
-	elif data.question.type == 1:
-		$Quiz/Question/Label.hide()
-		$Quiz/Question/Image.hide()
-		mediaDict[data.question.text] = $Quiz/Question/Image
-
-	if data.answers[0].type == 0:
-		$Quiz/Answers/A/Image.hide()
-		$Quiz/Answers/A/Label.text = data.answers[0].text
-		$Quiz/Answers/A/Label.show()
-	elif data.answers[0].type == 1:
-		$Quiz/Answers/A/Label.hide()
-		$Quiz/Answers/A/Image.hide()
-		mediaDict[data.answers[0].text] = $Quiz/Answers/A/Image
-	if data.answers[1].type == 0:
-		$Quiz/Answers/B/Image.hide()
-		$Quiz/Answers/B/Label.text = data.answers[1].text
-		$Quiz/Answers/B/Label.show()
-	elif data.answers[1].type == 1:
-		$Quiz/Answers/B/Label.hide()
-		$Quiz/Answers/B/Image.hide()
-		mediaDict[data.answers[1].text] = $Quiz/Answers/B/Image
-
-	if len(data.answers) >= 3:
-		if data.answers[2].type == 0:
-			$Quiz/Answers/C/Image.hide()
-			$Quiz/Answers/C/Label.text = data.answers[2].text
-			$Quiz/Answers/C/Label.show()
-		elif data.answers[2].type == 1:
-			$Quiz/Answers/C/Label.hide()
-			$Quiz/Answers/C/Image.hide()
-			mediaDict[data.answers[2].text] = $Quiz/Answers/C/Image
-		$Quiz/Answers/C.show()
-	else:
-		$Quiz/Answers/C.hide()
-	if len(data.answers) >= 4:
-		if data.answers[3].type == 0:
-			$Quiz/Answers/D/Image.hide()
-			$Quiz/Answers/D/Label.text = data.answers[3].text
-			$Quiz/Answers/D/Label.show()
-		elif data.answers[3].type == 1:
-			$Quiz/Answers/D/Label.hide()
-			$Quiz/Answers/D/Image.hide()
-			mediaDict[data.answers[3].text] = $Quiz/Answers/D/Image
-		$Quiz/Answers/D.show()
-	else:
-		$Quiz/Answers/D.hide()
-	
-	if len(mediaDict) > 0:
-		var media: String = mediaDict.keys()[0]
-		api.round_media(media, on_round_media_response, mediaDict[media].size.x, mediaDict[media].size.y)
+	QuestionData.new(data, self)
 
 	$Quiz/Answers/VoteIcon/Icon.self_modulate = Color.WHITE
 	$Quiz/Answers/VoteIcon.show()
